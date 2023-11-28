@@ -1,6 +1,3 @@
-<script setup>
-</script>
-
 <template>
-    Home!
+  <ui-button raised>Click me</ui-button>
 </template>

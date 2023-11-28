@@ -10,6 +10,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "balm-ui": "^10.23.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
   },
