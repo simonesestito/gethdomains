@@ -1,3 +1,5 @@
 <template>
-  <ui-button raised>Click me</ui-button>
+  <ui-button raised>Ciao</ui-button>
 </template>
+<script setup>
+</script>
