@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:gethdomains/bloc/theme/theme.dart';
+import 'package:gethdomains/di/injector.dart';
 import 'package:gethdomains/routes/router.dart';
 import 'package:gethdomains/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,22 +16,34 @@ class GethDomainsApp extends StatelessWidget {
   GethDomainsApp({super.key});
 
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en'), // English
-        ],
-        title: _title,
-        darkTheme: createDarkTheme(),
-        themeMode: ThemeMode.dark,
-        theme: createLightTheme(),
-        routerConfig: _appRouter.config(
-          deepLinkBuilder: (_) => const DeepLink([HomeRoute()]),
+  Widget build(BuildContext context) => DependencyInjector(
+        builder: (context) => MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'), // English
+          ],
+          title: _title,
+          darkTheme: createDarkTheme(),
+          themeMode: _getThemeMode(context),
+          theme: createLightTheme(),
+          routerConfig: _appRouter.config(
+            deepLinkBuilder: (_) => const DeepLink([HomeRoute()]),
+          ),
         ),
       );
+
+  ThemeMode _getThemeMode(BuildContext context) {
+    final themeState = context.watch<ThemeCubit>().state;
+    return switch (themeState) {
+      ThemeBrightness.system => ThemeMode.system,
+      ThemeBrightness.dark => ThemeMode.dark,
+      ThemeBrightness.light => ThemeMode.light,
+    };
+  }
 }

@@ -1,6 +1,9 @@
 {
   "appName": "GethDomains",
   "homeAppDescription": "Discover the new domain name system, decentralized",
+  "themeBrightnessDark": "Dark",
+  "themeBrightnessLight": "Light",
+  "themeBrightnessSystem": "System (auto)",
   "domainsSearchInputHint": "Search for a domain name",
   "domainsSearchSubmitButton": "Search",
   "inputErrorRequired": "This field is required",

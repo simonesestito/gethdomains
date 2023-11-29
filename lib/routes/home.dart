@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gethdomains/widget/domain_search/domain_search.dart';
 import 'package:gethdomains/widget/gradient_background.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gethdomains/widget/theme_mode_button.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -40,6 +41,7 @@ class HomePage extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) => AppBar(
         title: Text(AppLocalizations.of(context)!.appName),
         backgroundColor: Colors.transparent,
+        actions: const [ThemeModeIconButton()],
       );
 
   void onDomainSearch(String domain) {
