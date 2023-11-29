@@ -3,5 +3,5 @@ import 'package:gethdomains/app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const GethDomainsApp());
+  runApp(GethDomainsApp());
 }
