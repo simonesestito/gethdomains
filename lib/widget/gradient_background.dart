@@ -5,7 +5,7 @@ class GradientBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final startColor = Theme.of(context).colorScheme.secondary;
+    final startColor = Theme.of(context).colorScheme.primary;
     final endColor = Theme.of(context).scaffoldBackgroundColor;
 
     // Create a Container with a Gradient, from top to bottom
@@ -14,7 +14,7 @@ class GradientBackground extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          stops: const [0.0, 0.3],
+          stops: const [0.0, 0.2],
           colors: [startColor, endColor],
         ),
       ),

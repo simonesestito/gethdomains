@@ -1,6 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
-import 'package:gethdomains/widget/domain_search_form.dart';
+import 'package:gethdomains/widget/domain_search/domain_search.dart';
 import 'package:gethdomains/widget/gradient_background.dart';
 
 @RoutePage()
@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 36),
-              const DomainSearchForm(),
+              DomainSearchForm(onSubmit: onDomainSearch),
             ],
           ),
         ),
@@ -40,4 +40,8 @@ class HomePage extends StatelessWidget {
         title: const Text('Geth Domains'),
         backgroundColor: Colors.transparent,
       );
+
+  void onDomainSearch(String domain) {
+    debugPrint(domain);
+  }
 }

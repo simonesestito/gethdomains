@@ -14,7 +14,7 @@ class GethDomainsApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp.router(
         title: _title,
         darkTheme: createDarkTheme(),
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.light,
         theme: createLightTheme(),
         routerConfig: _appRouter.config(
           deepLinkBuilder: (_) => const DeepLink([HomeRoute()]),
