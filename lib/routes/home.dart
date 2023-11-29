@@ -1,38 +1,40 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:gethdomains/widget/gradient_background.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text('Geth Domains'),
-    ),
-    floatingActionButton: Builder(builder: (context) {
-      return FloatingActionButton(
-        onPressed: () {
-          ScaffoldMessenger.of(context).showMaterialBanner(
-            MaterialBanner(
-              content: const Text('Hello, world!'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
-                  },
-                  child: const Text('Dismiss'),
-                ),
-              ],
-            ),
-          );
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+  Widget build(BuildContext context) => Stack(
+        children: [
+          const GradientBackground(),
+          _buildContent(context),
+        ],
       );
-    }),
-    body: const Center(
-      child: Text('Hello, world!'),
-    ),
-  );
+
+  Widget _buildContent(BuildContext context) => Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: _buildAppBar(),
+        body: SizedBox.expand(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Discover the new domain name system, decentralized',
+                style: Theme.of(context).textTheme.displayMedium,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      );
+
+  PreferredSizeWidget _buildAppBar() => AppBar(
+        title: const Text('Geth Domains'),
+        backgroundColor: Colors.transparent,
+      );
 }

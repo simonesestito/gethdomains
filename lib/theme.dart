@@ -9,7 +9,7 @@ const _appBarDarkTextColor = Colors.white;
 
 ThemeData createDarkTheme() => ThemeData.dark().copyWith(
       colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: _primaryLightColor,
+        primarySwatch: Colors.blueGrey,
         accentColor: _accentColor,
       ),
       bannerTheme: MaterialBannerThemeData(
