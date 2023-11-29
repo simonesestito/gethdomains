@@ -15,7 +15,7 @@ class _DomainSearchButton extends StatelessWidget {
             onSubmit(form.value[DomainSearchForm._kDomain].toString());
           }
         },
-        label: const Text('Search'),
+        label: Text(AppLocalizations.of(context)!.domainsSearchSubmitButton),
         icon: const Icon(Icons.search),
       ),
     );

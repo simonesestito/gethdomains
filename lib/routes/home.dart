@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:gethdomains/widget/domain_search/domain_search.dart';
 import 'package:gethdomains/widget/gradient_background.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -17,7 +18,7 @@ class HomePage extends StatelessWidget {
 
   Widget _buildContent(BuildContext context) => Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: _buildAppBar(),
+        appBar: _buildAppBar(context),
         body: SizedBox.expand(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Discover the new domain name system, decentralized',
+                AppLocalizations.of(context)!.homeAppDescription,
                 style: Theme.of(context).textTheme.displayMedium,
                 textAlign: TextAlign.center,
               ),
@@ -36,8 +37,8 @@ class HomePage extends StatelessWidget {
         ),
       );
 
-  PreferredSizeWidget _buildAppBar() => AppBar(
-        title: const Text('Geth Domains'),
+  PreferredSizeWidget _buildAppBar(BuildContext context) => AppBar(
+        title: Text(AppLocalizations.of(context)!.appName),
         backgroundColor: Colors.transparent,
       );
 

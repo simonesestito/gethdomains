@@ -16,7 +16,7 @@ class _DomainSearchField extends StatelessWidget {
         child: ReactiveTextField<String>(
           formControlName: DomainSearchForm._kDomain,
           decoration: InputDecoration(
-            hintText: 'Search for a domain',
+            hintText: AppLocalizations.of(context)!.domainsSearchInputHint,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16.0),
               borderSide: BorderSide.none,
@@ -27,9 +27,12 @@ class _DomainSearchField extends StatelessWidget {
             // prefixIconColor: Theme.of(context).iconTheme.color,
           ),
           validationMessages: {
-            ValidationMessage.required: (_) => 'This field is required',
-            ValidationMessage.minLength: (_) => 'The provided domain is too short',
-            ValidationMessage.pattern: (_) => 'This is not a valid .eth domain',
+            ValidationMessage.required: (_) =>
+                AppLocalizations.of(context)!.inputErrorRequired,
+            ValidationMessage.minLength: (_) =>
+                AppLocalizations.of(context)!.inputErrorDomainTooShort,
+            ValidationMessage.pattern: (_) =>
+                AppLocalizations.of(context)!.inputErrorDomainInvalid,
           },
         ),
       );

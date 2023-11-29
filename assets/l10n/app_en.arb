@@ -1,0 +1,9 @@
+{
+  "appName": "GethDomains",
+  "homeAppDescription": "Discover the new domain name system, decentralized",
+  "domainsSearchInputHint": "Search for a domain name",
+  "domainsSearchSubmitButton": "Search",
+  "inputErrorRequired": "This field is required",
+  "inputErrorDomainTooShort": "This domain name is too short",
+  "inputErrorDomainInvalid": "This is not a valid .eth domain name"
+}
