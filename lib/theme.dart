@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
 
-ThemeData createDarkTheme() => ThemeData.dark(useMaterial3: false).copyWith(
-    colorScheme: ColorScheme.fromSwatch(
-      primarySwatch: Colors.blue,
-      accentColor: Colors.blueAccent[800],
-    ),
-    bannerTheme: MaterialBannerThemeData(
-      backgroundColor: Colors.blueGrey[900],
-      contentTextStyle: const TextStyle(color: Colors.white),
-    )
-);
+const _appBarTitleSize = 20.0;
+const _primaryLightColor = Colors.blue;
+final _primaryDarkColor = Colors.blueGrey[700];
+final _accentColor = Colors.blueAccent[800];
+final _appBarLightTextColor = Colors.grey[900];
+const _appBarDarkTextColor = Colors.white;
+
+ThemeData createDarkTheme() => ThemeData.dark().copyWith(
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: _primaryLightColor,
+        accentColor: _accentColor,
+      ),
+      bannerTheme: MaterialBannerThemeData(
+        backgroundColor: _primaryDarkColor,
+        contentTextStyle: const TextStyle(color: Colors.white),
+        dividerColor: _primaryDarkColor,
+      ),
+      appBarTheme: AppBarTheme(
+        titleTextStyle: const TextStyle(
+          color: _appBarDarkTextColor,
+          fontSize: _appBarTitleSize,
+        ),
+        color: _primaryDarkColor,
+      ),
+    );
 
 ThemeData createLightTheme() => ThemeData.light().copyWith(
-  colorScheme: ColorScheme.fromSwatch(
-    primarySwatch: Colors.blue,
-    accentColor: Colors.blueAccent[800],
-  ),
-);
+      colorScheme: ColorScheme.fromSwatch(
+        primarySwatch: _primaryLightColor,
+        accentColor: _accentColor,
+      ),
+      appBarTheme: AppBarTheme(
+        titleTextStyle: TextStyle(
+          color: _appBarLightTextColor,
+          fontSize: _appBarTitleSize,
+        ),
+      ),
+    );
