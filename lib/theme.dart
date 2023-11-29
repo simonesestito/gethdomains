@@ -24,6 +24,7 @@ ThemeData createDarkTheme() => ThemeData.dark().copyWith(
         ),
         color: _primaryDarkColor,
       ),
+      iconTheme: const IconThemeData(color: _appBarDarkTextColor),
     );
 
 ThemeData createLightTheme() => ThemeData.light().copyWith(
@@ -37,4 +38,5 @@ ThemeData createLightTheme() => ThemeData.light().copyWith(
           fontSize: _appBarTitleSize,
         ),
       ),
+      iconTheme: IconThemeData(color: _appBarLightTextColor),
     );

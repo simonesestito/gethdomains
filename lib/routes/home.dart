@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:gethdomains/widget/domain_search_form.dart';
 import 'package:gethdomains/widget/gradient_background.dart';
 
 @RoutePage()
@@ -28,6 +29,8 @@ class HomePage extends StatelessWidget {
                 style: Theme.of(context).textTheme.displayMedium,
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 36),
+              const DomainSearchForm(),
             ],
           ),
         ),
