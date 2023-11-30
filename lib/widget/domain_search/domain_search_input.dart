@@ -2,8 +2,12 @@ part of 'domain_search.dart';
 
 class _DomainSearchField extends StatelessWidget {
   final String formControlName;
+  final Function() onSubmit;
 
-  const _DomainSearchField({required this.formControlName});
+  const _DomainSearchField({
+    required this.formControlName,
+    required this.onSubmit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +28,19 @@ class _DomainSearchField extends StatelessWidget {
       ),
       validationMessages: {
         ValidationMessage.required: (_) =>
-        AppLocalizations.of(context)!.inputErrorRequired,
+            AppLocalizations.of(context)!.inputErrorRequired,
         ValidationMessage.minLength: (_) =>
-        AppLocalizations.of(context)!.inputErrorDomainTooShort,
+            AppLocalizations.of(context)!.inputErrorDomainTooShort,
         ValidationMessage.pattern: (_) =>
-        AppLocalizations.of(context)!.inputErrorDomainInvalid,
+            AppLocalizations.of(context)!.inputErrorDomainInvalid,
       },
       onChanged: (value) => domainSearchBloc.clear(),
+      onEditingComplete: (form) {
+        // Triggered when the user presses Enter on the keyboard
+        debugPrint(
+            'Editing complete for $formControlName with value "${form.value}"');
+        onSubmit();
+      },
     );
   }
 }

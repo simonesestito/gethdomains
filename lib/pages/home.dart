@@ -36,6 +36,8 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 36),
               DomainSearchForm(
                 onSubmit: (domain) => onDomainSearch(context, domain),
+                onRegister: (domain) =>
+                    requestDomainRegistration(context, domain),
               ),
             ],
           ),
@@ -45,5 +47,9 @@ class HomePage extends StatelessWidget {
   void onDomainSearch(BuildContext context, String domain) {
     final domainSearchBloc = context.read<DomainSearchBloc>();
     domainSearchBloc.search(domain);
+  }
+
+  void requestDomainRegistration(BuildContext context, String domain) {
+    // TODO: Go to the Registration page
   }
 }

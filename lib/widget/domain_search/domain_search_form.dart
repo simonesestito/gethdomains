@@ -4,18 +4,23 @@ class DomainSearchForm extends StatelessWidget {
   static const _kDomain = 'domain';
 
   final DomainSearchCallback onSubmit;
+  final DomainSearchCallback onRegister;
 
   final form = FormGroup({
     _kDomain: FormControl<String>(
       validators: [
         Validators.required,
         DomainInputValidator(),
-        Validators.minLength(3+'.eth'.length),
+        Validators.minLength(3 + '.eth'.length),
       ],
     ),
   });
 
-  DomainSearchForm({required this.onSubmit, super.key});
+  DomainSearchForm({
+    required this.onSubmit,
+    required this.onRegister,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +30,43 @@ class DomainSearchForm extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 800),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: Column(
             children: [
-              const Expanded(child: _DomainSearchField(formControlName: _kDomain)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: _DomainSearchField(
+                    formControlName: _kDomain,
+                    onSubmit: _onFormSubmit,
+                  )),
+                  const SizedBox(width: 16),
+                  _DomainSearchButton(
+                    onSubmit: _onFormSubmit,
+                    onRegister: _onRegistrationRequest,
+                  ),
+                ],
+              ),
               const SizedBox(width: 16),
-              _DomainSearchButton(onSubmit: onSubmit),
+              const DomainSearchErrorBanner(),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _onFormSubmit() {
+    form.markAllAsTouched();
+    if (form.valid) {
+      onSubmit(form.control(_kDomain).value);
+    }
+  }
+
+  void _onRegistrationRequest() {
+    if (form.valid) {
+      onRegister(form.control(_kDomain).value);
+    }
   }
 }
