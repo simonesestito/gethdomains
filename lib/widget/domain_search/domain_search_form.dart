@@ -21,14 +21,20 @@ class DomainSearchForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return ReactiveForm(
       formGroup: form,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const _DomainSearchField(formControlName: _kDomain),
-          const SizedBox(width: 16),
-          _DomainSearchButton(onSubmit: onSubmit),
-        ],
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 800),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Expanded(child: _DomainSearchField(formControlName: _kDomain)),
+              const SizedBox(width: 16),
+              _DomainSearchButton(onSubmit: onSubmit),
+            ],
+          ),
+        ),
       ),
     );
   }
