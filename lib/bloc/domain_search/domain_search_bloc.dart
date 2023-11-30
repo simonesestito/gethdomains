@@ -12,20 +12,20 @@ class DomainSearchBloc extends Bloc<DomainSearchEvent, DomainSearchState> {
   final DomainRepository domainRepository;
 
   DomainSearchBloc({required this.domainRepository})
-      : super(DomainSearchStateInitial()) {
+      : super(const DomainSearchStateInitial()) {
     on<DomainSearchEventSearch>(_onSearch);
     on<DomainSearchEventClear>(_onClear);
   }
 
   void search(String domain) => add(DomainSearchEventSearch(domain));
 
-  void clear() => add(DomainSearchEventClear());
+  void clear() => add(const DomainSearchEventClear());
 
   FutureOr<void> _onSearch(
     DomainSearchEventSearch event,
     Emitter<DomainSearchState> emit,
   ) async {
-    emit(DomainSearchStateLoading());
+    emit(const DomainSearchStateLoading());
 
     try {
       final domain = await domainRepository.searchDomain(event.domainName);
@@ -33,7 +33,7 @@ class DomainSearchBloc extends Bloc<DomainSearchEvent, DomainSearchState> {
       if (domain != null) {
         emit(DomainSearchStateSuccess(domain));
       } else {
-        emit(DomainSearchStateNoResults());
+        emit(const DomainSearchStateNoResults());
       }
     } catch (e) {
       emit(DomainSearchStateError(e.toString()));
@@ -44,6 +44,6 @@ class DomainSearchBloc extends Bloc<DomainSearchEvent, DomainSearchState> {
     DomainSearchEventClear event,
     Emitter<DomainSearchState> emit,
   ) async {
-    emit(DomainSearchStateInitial());
+    emit(const DomainSearchStateInitial());
   }
 }

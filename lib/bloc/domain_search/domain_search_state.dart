@@ -1,21 +1,29 @@
 part of 'domain_search_bloc.dart';
 
-sealed class DomainSearchState {}
+sealed class DomainSearchState {
+  const DomainSearchState();
+}
 
-class DomainSearchStateInitial extends DomainSearchState {}
+class DomainSearchStateInitial extends DomainSearchState {
+  const DomainSearchStateInitial();
+}
 
-class DomainSearchStateLoading extends DomainSearchState {}
+class DomainSearchStateLoading extends DomainSearchState {
+  const DomainSearchStateLoading();
+}
 
-class DomainSearchStateNoResults extends DomainSearchState {}
+class DomainSearchStateNoResults extends DomainSearchState {
+  const DomainSearchStateNoResults();
+}
 
 class DomainSearchStateSuccess extends DomainSearchState {
   final Domain domainSearchResult;
 
-  DomainSearchStateSuccess(this.domainSearchResult);
+  const DomainSearchStateSuccess(this.domainSearchResult);
 }
 
 class DomainSearchStateError extends DomainSearchState {
   final String errorMessage;
 
-  DomainSearchStateError(this.errorMessage);
+  const DomainSearchStateError(this.errorMessage);
 }

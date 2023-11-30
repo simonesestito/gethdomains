@@ -1,11 +1,15 @@
 part of 'domain_search_bloc.dart';
 
-sealed class DomainSearchEvent {}
+sealed class DomainSearchEvent {
+  const DomainSearchEvent();
+}
 
 class DomainSearchEventSearch extends DomainSearchEvent {
   final String domainName;
 
-  DomainSearchEventSearch(this.domainName);
+  const DomainSearchEventSearch(this.domainName);
 }
 
-class DomainSearchEventClear extends DomainSearchEvent {}
+class DomainSearchEventClear extends DomainSearchEvent {
+  const DomainSearchEventClear();
+}
