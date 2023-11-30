@@ -14,6 +14,7 @@ class _BlocDependencies extends StatelessWidget {
       BlocProvider(
         create: (context) => DomainSearchBloc(domainRepository: context.read()),
       ),
+      BlocProvider(create: (context) => AuthBloc()),
     ], child: child);
   }
 }

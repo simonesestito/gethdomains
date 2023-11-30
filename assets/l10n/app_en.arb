@@ -1,6 +1,8 @@
 {
   "appName": "GethDomains",
   "homeAppDescription": "Discover the new domain name system, decentralized",
+  "logout": "Logout",
+  "login": "Login",
   "themeBrightnessDark": "Dark",
   "themeBrightnessLight": "Light",
   "themeBrightnessSystem": "System (auto)",

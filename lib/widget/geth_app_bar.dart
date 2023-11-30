@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/theme.dart';
+import 'package:gethdomains/widget/login_button.dart';
 import 'package:gethdomains/widget/theme_mode_button.dart';
 
 PreferredSizeWidget gethAppBar(
@@ -24,6 +25,6 @@ PreferredSizeWidget gethAppBar(
     title: Text(title, style: titleTextStyle),
     backgroundColor: backgroundColor,
     iconTheme: iconTheme,
-    actions: const [ThemeModeIconButton()],
+    actions: const [ThemeModeIconButton(), LoginButton()],
   );
 }
