@@ -7,6 +7,8 @@ class _DomainSearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final domainSearchBloc = context.read<DomainSearchBloc>();
+
     return ReactiveTextField<String>(
       formControlName: DomainSearchForm._kDomain,
       decoration: InputDecoration(
@@ -28,6 +30,7 @@ class _DomainSearchField extends StatelessWidget {
         ValidationMessage.pattern: (_) =>
         AppLocalizations.of(context)!.inputErrorDomainInvalid,
       },
+      onChanged: (value) => domainSearchBloc.clear(),
     );
   }
 }

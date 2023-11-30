@@ -1,5 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gethdomains/bloc/domain_search/domain_search_bloc.dart';
 import 'package:gethdomains/widget/domain_search/domain_search.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/gradient_background.dart';
@@ -32,13 +34,16 @@ class HomePage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 36),
-              DomainSearchForm(onSubmit: onDomainSearch),
+              DomainSearchForm(
+                onSubmit: (domain) => onDomainSearch(context, domain),
+              ),
             ],
           ),
         ),
       );
 
-  void onDomainSearch(String domain) {
-    debugPrint(domain);
+  void onDomainSearch(BuildContext context, String domain) {
+    final domainSearchBloc = context.read<DomainSearchBloc>();
+    domainSearchBloc.search(domain);
   }
 }
