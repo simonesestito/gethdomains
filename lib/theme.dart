@@ -4,8 +4,8 @@ const _appBarTitleSize = 20.0;
 const _primaryLightColor = Colors.blue;
 const _primaryDarkColor = Colors.blueGrey;
 final _accentColor = Colors.blueAccent[900];
-final _appBarLightTextColor = Colors.grey[900];
-const _appBarDarkTextColor = Colors.white;
+final appBarLightTextColor = Colors.grey[900];
+const appBarDarkTextColor = Colors.white;
 
 ThemeData createDarkTheme() {
   final baseTheme = ThemeData.dark();
@@ -24,12 +24,12 @@ ThemeData createDarkTheme() {
     ),
     appBarTheme: baseTheme.appBarTheme.copyWith(
       titleTextStyle: const TextStyle(
-        color: _appBarDarkTextColor,
+        color: appBarDarkTextColor,
         fontSize: _appBarTitleSize,
       ),
       color: _primaryDarkColor,
     ),
-    iconTheme: baseTheme.iconTheme.copyWith(color: _appBarDarkTextColor),
+    iconTheme: baseTheme.iconTheme.copyWith(color: appBarDarkTextColor),
     popupMenuTheme: baseTheme.popupMenuTheme.copyWith(
       color: colorScheme.surface,
       textStyle: const TextStyle(color: Colors.white),
@@ -50,10 +50,10 @@ ThemeData createLightTheme() {
     primaryColor: _primaryLightColor,
     appBarTheme: AppBarTheme(
       titleTextStyle: TextStyle(
-        color: _appBarLightTextColor,
+        color: appBarLightTextColor,
         fontSize: _appBarTitleSize,
       ),
     ),
-    iconTheme: IconThemeData(color: _appBarLightTextColor),
+    iconTheme: IconThemeData(color: appBarLightTextColor),
   );
 }

@@ -1,9 +1,9 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:gethdomains/widget/domain_search/domain_search.dart';
+import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/gradient_background.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gethdomains/widget/theme_mode_button.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
 
   Widget _buildContent(BuildContext context) => Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: _buildAppBar(context),
+        appBar: gethAppBar(context, backgroundColor: Colors.transparent),
         body: SizedBox.expand(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -36,12 +36,6 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-      );
-
-  PreferredSizeWidget _buildAppBar(BuildContext context) => AppBar(
-        title: Text(AppLocalizations.of(context)!.appName),
-        backgroundColor: Colors.transparent,
-        actions: const [ThemeModeIconButton()],
       );
 
   void onDomainSearch(String domain) {
