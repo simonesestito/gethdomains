@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -32,9 +31,7 @@ class GethDomainsApp extends StatelessWidget {
           darkTheme: createDarkTheme(),
           themeMode: _getThemeMode(context),
           theme: createLightTheme(),
-          routerConfig: _appRouter.config(
-            deepLinkBuilder: (_) => const DeepLink([HomeRoute()]),
-          ),
+          routerConfig: _appRouter.config(initialDeepLink: '/'),
         ),
       );
 

@@ -8,6 +8,7 @@ class AppRouter extends _$AppRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: HomeRoute.page),
+    RedirectRoute(path: '/', redirectTo: '/home'),
+    AutoRoute(path: '/home', page: HomeRoute.page),
   ];
 }
