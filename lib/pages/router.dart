@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:gethdomains/routes/home.dart';
+import 'package:gethdomains/pages/home.dart';
 
 part 'router.gr.dart';
 
