@@ -16,6 +16,7 @@ ThemeData createDarkTheme() {
 
   return baseTheme.copyWith(
     colorScheme: colorScheme,
+    primaryColor: _primaryDarkColor,
     bannerTheme: baseTheme.bannerTheme.copyWith(
       backgroundColor: _primaryDarkColor,
       contentTextStyle: const TextStyle(color: Colors.white),
@@ -46,6 +47,7 @@ ThemeData createLightTheme() {
 
   return baseTheme.copyWith(
     colorScheme: colorScheme,
+    primaryColor: _primaryLightColor,
     appBarTheme: AppBarTheme(
       titleTextStyle: TextStyle(
         color: _appBarLightTextColor,

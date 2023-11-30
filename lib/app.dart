@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';
 import 'package:gethdomains/di/injector.dart';
 import 'package:gethdomains/routes/router.dart';
+import 'package:gethdomains/service/theme_updater.dart';
 import 'package:gethdomains/theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,15 +29,20 @@ class GethDomainsApp extends StatelessWidget {
             Locale('en'), // English
           ],
           title: _title,
-          darkTheme: createDarkTheme(),
           themeMode: _getThemeMode(context),
           theme: createLightTheme(),
+          darkTheme: createDarkTheme(),
+          // ignore: deprecated_member_use
           routerConfig: _appRouter.config(initialDeepLink: '/'),
         ),
       );
 
   ThemeMode _getThemeMode(BuildContext context) {
     final themeState = context.watch<ThemeCubit>().state;
+
+    // Update browser theme color
+    context.read<ThemeUpdater>().updateThemeColor(themeState);
+
     return switch (themeState) {
       ThemeBrightness.system => ThemeMode.system,
       ThemeBrightness.dark => ThemeMode.dark,

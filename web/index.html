@@ -20,6 +20,10 @@
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="Decentralized Domain Name Registrar for IPFS and Tor">
 
+  <!-- Add theme colors to the browser toolbar -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#2294F0">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#5F7C89">
+
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -40,6 +44,10 @@
   <script src="flutter.js" defer></script>
 </head>
 <body>
+  <!-- Add custom JS functions -->
+  <script src="js/theme_updater.js"></script>
+
+  <!-- Standard Flutter JS -->
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js

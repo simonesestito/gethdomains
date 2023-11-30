@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';
+import 'package:gethdomains/service/theme_updater.dart';
+import 'package:provider/provider.dart';
 
 class DependencyInjector extends StatelessWidget {
   final WidgetBuilder builder;
@@ -14,6 +16,7 @@ class DependencyInjector extends StatelessWidget {
         BlocProvider<ThemeCubit>(
           create: (_) => ThemeCubit(ThemeBrightness.system),
         ),
+        Provider(create: (_) => const ThemeUpdater()),
       ],
       child: Builder(builder: builder),
     );
