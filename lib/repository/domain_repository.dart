@@ -9,8 +9,8 @@ class DomainRepository {
     // Simulate fake waiting time
     await Future.delayed(const Duration(seconds: 1));
 
-    // with probability 0.4, throw an exception
-    if (Random().nextDouble() < 0.4) {
+    // with some probability, throw an exception
+    if (Random().nextDouble() < 0.25) {
       throw Exception('Error searching domain');
     }
 
