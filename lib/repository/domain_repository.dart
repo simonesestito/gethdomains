@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:gethdomains/input/validators/domain_input.dart';
 import 'package:gethdomains/model/domain.dart';
 
 class DomainRepository {
@@ -15,7 +16,7 @@ class DomainRepository {
     }
 
     final mockDomain = Domain(
-      domainName: 'test.eth',
+      domainName: 'test${DomainInputValidator.domainSuffix}',
       realAddress: 'QmZiSAYkU7gZtqYeZWL21yuwgFtRnJu1JjDzR6Qd2qdDBr',
       type: DomainType.ipfs,
       owner: '0x000000000000000000000000000000000000dead',

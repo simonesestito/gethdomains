@@ -23,17 +23,8 @@ class _DomainSearchField extends StatelessWidget {
         ),
         filled: true,
         fillColor: Theme.of(context).colorScheme.secondary.withAlpha(50),
-        // prefixIcon: const Icon(Icons.search),
-        // prefixIconColor: Theme.of(context).iconTheme.color,
       ),
-      validationMessages: {
-        ValidationMessage.required: (_) =>
-            AppLocalizations.of(context)!.inputErrorRequired,
-        ValidationMessage.minLength: (_) =>
-            AppLocalizations.of(context)!.inputErrorDomainTooShort,
-        ValidationMessage.pattern: (_) =>
-            AppLocalizations.of(context)!.inputErrorDomainInvalid,
-      },
+      validationMessages: DomainInputValidator.getValidationMessages(context),
       onChanged: (value) => domainSearchBloc.clear(),
       onEditingComplete: (form) {
         // Triggered when the user presses Enter on the keyboard

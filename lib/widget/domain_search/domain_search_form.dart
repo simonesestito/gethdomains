@@ -8,11 +8,7 @@ class DomainSearchForm extends StatelessWidget {
 
   final form = FormGroup({
     _kDomain: FormControl<String>(
-      validators: [
-        Validators.required,
-        DomainInputValidator(),
-        Validators.minLength(3 + '.eth'.length),
-      ],
+      validators: const [DomainInputValidator()],
     ),
   });
 
