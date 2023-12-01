@@ -10,7 +10,7 @@ class _GuardDependencies extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (_) => AuthenticationGuard(authRepository: context.read()),
+          create: (_) => AuthenticationGuard(authBloc: context.read()),
         ),
       ],
       child: Builder(builder: builder),

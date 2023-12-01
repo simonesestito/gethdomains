@@ -28,7 +28,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           path: '/loginStatus',
           page: LoginStatusRoute.page,
-          guards: [authenticationGuard],
         ),
       ];
 }

@@ -1,13 +1,15 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 
-@RoutePage()
+@RoutePage<bool>()
 class LoginStatusPage extends StatelessWidget {
-  const LoginStatusPage({super.key});
+  final bool popAfterLogin;
+
+  const LoginStatusPage({super.key, this.popAfterLogin = false});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +18,24 @@ class LoginStatusPage extends StatelessWidget {
         context,
         title: AppLocalizations.of(context)!.loginStatusPageTitle,
       ),
-      body: Center(
-        child: BlocBuilder<AuthBloc, AuthState>(
-          builder: (context, state) => switch (state) {
-            AuthLoggedOut() => const _LoginStatusLoggedOut(),
-            AuthLoggedIn loggedInState => _LoginStatusLoggedIn(
-                authState: loggedInState,
-              ),
-            AuthLoading() => const _LoginStatusLoading(),
-          },
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          // Also, listen for AuthLoggedIn state changes and redirect
+          // to the route that was passed in the constructor.
+          if (state is AuthLoggedIn && popAfterLogin) {
+            context.router.pop(true);
+          }
+        },
+        child: Center(
+          child: BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) => switch (state) {
+              AuthLoggedOut() => const _LoginStatusLoggedOut(),
+              AuthLoggedIn loggedInState => _LoginStatusLoggedIn(
+                  authState: loggedInState,
+                ),
+              AuthLoading() => const _LoginStatusLoading(),
+            },
+          ),
         ),
       ),
     );

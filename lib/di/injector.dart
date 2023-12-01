@@ -21,10 +21,14 @@ class DependencyInjector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _BaseDependencies(
-      builder: (_) => _RepositoryDependencies(
-        builder: (_) => _GuardDependencies(
-          builder: (_) => _BlocDependencies(
-            builder: builder,
+      builder: (context) => _RepositoryDependencies(
+        builder: (context) => _BlocDependencies(
+          builder: (context) => _GuardDependencies(
+            builder: (context) => RepositoryProvider(
+              create: (context) =>
+                  AppRouter(authenticationGuard: context.read()),
+              child: Builder(builder: builder),
+            ),
           ),
         ),
       ),

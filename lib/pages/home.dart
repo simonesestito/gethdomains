@@ -7,6 +7,7 @@ import 'package:gethdomains/routing/router.dart';
 import 'package:gethdomains/widget/domain_search/domain_search.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/gradient_background.dart';
+import 'package:gethdomains/widget/login_button.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -28,8 +29,12 @@ class HomePage extends StatelessWidget {
       );
 
   Widget _buildContent(BuildContext context) => Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: gethAppBar(context, backgroundColor: Colors.transparent),
+    backgroundColor: Colors.transparent,
+        appBar: gethAppBar(
+          context,
+          backgroundColor: Colors.transparent,
+          actions: const [LoginButton()],
+        ),
         body: SizedBox.expand(
           child: Column(
             mainAxisSize: MainAxisSize.max,

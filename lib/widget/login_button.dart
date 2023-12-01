@@ -27,7 +27,7 @@ class LoginButton extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.logout),
       tooltip: AppLocalizations.of(context)!.logout,
-      onPressed: () => context.router.navigate(const LoginStatusRoute()),
+      onPressed: () => context.router.navigate(LoginStatusRoute()),
     );
   }
 
