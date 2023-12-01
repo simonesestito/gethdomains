@@ -10,6 +10,7 @@ const appBarDarkTextColor = Colors.white;
 ThemeData createDarkTheme() {
   final baseTheme = ThemeData.dark();
   final colorScheme = ColorScheme.fromSwatch(
+    brightness: Brightness.dark,
     primarySwatch: _primaryDarkColor,
     accentColor: _accentColor,
   ).copyWith(surface: _primaryDarkColor.shade100);
@@ -42,6 +43,7 @@ ThemeData createDarkTheme() {
 ThemeData createLightTheme() {
   final baseTheme = ThemeData.light();
   final colorScheme = ColorScheme.fromSwatch(
+    brightness: Brightness.light,
     primarySwatch: _primaryLightColor,
     accentColor: _accentColor,
   ).copyWith(surface: _primaryLightColor.shade50);
