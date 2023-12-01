@@ -1,11 +1,12 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/domain_search/domain_search_bloc.dart';
+import 'package:gethdomains/pages/router.dart';
 import 'package:gethdomains/widget/domain_search/domain_search.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/gradient_background.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -17,12 +18,13 @@ class HomePage extends StatelessWidget {
         create: (context) => DomainSearchBloc(
           domainRepository: context.read(),
         ),
-        child: Stack(
-          children: [
-            const GradientBackground(),
-            _buildContent(context),
-          ],
-        ),
+        child: Builder(
+            builder: (context) => Stack(
+                  children: [
+                    const GradientBackground(),
+                    _buildContent(context),
+                  ],
+                )),
       );
 
   Widget _buildContent(BuildContext context) => Scaffold(
@@ -56,6 +58,8 @@ class HomePage extends StatelessWidget {
   }
 
   void requestDomainRegistration(BuildContext context, String domain) {
-    // TODO: Go to the Registration page
+    context.router.navigate(DomainRegistrationRoute(
+      searchedDomain: domain,
+    ));
   }
 }

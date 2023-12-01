@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ThemeModeIconButton extends StatelessWidget {
   const ThemeModeIconButton({super.key});
@@ -12,6 +12,7 @@ class ThemeModeIconButton extends StatelessWidget {
 
     return PopupMenuButton(
       icon: _getIcon(themeBrightness),
+      tooltip: AppLocalizations.of(context)!.themeModePopupButtonTooltip,
       itemBuilder: (context) => _getBrightnessOptions(context),
       onSelected: (ThemeBrightness value) {
         context.read<ThemeCubit>().changeTheme(value);

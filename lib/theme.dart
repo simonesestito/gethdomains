@@ -28,6 +28,7 @@ ThemeData createDarkTheme() {
         fontSize: _appBarTitleSize,
       ),
       color: _primaryDarkColor,
+      iconTheme: baseTheme.iconTheme.copyWith(color: appBarDarkTextColor),
     ),
     iconTheme: baseTheme.iconTheme.copyWith(color: appBarDarkTextColor),
     popupMenuTheme: baseTheme.popupMenuTheme.copyWith(
@@ -48,12 +49,13 @@ ThemeData createLightTheme() {
   return baseTheme.copyWith(
     colorScheme: colorScheme,
     primaryColor: _primaryLightColor,
-    appBarTheme: AppBarTheme(
+    appBarTheme: baseTheme.appBarTheme.copyWith(
       titleTextStyle: TextStyle(
         color: appBarLightTextColor,
         fontSize: _appBarTitleSize,
       ),
+      color: _primaryLightColor.shade200,
     ),
-    iconTheme: IconThemeData(color: appBarLightTextColor),
+    iconTheme: baseTheme.iconTheme.copyWith(color: appBarLightTextColor),
   );
 }

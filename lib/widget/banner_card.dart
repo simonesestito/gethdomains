@@ -15,7 +15,8 @@ class BannerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: color.withOpacity(0.3),
+      elevation: 0, // Otherwise, background is not transparent
+      color: color.withAlpha(80),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: BorderSide(color: color),

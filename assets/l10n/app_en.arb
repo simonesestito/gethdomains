@@ -3,6 +3,7 @@
   "homeAppDescription": "Discover the new domain name system, decentralized",
   "logout": "Logout",
   "login": "Login",
+  "themeModePopupButtonTooltip": "Change theme",
   "themeBrightnessDark": "Dark",
   "themeBrightnessLight": "Light",
   "themeBrightnessSystem": "System (auto)",
