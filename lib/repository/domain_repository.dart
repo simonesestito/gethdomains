@@ -7,7 +7,7 @@ class DomainRepository {
 
   Future<Domain?> searchDomain(String domainName) async {
     // Simulate fake waiting time
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 100));
 
     // with some probability, throw an exception
     if (Random().nextDouble() < 0.25) {
