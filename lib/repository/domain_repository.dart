@@ -1,7 +1,10 @@
 import 'dart:math';
+
 import 'package:gethdomains/model/domain.dart';
 
 class DomainRepository {
+  const DomainRepository();
+
   Future<Domain?> searchDomain(String domainName) async {
     // Simulate fake waiting time
     await Future.delayed(const Duration(seconds: 1));

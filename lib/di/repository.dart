@@ -8,7 +8,8 @@ class _RepositoryDependencies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(providers: [
-      RepositoryProvider(create: (_) => DomainRepository()),
+      RepositoryProvider(create: (_) => const DomainRepository()),
+      RepositoryProvider(create: (_) => const AuthRepository()),
     ], child: child);
   }
 }

@@ -12,7 +12,11 @@ class _BlocDependencies extends StatelessWidget {
       BlocProvider(
         create: (context) => ThemeCubit(ThemeBrightness.system),
       ),
-      BlocProvider(create: (context) => AuthBloc()),
+      BlocProvider(
+        create: (context) => AuthBloc(
+          authRepository: context.read(),
+        ),
+      ),
     ], child: child);
   }
 }

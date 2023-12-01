@@ -1,28 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gethdomains/bloc/auth/auth_bloc.dart';
+import 'package:gethdomains/model/account.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isLoggedIn = context.watch<AuthBloc>().state is AuthLoggedIn;
+    return BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) => switch (state) {
+              AuthLoggedIn successResult => _buildLoggedInButton(
+                  context,
+                  successResult.account,
+                ),
+              AuthLoggedOut() => _buildLoggedOutButton(context),
+              AuthLoading() => _buildLoadingButton(context),
+            });
+  }
 
+  Widget _buildLoggedInButton(BuildContext context, UserAccount account) {
     return IconButton(
-        icon: isLoggedIn
-            ? const Icon(Icons.logout)
-            : const Icon(Icons.account_circle),
-        tooltip: isLoggedIn
-            ? AppLocalizations.of(context)!.logout
-            : AppLocalizations.of(context)!.login,
-        onPressed: () {
-          if (isLoggedIn) {
-            context.read<AuthBloc>().logout();
-          } else {
-            context.read<AuthBloc>().login();
-          }
-        });
+      icon: const Icon(Icons.logout),
+      tooltip: AppLocalizations.of(context)!.logout,
+      onPressed: () => context.read<AuthBloc>().logout(),
+    );
+  }
+
+  Widget _buildLoggedOutButton(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.account_circle),
+      tooltip: AppLocalizations.of(context)!.login,
+      onPressed: () => context.read<AuthBloc>().login(),
+    );
+  }
+
+  Widget _buildLoadingButton(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.all(10),
+      child: SizedBox(
+        height: 20,
+        width: 20,
+        child: CircularProgressIndicator(
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 }
