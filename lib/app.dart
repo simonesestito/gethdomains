@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';
 import 'package:gethdomains/di/injector.dart';
-import 'package:gethdomains/pages/router.dart';
+import 'package:gethdomains/routing/router.dart';
 import 'package:gethdomains/service/theme_updater.dart';
 import 'package:gethdomains/theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 const String _title = 'Geth Domains';
 

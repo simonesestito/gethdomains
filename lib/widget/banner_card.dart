@@ -4,12 +4,14 @@ class BannerCard extends StatelessWidget {
   final Color color;
   final Widget icon;
   final Widget content;
+  final Widget? action;
 
   const BannerCard({
     Key? key,
     required this.color,
     required this.icon,
     required this.content,
+    this.action,
   }) : super(key: key);
 
   @override

@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/model/account.dart';
+import 'package:gethdomains/routing/router.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton({super.key});
@@ -10,21 +12,22 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
-        builder: (context, state) => switch (state) {
-              AuthLoggedIn successResult => _buildLoggedInButton(
-                  context,
-                  successResult.account,
-                ),
-              AuthLoggedOut() => _buildLoggedOutButton(context),
-              AuthLoading() => _buildLoadingButton(context),
-            });
+      builder: (context, state) => switch (state) {
+        AuthLoggedIn successResult => _buildLoggedInButton(
+            context,
+            successResult.account,
+          ),
+        AuthLoggedOut() => _buildLoggedOutButton(context),
+        AuthLoading() => _buildLoadingButton(context),
+      },
+    );
   }
 
   Widget _buildLoggedInButton(BuildContext context, UserAccount account) {
     return IconButton(
       icon: const Icon(Icons.logout),
       tooltip: AppLocalizations.of(context)!.logout,
-      onPressed: () => context.read<AuthBloc>().logout(),
+      onPressed: () => context.router.navigate(const LoginStatusRoute()),
     );
   }
 

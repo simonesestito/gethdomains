@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gethdomains/routing/router.dart';
 import 'package:gethdomains/theme.dart';
 import 'package:gethdomains/widget/login_button.dart';
 import 'package:gethdomains/widget/theme_mode_button.dart';
 
-PreferredSizeWidget gethAppBar(
-  BuildContext context, {
+PreferredSizeWidget gethAppBar(BuildContext context, {
   String? title,
   Color? backgroundColor,
 }) {
@@ -16,8 +17,8 @@ PreferredSizeWidget gethAppBar(
   if (backgroundColor == Colors.transparent) {
     // Use light icons (= as on dark background)
     iconTheme = Theme.of(context).iconTheme.copyWith(
-      color: appBarDarkTextColor,
-    );
+          color: appBarDarkTextColor,
+        );
     titleTextStyle = const TextStyle(color: appBarDarkTextColor);
   }
 
@@ -25,6 +26,10 @@ PreferredSizeWidget gethAppBar(
     title: Text(title, style: titleTextStyle),
     backgroundColor: backgroundColor,
     iconTheme: iconTheme,
-    actions: const [ThemeModeIconButton(), LoginButton()],
+    actions: [
+      const ThemeModeIconButton(),
+      if (context.router.current.name != LoginStatusRoute.name)
+        const LoginButton()
+    ],
   );
 }
