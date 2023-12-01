@@ -12,11 +12,17 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) => Stack(
-        children: [
-          const GradientBackground(),
-          _buildContent(context),
-        ],
+  Widget build(BuildContext context) => BlocProvider(
+    // Inject the BLoC locally in this route
+        create: (context) => DomainSearchBloc(
+          domainRepository: context.read(),
+        ),
+        child: Stack(
+          children: [
+            const GradientBackground(),
+            _buildContent(context),
+          ],
+        ),
       );
 
   Widget _buildContent(BuildContext context) => Scaffold(

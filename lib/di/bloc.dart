@@ -8,11 +8,9 @@ class _BlocDependencies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(providers: [
+      // Global BLoCs are injected here
       BlocProvider(
         create: (context) => ThemeCubit(ThemeBrightness.system),
-      ),
-      BlocProvider(
-        create: (context) => DomainSearchBloc(domainRepository: context.read()),
       ),
       BlocProvider(create: (context) => AuthBloc()),
     ], child: child);
