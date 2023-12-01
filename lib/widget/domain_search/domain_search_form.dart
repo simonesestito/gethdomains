@@ -22,8 +22,7 @@ class DomainSearchForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return ReactiveForm(
       formGroup: form,
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 800),
+      child: BodyContainer(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(

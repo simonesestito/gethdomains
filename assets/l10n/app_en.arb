@@ -45,5 +45,10 @@
     }
   },
   "domainRegistrationDomainLabel": "Domain name",
-  "openDomainPointer": "Open site"
+  "openDomainPointer": "Open site",
+  "domainRegistrationIpfsHashLabel": "IPFS hash",
+  "domainRegistrationTorHashLabel": "Tor hash",
+  "inputErrorIpfsCidInvalid": "This is not a valid IPFS CID",
+  "inputErrorTorHashInvalid": "This is not a valid Tor .onion domain",
+  "inputErrorDomainTypeRequired": "You must select a domain type"
 }

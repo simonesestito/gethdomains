@@ -9,6 +9,10 @@ part 'router.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends _$AppRouter {
+  final AuthenticationGuard authenticationGuard;
+
+  AppRouter({required this.authenticationGuard});
+
   @override
   RouteType get defaultRouteType => const RouteType.material();
 
@@ -19,12 +23,12 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           path: '/domainRegistration',
           page: DomainRegistrationRoute.page,
-          guards: const [AuthenticationGuard()],
+          guards: [authenticationGuard],
         ),
         AutoRoute(
           path: '/loginStatus',
           page: LoginStatusRoute.page,
-          guards: const [AuthenticationGuard()],
+          guards: [authenticationGuard],
         ),
       ];
 }

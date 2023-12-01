@@ -11,9 +11,7 @@ import 'package:gethdomains/theme.dart';
 const String _title = 'Geth Domains';
 
 class GethDomainsApp extends StatelessWidget {
-  final _appRouter = AppRouter();
-
-  GethDomainsApp({super.key});
+  const GethDomainsApp({super.key});
 
   @override
   Widget build(BuildContext context) => DependencyInjector(
@@ -33,7 +31,7 @@ class GethDomainsApp extends StatelessWidget {
           theme: createLightTheme(),
           darkTheme: createDarkTheme(),
           // ignore: deprecated_member_use
-          routerConfig: _appRouter.config(initialDeepLink: '/'),
+          routerConfig: context.read<AppRouter>().config(initialDeepLink: '/'),
         ),
       );
 

@@ -13,23 +13,12 @@ class _DomainSearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     final domainSearchBloc = context.read<DomainSearchBloc>();
 
-    return ReactiveTextField<String>(
+    return AppReactiveTextField<String>(
       formControlName: DomainSearchForm._kDomain,
-      decoration: InputDecoration(
-        hintText: AppLocalizations.of(context)!.domainsSearchInputHint,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.0),
-          borderSide: BorderSide.none,
-        ),
-        filled: true,
-        fillColor: Theme.of(context).colorScheme.secondary.withAlpha(50),
-      ),
-      validationMessages: DomainInputValidator.getValidationMessages(context),
-      onChanged: (value) => domainSearchBloc.clear(),
-      onEditingComplete: (form) {
+      hintText: AppLocalizations.of(context)!.domainsSearchInputHint,
+      onChanged: (_) => domainSearchBloc.clear(),
+      onSubmit: (_) {
         // Triggered when the user presses Enter on the keyboard
-        debugPrint(
-            'Editing complete for $formControlName with value "${form.value}"');
         onSubmit();
       },
     );

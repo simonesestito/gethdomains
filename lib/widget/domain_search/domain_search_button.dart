@@ -25,13 +25,8 @@ class _DomainSearchButton extends StatelessWidget {
       );
 
   Widget _buildRegisterButton(BuildContext context) => ReactiveFormConsumer(
-        builder: (context, form, _) => FloatingActionButton.extended(
-          backgroundColor: Colors.green,
+        builder: (context, form, _) => RegisterDomainButton(
           onPressed: onRegister,
-          label: Text(
-            AppLocalizations.of(context)!.domainsSearchRegisterButton,
-          ),
-          icon: const Icon(Icons.app_registration),
         ),
       );
 }
