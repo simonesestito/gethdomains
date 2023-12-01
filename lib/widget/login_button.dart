@@ -37,13 +37,13 @@ class LoginButton extends StatelessWidget {
   }
 
   Widget _buildLoadingButton(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(10),
+    return Padding(
+      padding: const EdgeInsets.all(10),
       child: SizedBox(
         height: 20,
         width: 20,
         child: CircularProgressIndicator(
-          color: Colors.white,
+          color: IconTheme.of(context).color,
         ),
       ),
     );

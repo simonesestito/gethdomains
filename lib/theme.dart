@@ -55,6 +55,7 @@ ThemeData createLightTheme() {
         fontSize: _appBarTitleSize,
       ),
       color: _primaryLightColor.shade200,
+      iconTheme: baseTheme.iconTheme.copyWith(color: appBarLightTextColor),
     ),
     iconTheme: baseTheme.iconTheme.copyWith(color: appBarLightTextColor),
   );
