@@ -1,7 +1,8 @@
-import 'package:cid/cid.dart';
+import 'package:gethdomains/input/ipfs_cid_parser.dart';
 import "package:reactive_forms/reactive_forms.dart";
 
 class IpfsCidValidator extends Validator<String> {
+  final cidParser = const IpfsCidParser();
   static const String validationName = 'ipfsFormat';
 
   const IpfsCidValidator() : super();
@@ -13,12 +14,13 @@ class IpfsCidValidator extends Validator<String> {
       return requiredValidation;
     }
 
-    final cid = control.value!;
-    try {
-      CID.decodeCid(cid);
-      return null;
-    } catch (err) {
+    if (!cidParser.isValid(control.value!)) {
       return {validationName: true};
     }
+
+    assert(cidParser
+        .isValid(cidParser.fromBinaryV1(cidParser.toBinary(control.value!)!)));
+
+    return null;
   }
 }

@@ -50,6 +50,8 @@ dependencies:
   cid: ^1.0.1
   base32: ^2.1.3
   sha3: ^0.2.0
+  bs58: ^1.0.2
+  convert: ^3.1.1
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to
