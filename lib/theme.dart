@@ -13,7 +13,7 @@ ThemeData createDarkTheme() {
     brightness: Brightness.dark,
     primarySwatch: _primaryDarkColor,
     accentColor: _accentColor,
-  ).copyWith(surface: _primaryDarkColor.shade100);
+  );
 
   return baseTheme.copyWith(
     colorScheme: colorScheme,
@@ -32,11 +32,6 @@ ThemeData createDarkTheme() {
       iconTheme: baseTheme.iconTheme.copyWith(color: appBarDarkTextColor),
     ),
     iconTheme: baseTheme.iconTheme.copyWith(color: appBarDarkTextColor),
-    popupMenuTheme: baseTheme.popupMenuTheme.copyWith(
-      color: colorScheme.surface,
-      textStyle: const TextStyle(color: Colors.white),
-      iconColor: Colors.white,
-    ),
   );
 }
 
