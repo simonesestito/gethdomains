@@ -17,7 +17,8 @@ class DomainRepository {
 
     final mockDomain = Domain(
       domainName: 'test${DomainInputValidator.domainSuffix}',
-      realAddress: 'QmZiSAYkU7gZtqYeZWL21yuwgFtRnJu1JjDzR6Qd2qdDBr',
+      realAddress:
+          'bafybeifx7yeb55armcsxwwitkymga5xf53dxiarykms3ygqic223w5sk3m',
       type: DomainType.ipfs,
       owner: '0x000000000000000000000000000000000000dead',
       validUntil: DateTime(2023, 12, 31),
