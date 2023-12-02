@@ -18,6 +18,9 @@ class _BlocDependencies extends StatelessWidget {
             authRepository: context.read(),
           ),
         ),
+        BlocProvider(
+          create: (context) => SettingsCubit(),
+        ),
       ],
       child: Builder(builder: builder),
     );

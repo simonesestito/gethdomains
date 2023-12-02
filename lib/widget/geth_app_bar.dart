@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/theme.dart';
-import 'package:gethdomains/widget/theme_mode_button.dart';
+import 'package:gethdomains/widget/action_buttons/theme_mode_button.dart';
 
 PreferredSizeWidget gethAppBar(BuildContext context, {
   String? title,

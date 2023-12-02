@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:gethdomains/pages/domain_registration.dart';
 import 'package:gethdomains/pages/home.dart';
 import 'package:gethdomains/pages/login_status.dart';
+import 'package:gethdomains/pages/settings.dart';
 import 'package:gethdomains/routing/guard/auth_guard.dart';
 
 part 'router.gr.dart';
@@ -17,7 +18,8 @@ class AppRouter extends _$AppRouter {
   RouteType get defaultRouteType => const RouteType.material();
 
   @override
-  List<AutoRoute> get routes => [
+  List<AutoRoute> get routes =>
+      [
         RedirectRoute(path: '/', redirectTo: '/home'),
         AutoRoute(path: '/home', page: HomeRoute.page),
         AutoRoute(
@@ -25,9 +27,7 @@ class AppRouter extends _$AppRouter {
           page: DomainRegistrationRoute.page,
           guards: [authenticationGuard],
         ),
-        AutoRoute(
-          path: '/loginStatus',
-          page: LoginStatusRoute.page,
-        ),
+        AutoRoute(path: '/loginStatus', page: LoginStatusRoute.page),
+        AutoRoute(path: '/settings', page: SettingsRoute.page),
       ];
 }

@@ -50,5 +50,7 @@
   "domainRegistrationTorHashLabel": "Tor hash",
   "inputErrorIpfsCidInvalid": "This is not a valid IPFS CID",
   "inputErrorTorHashInvalid": "This is not a valid Tor .onion domain",
-  "inputErrorDomainTypeRequired": "You must select a domain type"
+  "inputErrorDomainTypeRequired": "You must select a domain type",
+  "settingsPageTitle": "Settings",
+  "settingsItemIpfsGateway": "IPFS gateway"
 }

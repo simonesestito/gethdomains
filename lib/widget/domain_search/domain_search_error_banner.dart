@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/domain_search/domain_search_bloc.dart';
+import 'package:gethdomains/bloc/settings/settings.dart';
+import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/widget/banner_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DomainSearchErrorBanner extends StatelessWidget {
   const DomainSearchErrorBanner({super.key});
@@ -49,14 +52,34 @@ class DomainSearchErrorBanner extends StatelessWidget {
             iconColor: Theme.of(context).textTheme.bodyMedium!.color,
             foregroundColor: Theme.of(context).textTheme.bodyMedium!.color,
           ),
-          onPressed: () {
-            // TODO: Open site
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(success.domainSearchResult.realAddress)),
-            );
-          },
+          onPressed: () => _openDomainPointer(
+            context,
+            success.domainSearchResult,
+          ),
           icon: const Icon(Icons.open_in_new),
           label: Text(AppLocalizations.of(context)!.openDomainPointer),
         ),
       );
+
+  void _openDomainPointer(BuildContext context, Domain domain) {
+    switch (domain.type) {
+      case DomainType.ipfs:
+        _openIpfsDomain(context, domain.realAddress);
+        break;
+      case DomainType.tor:
+        _openTorDomain(context, domain.realAddress);
+        break;
+    }
+  }
+
+  void _openIpfsDomain(BuildContext context, String cid) {
+    final httpUrl =
+        context.read<SettingsCubit>().state.ipfsGateway.getGatewayUrl(cid);
+    // Open a new browser tab with the IPFS gateway URL
+    launchUrl(httpUrl, webOnlyWindowName: '_blank');
+  }
+
+  void _openTorDomain(BuildContext context, String domain) {
+    // TODO: open tor domain (or check if it's possible)
+  }
 }
