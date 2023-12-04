@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:gethdomains/bloc/settings/ipfs_gateway.dart';
+import 'package:gethdomains/model/ipfs_gateway.dart';
 
 part 'settings_state.freezed.dart';
 part 'settings_state.g.dart';

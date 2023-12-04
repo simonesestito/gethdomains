@@ -1,5 +1,5 @@
-import 'package:gethdomains/bloc/settings/ipfs_gateway.dart';
 import 'package:gethdomains/bloc/settings/settings_state.dart';
+import 'package:gethdomains/model/ipfs_gateway.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 export 'settings_state.dart';
