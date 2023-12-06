@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
+import 'package:gethdomains/bloc/balance/balance_bloc.dart';
 import 'package:gethdomains/bloc/settings/settings.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';
 import 'package:gethdomains/repository/auth_repository.dart';
+import 'package:gethdomains/repository/balance_repository.dart';
 import 'package:gethdomains/repository/domain_repository.dart';
 import 'package:gethdomains/routing/guard/auth_guard.dart';
 import 'package:gethdomains/routing/router.dart';

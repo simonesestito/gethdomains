@@ -15,7 +15,7 @@ class DomainRepository {
       throw Exception('Error searching domain');
     }
 
-    final mockDomain = const Domain(
+    const mockDomain = Domain(
       domainName: 'test${DomainInputValidator.domainSuffix}',
       realAddress:
           'bafybeifx7yeb55armcsxwwitkymga5xf53dxiarykms3ygqic223w5sk3m',

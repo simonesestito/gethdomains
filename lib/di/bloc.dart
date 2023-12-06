@@ -7,19 +7,24 @@ class _BlocDependencies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authBloc = AuthBloc(authRepository: context.read());
+
     return MultiRepositoryProvider(
       providers: [
         // Global BLoCs are injected here
         BlocProvider(
           create: (context) => ThemeCubit(ThemeBrightness.system),
         ),
-        BlocProvider(
-          create: (context) => AuthBloc(
-            authRepository: context.read(),
-          ),
-        ),
+        BlocProvider.value(value: authBloc),
         BlocProvider(
           create: (context) => SettingsCubit(),
+        ),
+        BlocProvider(
+          create: (context) => BalanceBloc(
+            balanceRepository: context.read(),
+            authStateChanges: authBloc.stream,
+          ),
+          lazy: false,
         ),
       ],
       child: Builder(builder: builder),

@@ -54,5 +54,15 @@
   "inputErrorDomainTypeRequired": "You must select a domain type",
   "settingsPageTitle": "Settings",
   "settingsItemIpfsGateway": "IPFS gateway",
-  "loginProviderErrorMessage": "A web3 provider (such as Metamask) is required in the browser"
+  "loginProviderErrorMessage": "A web3 provider (such as Metamask) is required in the browser",
+  "userTokenBalanceMessage": "You have {balance} GETH",
+  "@userTokenBalanceMessage": {
+    "placeholders": {
+      "balance": {
+        "type": "BigInt"
+      }
+    }
+  },
+  "userTokenBalanceUnavailable": "Your GETH balance is unavailable",
+  "buyTokensButtonLabel": "Buy GETH"
 }

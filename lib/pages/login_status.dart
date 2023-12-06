@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
+import 'package:gethdomains/bloc/balance/balance_bloc.dart';
+import 'package:gethdomains/widget/body_container.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/login_provider_error_banner.dart';
 
@@ -27,7 +29,7 @@ class LoginStatusPage extends StatelessWidget {
             context.router.pop(true);
           }
         },
-        child: Center(
+        child: BodyContainer(
           child: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) => switch (state) {
               AuthLoggedOut() => const _LoginStatusLoggedOut(),
@@ -83,8 +85,40 @@ class _LoginStatusLoggedIn extends StatelessWidget {
           icon: const Icon(Icons.logout),
           label: Text(AppLocalizations.of(context)!.logout),
         ),
+        const Divider(),
+        _buildTokenBalance(context),
+        const Divider(),
+        _buildDomainsList(context),
       ],
     );
+  }
+
+  Widget _buildTokenBalance(BuildContext context) =>
+      BlocBuilder<BalanceBloc, BalanceState>(
+        builder: (context, state) => switch (state) {
+          LoadingBalanceState() => const SizedBox.shrink(),
+          BalanceStateData balanceState => ListTile(
+              title: Text(AppLocalizations.of(context)!.userTokenBalanceMessage(
+                balanceState.balance,
+              )),
+              trailing: OutlinedButton(
+                onPressed: () => _onBuyTokensPressed(context),
+                child: Text(AppLocalizations.of(context)!.buyTokensButtonLabel),
+              ),
+            ),
+          UnavailableBalanceState() => Text(
+              AppLocalizations.of(context)!.userTokenBalanceUnavailable,
+            ),
+        },
+      );
+
+  void _onBuyTokensPressed(BuildContext context) {
+    // TODO: Implement buying tokens page route
+  }
+
+  Widget _buildDomainsList(BuildContext context) {
+    // TODO: Build domains list
+    return const Placeholder();
   }
 }
 
