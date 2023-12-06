@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
+import 'package:gethdomains/widget/login_provider_error_banner.dart';
 
 @RoutePage<bool>()
 class LoginStatusPage extends StatelessWidget {
@@ -30,6 +31,7 @@ class LoginStatusPage extends StatelessWidget {
           child: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) => switch (state) {
               AuthLoggedOut() => const _LoginStatusLoggedOut(),
+              AuthMissingProvider() => const LoginProviderErrorBanner(),
               AuthLoggedIn loggedInState => _LoginStatusLoggedIn(
                   authState: loggedInState,
                 ),

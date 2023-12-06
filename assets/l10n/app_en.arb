@@ -53,5 +53,6 @@
   "inputErrorTorHashInvalid": "This is not a valid Tor .onion domain",
   "inputErrorDomainTypeRequired": "You must select a domain type",
   "settingsPageTitle": "Settings",
-  "settingsItemIpfsGateway": "IPFS gateway"
+  "settingsItemIpfsGateway": "IPFS gateway",
+  "loginProviderErrorMessage": "A web3 provider (such as Metamask) is required in the browser"
 }

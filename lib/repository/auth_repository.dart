@@ -8,6 +8,9 @@ import 'package:flutter/foundation.dart';
 import 'package:gethdomains/model/account.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@JS('canLogin')
+external JSPromise _canLogin();
+
 @JS('login')
 external JSPromise _login();
 
@@ -19,6 +22,15 @@ class AuthRepository {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   AuthRepository();
+
+  Future<bool> canLogin() async {
+    try {
+      return promiseToFuture<bool>(_canLogin());
+    } catch (err) {
+      debugPrint('Error checking if can login: $err');
+      return false;
+    }
+  }
 
   Future<bool> wasLoggedIn() async {
     final prefs = await _prefs;

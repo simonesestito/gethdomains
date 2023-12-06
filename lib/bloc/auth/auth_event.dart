@@ -6,7 +6,6 @@ sealed class AuthEvent {
 
 class AuthLogin extends AuthEvent {
   const AuthLogin();
-  // TODO: Define parameters required for login
 }
 
 class AuthLogout extends AuthEvent {

@@ -26,6 +26,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _onLogin(AuthLogin event, Emitter<AuthState> emit) async {
     emit(const AuthLoading());
+
+    if (!await authRepository.canLogin()) {
+      emit(const AuthMissingProvider());
+      return;
+    }
+
     try {
       final loginResult = await authRepository.login();
       if (loginResult != null) {
@@ -34,7 +40,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(const AuthLoggedOut());
       }
     } catch (err) {
-      // TODO: Better login error handling (one-shot error message?)
       emit(const AuthLoggedOut());
     }
   }

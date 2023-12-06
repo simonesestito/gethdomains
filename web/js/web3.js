@@ -17,6 +17,17 @@ async function getCurrentUser() {
     return accounts[0];
 }
 
+async function canLogin() {
+    const web3 = getWeb3();
+
+    try {
+        await web3.eth.net.isListening();
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
 async function login() {
     const web3 = getWeb3();
 

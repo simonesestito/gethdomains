@@ -17,3 +17,7 @@ class AuthLoggedIn extends AuthState {
 
   const AuthLoggedIn(this.account);
 }
+
+class AuthMissingProvider extends AuthState {
+  const AuthMissingProvider();
+}

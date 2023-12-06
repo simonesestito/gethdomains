@@ -15,6 +15,7 @@ class LoginButton extends StatelessWidget {
         AuthLoggedIn _ => _buildAccountButton(context),
         AuthLoggedOut() => _buildLoginButton(context),
         AuthLoading() => _buildLoadingButton(context),
+        AuthMissingProvider() => const SizedBox.shrink(),
       },
     );
   }

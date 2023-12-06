@@ -2,13 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/bloc/domain_search/domain_search_bloc.dart';
 import 'package:gethdomains/routing/router.dart';
 import 'package:gethdomains/widget/action_buttons/login_button.dart';
 import 'package:gethdomains/widget/action_buttons/settings_button.dart';
+import 'package:gethdomains/widget/body_container.dart';
 import 'package:gethdomains/widget/domain_search/domain_search.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/gradient_background.dart';
+import 'package:gethdomains/widget/login_provider_error_banner.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -16,7 +19,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-    // Inject the BLoC locally in this route
+        // Inject the BLoC locally in this route
         create: (context) => DomainSearchBloc(
           domainRepository: context.read(),
         ),
@@ -25,12 +28,13 @@ class HomePage extends StatelessWidget {
                   children: [
                     const GradientBackground(),
                     _buildContent(context),
+                    _buildLoginProviderErrorIfAny(context),
                   ],
                 )),
       );
 
   Widget _buildContent(BuildContext context) => Scaffold(
-    backgroundColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
         appBar: gethAppBar(
           context,
           backgroundColor: Colors.transparent,
@@ -68,4 +72,18 @@ class HomePage extends StatelessWidget {
       searchedDomain: domain,
     ));
   }
+
+  Widget _buildLoginProviderErrorIfAny(BuildContext context) =>
+      BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) => switch (state) {
+          AuthMissingProvider() => const Padding(
+              padding: EdgeInsets.only(top: 64),
+              child: BodyContainer(
+                alignment: Alignment.topCenter,
+                child: LoginProviderErrorBanner(),
+              ),
+            ),
+          _ => const SizedBox.shrink(),
+        },
+      );
 }
