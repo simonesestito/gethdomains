@@ -9,7 +9,7 @@ class Domain with _$Domain {
     required String realAddress,
     required DomainType type,
     required String owner,
-    required DateTime validUntil,
+    required int validUntilBlockNumber,
   }) = _Domain;
 }
 

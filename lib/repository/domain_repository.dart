@@ -15,13 +15,13 @@ class DomainRepository {
       throw Exception('Error searching domain');
     }
 
-    final mockDomain = Domain(
+    final mockDomain = const Domain(
       domainName: 'test${DomainInputValidator.domainSuffix}',
       realAddress:
           'bafybeifx7yeb55armcsxwwitkymga5xf53dxiarykms3ygqic223w5sk3m',
       type: DomainType.ipfs,
       owner: '0x000000000000000000000000000000000000dead',
-      validUntil: DateTime(2023, 12, 31),
+      validUntilBlockNumber: 6000000,
     );
 
     if (domainName == mockDomain.domainName) {
