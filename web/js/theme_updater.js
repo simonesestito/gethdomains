@@ -1,7 +1,7 @@
 function updateThemeColor(brightness) {
     // Update the color of the theme,
     // indicated in <meta name="theme-color">.
-    const darkColor = "#5F7C89";
+    const darkColor = "#2194EF";
     const lightColor = "#2294F0";
 
     // Remove all existing meta[name=theme-color] elements.
