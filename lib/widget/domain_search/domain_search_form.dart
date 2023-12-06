@@ -44,7 +44,7 @@ class DomainSearchForm extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-              const DomainSearchErrorBanner(),
+              const DomainSearchResultBanner(),
             ],
           ),
         ),

@@ -7,8 +7,8 @@ import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/widget/banner_card.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DomainSearchErrorBanner extends StatelessWidget {
-  const DomainSearchErrorBanner({super.key});
+class DomainSearchResultBanner extends StatelessWidget {
+  const DomainSearchResultBanner({super.key});
 
   @override
   Widget build(BuildContext context) =>
@@ -80,6 +80,8 @@ class DomainSearchErrorBanner extends StatelessWidget {
   }
 
   void _openTorDomain(BuildContext context, String domain) {
-    // TODO: open tor domain (or check if it's possible)
+    final httpUrl = Uri.parse('https://$domain');
+    // Launch ONION domain, even if the user is not using Tor
+    launchUrl(httpUrl, webOnlyWindowName: '_blank');
   }
 }

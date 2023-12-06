@@ -15,19 +15,29 @@ class DomainRepository {
       throw Exception('Error searching domain');
     }
 
-    const mockDomain = Domain(
-      domainName: 'test${DomainInputValidator.domainSuffix}',
-      realAddress:
-          'bafybeifx7yeb55armcsxwwitkymga5xf53dxiarykms3ygqic223w5sk3m',
-      type: DomainType.ipfs,
-      owner: '0x000000000000000000000000000000000000dead',
-      validUntilBlockNumber: 6000000,
-    );
+    const mockDomains = [
+      Domain(
+        domainName: 'test${DomainInputValidator.domainSuffix}',
+        realAddress:
+            'bafybeifx7yeb55armcsxwwitkymga5xf53dxiarykms3ygqic223w5sk3m',
+        type: DomainType.ipfs,
+        owner: '0x000000000000000000000000000000000000dead',
+        validUntilBlockNumber: 6000000,
+      ),
+      Domain(
+        domainName: 'tor${DomainInputValidator.domainSuffix}',
+        realAddress:
+            'duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion',
+        type: DomainType.tor,
+        owner: '0x000000000000000000000000000000000000dead',
+        validUntilBlockNumber: 6000000,
+      ),
+    ];
 
-    if (domainName == mockDomain.domainName) {
-      return mockDomain;
-    } else {
-      return null;
-    }
+    // ignore: unnecessary_cast
+    return mockDomains.map((d) => d as Domain?).firstWhere(
+      (domain) => domain?.domainName == domainName,
+      orElse: () => null,
+    );
   }
 }
