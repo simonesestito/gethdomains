@@ -85,6 +85,7 @@ class _LoginStatusLoggedIn extends StatelessWidget {
           icon: const Icon(Icons.logout),
           label: Text(AppLocalizations.of(context)!.logout),
         ),
+        const SizedBox(height: 16),
         const Divider(),
         _buildTokenBalance(context),
         const Divider(),
@@ -118,7 +119,15 @@ class _LoginStatusLoggedIn extends StatelessWidget {
 
   Widget _buildDomainsList(BuildContext context) {
     // TODO: Build domains list
-    return const Placeholder();
+    return Column(children: [
+      const SizedBox(height: 16),
+      Text(
+        AppLocalizations.of(context)!.userDomainsListTitle,
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+      const SizedBox(height: 16),
+      const Placeholder(),
+    ]);
   }
 }
 

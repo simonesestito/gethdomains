@@ -64,5 +64,6 @@
     }
   },
   "userTokenBalanceUnavailable": "Your GETH balance is unavailable",
-  "buyTokensButtonLabel": "Buy GETH"
+  "buyTokensButtonLabel": "Buy GETH",
+  "userDomainsListTitle": "Your domains"
 }
