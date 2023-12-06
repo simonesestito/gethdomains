@@ -11,9 +11,13 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
 
-  AuthBloc({required this.authRepository}) : super(const AuthLoggedOut()) {
+  AuthBloc({required this.authRepository}) : super(const AuthLoading()) {
     on<AuthLogin>(_onLogin);
     on<AuthLogout>(_onLogout);
+    on<AuthLoadCurrentUser>(_loadCurrentUser);
+
+    // Initial load of current user
+    add(const AuthLoadCurrentUser());
   }
 
   void login() => add(const AuthLogin());
@@ -37,11 +41,33 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _onLogout(AuthLogout event, Emitter<AuthState> emit) async {
     emit(const AuthLoading());
-    try {
-      await authRepository.logout();
-    } catch (err) {
-      debugPrint('Error logging out: $err');
-    }
+    await authRepository.logout();
     emit(const AuthLoggedOut());
+  }
+
+  FutureOr<void> _loadCurrentUser(
+    AuthLoadCurrentUser event,
+    Emitter<AuthState> emit,
+  ) async {
+    final shouldFetchUser = await authRepository.wasLoggedIn();
+    debugPrint('Should fetch user: $shouldFetchUser');
+    if (!shouldFetchUser) {
+      emit(const AuthLoggedOut());
+    } else {
+      // Try to recover the current user
+      emit(const AuthLoading());
+
+      try {
+        final currentUser = await authRepository.getCurrentUser();
+        if (currentUser != null) {
+          emit(AuthLoggedIn(currentUser));
+        } else {
+          emit(const AuthLoggedOut());
+        }
+      } catch (err) {
+        debugPrint('Error loading current user: $err');
+        emit(const AuthLoggedOut());
+      }
+    }
   }
 }

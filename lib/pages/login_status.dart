@@ -72,7 +72,7 @@ class _LoginStatusLoggedIn extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(AppLocalizations.of(context)!.loginStatusPageLoggedIn(
+        SelectableText(AppLocalizations.of(context)!.loginStatusPageLoggedIn(
           authState.account.address,
         )),
         const SizedBox(height: 16),

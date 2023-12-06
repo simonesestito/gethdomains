@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
-import 'package:gethdomains/model/account.dart';
 import 'package:gethdomains/routing/router.dart';
 
 class LoginButton extends StatelessWidget {
@@ -13,27 +12,24 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) => switch (state) {
-        AuthLoggedIn successResult => _buildLoggedInButton(
-            context,
-            successResult.account,
-          ),
-        AuthLoggedOut() => _buildLoggedOutButton(context),
+        AuthLoggedIn _ => _buildAccountButton(context),
+        AuthLoggedOut() => _buildLoginButton(context),
         AuthLoading() => _buildLoadingButton(context),
       },
     );
   }
 
-  Widget _buildLoggedInButton(BuildContext context, UserAccount account) {
+  Widget _buildAccountButton(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.logout),
-      tooltip: AppLocalizations.of(context)!.logout,
+      icon: const Icon(Icons.account_circle),
+      tooltip: AppLocalizations.of(context)!.accountButtonTooltip,
       onPressed: () => context.router.navigate(LoginStatusRoute()),
     );
   }
 
-  Widget _buildLoggedOutButton(BuildContext context) {
+  Widget _buildLoginButton(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.account_circle),
+      icon: const Icon(Icons.login),
       tooltip: AppLocalizations.of(context)!.login,
       onPressed: () => context.read<AuthBloc>().login(),
     );

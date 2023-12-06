@@ -12,3 +12,7 @@ class AuthLogin extends AuthEvent {
 class AuthLogout extends AuthEvent {
   const AuthLogout();
 }
+
+class AuthLoadCurrentUser extends AuthEvent {
+  const AuthLoadCurrentUser();
+}
