@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gethdomains/input/validators/ipfs_cid_validator.dart';
 import 'package:gethdomains/input/validators/tor_address_validator.dart';
 import 'package:gethdomains/model/domain.dart';
+import 'package:gethdomains/utils/form_utils.dart';
 import 'package:gethdomains/widget/text_field_decoration.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,7 +23,7 @@ class IpfsTorFormInputs extends StatelessWidget {
     required this.onSubmit,
     Domain? editingDomain,
   }) {
-    _replaceControls(form, {
+    form.replaceControls({
       IpfsTorFormInputs.kIpfsHash: ipfsHashInput,
       IpfsTorFormInputs.kTorHash: torHashInput,
     });
@@ -41,17 +42,6 @@ class IpfsTorFormInputs extends StatelessWidget {
           break;
       }
     }
-  }
-
-  static void _replaceControls(
-    FormGroup form,
-    Map<String, AbstractControl> controls,
-  ) {
-    // Remove existing controls
-    controls.keys.where(form.contains).forEach(form.removeControl);
-
-    // Add new controls
-    form.addAll(controls);
   }
 
   @override
