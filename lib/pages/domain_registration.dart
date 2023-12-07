@@ -6,6 +6,7 @@ import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/widget/body_container.dart';
 import 'package:gethdomains/widget/column_gap.dart';
 import 'package:gethdomains/widget/domain_form/ipfs_tor_inputs.dart';
+import 'package:gethdomains/widget/domain_form/validity_blocks_input.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/domain_form/register_domain_button.dart';
 import 'package:gethdomains/widget/text_field_decoration.dart';
@@ -14,9 +15,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 @RoutePage()
 class DomainRegistrationPage extends StatelessWidget {
   final String searchedDomain;
-  static const int _fiveYearsInBlocks = 5 * 365 * 24 * 60 * 60 ~/ 12;
   static const String _kDomainName = 'domain';
-  static const String _kValidityBlocksCount = 'validityBlocksCount';
 
   late final FormGroup form;
 
@@ -29,17 +28,6 @@ class DomainRegistrationPage extends StatelessWidget {
         validators: const [DomainInputValidator()],
         value: searchedDomain,
         disabled: true,
-      ),
-      IpfsTorFormInputs.kDomainType: FormControl<DomainType>(
-        validators: [Validators.required],
-      ),
-      _kValidityBlocksCount: FormControl<int>(
-        validators: [
-          Validators.number,
-          Validators.required,
-          Validators.min(10),
-          Validators.max(_fiveYearsInBlocks),
-        ],
       ),
     });
   }
@@ -62,13 +50,9 @@ class DomainRegistrationPage extends StatelessWidget {
                 hintText: '',
                 onSubmit: (_) {},
               ),
-              AppReactiveTextField(
-                formControlName: _kValidityBlocksCount,
-                hintText: AppLocalizations.of(context)!
-                    .domainRegistrationValidityBlocksLabel,
-                helperText: AppLocalizations.of(context)!
-                    .domainRegistrationValidityBlocksHelper,
-                onSubmit: (_) => _onSubmit(context),
+              ValidityBlocksCountInput(
+                form: form,
+                onSubmit: () => _onSubmit(context),
               ),
               IpfsTorFormInputs(
                 form: form,
@@ -99,7 +83,8 @@ class DomainRegistrationPage extends StatelessWidget {
             ? form.value[IpfsTorFormInputs.kIpfsHash].toString()
             : form.value[IpfsTorFormInputs.kTorHash].toString();
 
-    final validityBlocksCount = form.value[_kValidityBlocksCount] as int;
+    final validityBlocksCount =
+        form.value[ValidityBlocksCountInput.kValidityBlocksCount] as int;
     debugPrint('Validity blocks count: $validityBlocksCount');
 
     ScaffoldMessenger.of(context).showSnackBar(

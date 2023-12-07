@@ -24,6 +24,9 @@ class IpfsTorFormInputs extends StatelessWidget {
     Domain? editingDomain,
   }) {
     form.replaceControls({
+      IpfsTorFormInputs.kDomainType: FormControl<DomainType>(
+        validators: [Validators.required],
+      ),
       IpfsTorFormInputs.kIpfsHash: ipfsHashInput,
       IpfsTorFormInputs.kTorHash: torHashInput,
     });
