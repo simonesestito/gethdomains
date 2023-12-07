@@ -1,6 +1,5 @@
 import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
-import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/utils/form_utils.dart';
 import 'package:gethdomains/widget/text_field_decoration.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -12,9 +11,10 @@ class ValidityBlocksCountInput extends StatelessWidget {
   static const String kValidityBlocksCount = 'validityBlocksCount';
 
   // TODO: Define the cost in GETH per block
-  static final Decimal costPerBlock = Decimal.parse('0.0001');
+  static final Decimal costPerBlock = Decimal.parse('0.001');
 
   final void Function() onSubmit;
+  final String? helperText;
 
   static const int _fiveYearsInBlocks = 5 * 365 * 24 * 60 * 60 ~/ 12;
 
@@ -22,7 +22,7 @@ class ValidityBlocksCountInput extends StatelessWidget {
     super.key,
     required FormGroup form,
     required this.onSubmit,
-    Domain? editingDomain,
+    this.helperText,
   }) {
     form.replaceControls({
       kValidityBlocksCount: FormControl<int>(
@@ -45,8 +45,9 @@ class ValidityBlocksCountInput extends StatelessWidget {
           formControlName: kValidityBlocksCount,
           hintText: AppLocalizations.of(context)!
               .domainRegistrationValidityBlocksLabel,
-          helperText: AppLocalizations.of(context)!
-              .domainRegistrationValidityBlocksHelper,
+          helperText: helperText ??
+              AppLocalizations.of(context)!
+                  .domainRegistrationValidityBlocksHelper,
           onSubmit: (_) => onSubmit(),
         ),
         ReactiveValueListenableBuilder(
@@ -68,9 +69,11 @@ class ValidityBlocksCountInput extends StatelessWidget {
                       estimatedCost.toString());
             }
 
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(estimatedCostDisplayMessage),
+            return ListTile(
+              title: Text(estimatedCostDisplayMessage),
+              leading: estimatedCostDisplayMessage.isEmpty
+                  ? null
+                  : const Icon(Icons.money),
             );
           },
         ),

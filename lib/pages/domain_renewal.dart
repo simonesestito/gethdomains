@@ -1,8 +1,8 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gethdomains/input/validators/domain_input.dart';
 import 'package:gethdomains/model/domain.dart';
+import 'package:gethdomains/utils/form_utils.dart';
 import 'package:gethdomains/widget/body_container.dart';
 import 'package:gethdomains/widget/column_gap.dart';
 import 'package:gethdomains/widget/domain_form/ipfs_tor_inputs.dart';
@@ -13,17 +13,16 @@ import 'package:gethdomains/widget/text_field_decoration.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @RoutePage()
-class DomainRegistrationPage extends StatelessWidget {
-  final String searchedDomain;
+class DomainRenewalPage extends StatelessWidget {
   static const String _kDomainName = 'domain';
+  final Domain domainToRenew;
 
-  late final FormGroup form;
+  final FormGroup form = FormGroup({});
 
-  DomainRegistrationPage({super.key, this.searchedDomain = ''}) {
-    form = FormGroup({
+  DomainRenewalPage({super.key, required this.domainToRenew}) {
+    form.replaceControls({
       _kDomainName: FormControl<String>(
-        validators: const [DomainInputValidator()],
-        value: searchedDomain,
+        value: domainToRenew.domainName,
         disabled: true,
       ),
     });
@@ -34,7 +33,7 @@ class DomainRegistrationPage extends StatelessWidget {
     return Scaffold(
       appBar: gethAppBar(
         context,
-        title: AppLocalizations.of(context)!.domainRegistrationTitle,
+        title: AppLocalizations.of(context)!.domainRenewalTitle,
       ),
       body: BodyContainer(
         child: ReactiveForm(
@@ -47,12 +46,22 @@ class DomainRegistrationPage extends StatelessWidget {
                 hintText: '',
                 onSubmit: (_) {},
               ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: ListTile(
+                  leading: const Icon(Icons.info),
+                  subtitle: Text(
+                      AppLocalizations.of(context)!.userDomainItemDescription(
+                    domainToRenew.type.name,
+                    domainToRenew.realAddress,
+                    domainToRenew.validUntilBlockNumber,
+                  )),
+                ),
+              ),
               ValidityBlocksCountInput(
                 form: form,
-                onSubmit: () => _onSubmit(context),
-              ),
-              IpfsTorFormInputs(
-                form: form,
+                helperText: AppLocalizations.of(context)!
+                    .domainRenewalValidityBlocksCountHelperText,
                 onSubmit: () => _onSubmit(context),
               ),
               ReactiveFormConsumer(

@@ -47,7 +47,7 @@ class OwnedDomainListItem extends StatelessWidget {
   }
 
   void _onRenewPressed(BuildContext context) {
-    // TODO: Implement renew domain page route
+    context.router.navigate(DomainRenewalRoute(domainToRenew: domain));
   }
 
   void _onEditPressed(BuildContext context) {

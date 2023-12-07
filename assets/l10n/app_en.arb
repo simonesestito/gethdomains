@@ -107,6 +107,7 @@
   "userDomainItemEditTooltip": "Edit this domain",
   "domainRegistrationValidityBlocksLabel": "Valid for no. blocks",
   "domainRegistrationValidityBlocksHelper": "The domain will be valid for this number of blocks, starting from the current block in the blockchain",
+  "domainRenewalValidityBlocksCountHelperText": "This amount of blocks will be ADDED to the current expiration block, if not expired yet",
   "domainRegistrationValidityBlocksEstimatedCost": "Estimated cost: {cost} GETH",
   "@domainRegistrationValidityBlocksEstimatedCost": {
     "placeholders": {
@@ -114,5 +115,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "domainRenewalTitle": "Renew domain"
 }
