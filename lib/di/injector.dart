@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/bloc/balance/balance_bloc.dart';
+import 'package:gethdomains/bloc/domains/domains_bloc.dart';
 import 'package:gethdomains/bloc/settings/settings.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';
 import 'package:gethdomains/repository/auth_repository.dart';

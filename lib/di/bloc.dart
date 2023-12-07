@@ -26,6 +26,13 @@ class _BlocDependencies extends StatelessWidget {
           ),
           lazy: false,
         ),
+        BlocProvider(
+          create: (context) => DomainsBloc(
+            domainsRepository: context.read(),
+            authStateChanges: authBloc.stream,
+          ),
+          lazy: false,
+        ),
       ],
       child: Builder(builder: builder),
     );

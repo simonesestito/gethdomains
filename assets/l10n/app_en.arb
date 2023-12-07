@@ -65,5 +65,22 @@
   },
   "userTokenBalanceUnavailable": "Your GETH balance is unavailable",
   "buyTokensButtonLabel": "Buy GETH",
-  "userDomainsListTitle": "Your domains"
+  "userDomainsListTitle": "Your domains",
+  "userDomainsListUnavailable": "Your domains list is unavailable",
+  "userDomainsListEmpty": "You own no domains",
+  "userDomainItemResellTooltip": "Resell this domain",
+  "userDomainItemDescription": "{type} -> {address}\nValid until block no. {validUntilBlock}",
+  "@userDomainItemDescription": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      },
+      "address": {
+        "type": "String"
+      },
+      "validUntilBlock": {
+        "type": "int"
+      }
+    }
+  }
 }

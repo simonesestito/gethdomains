@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
-import 'package:gethdomains/bloc/balance/balance_bloc.dart';
 import 'package:gethdomains/widget/body_container.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
+import 'package:gethdomains/widget/geth_balance_tile.dart';
 import 'package:gethdomains/widget/login_provider_error_banner.dart';
+import 'package:gethdomains/widget/owned_domains_list.dart';
 import 'package:local_hero/local_hero.dart';
 
 @RoutePage<bool>()
@@ -98,47 +99,11 @@ class _LoginStatusLoggedIn extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         const Divider(),
-        _buildTokenBalance(context),
+        const GethBalanceTile(),
         const Divider(),
-        _buildDomainsList(context),
+        const OwnedDomainsList(),
       ],
     );
-  }
-
-  Widget _buildTokenBalance(BuildContext context) =>
-      BlocBuilder<BalanceBloc, BalanceState>(
-        builder: (context, state) => switch (state) {
-          LoadingBalanceState() => const SizedBox.shrink(),
-          BalanceStateData balanceState => ListTile(
-              title: Text(AppLocalizations.of(context)!.userTokenBalanceMessage(
-                balanceState.balance,
-              )),
-              trailing: OutlinedButton(
-                onPressed: () => _onBuyTokensPressed(context),
-                child: Text(AppLocalizations.of(context)!.buyTokensButtonLabel),
-              ),
-            ),
-          UnavailableBalanceState() => Text(
-              AppLocalizations.of(context)!.userTokenBalanceUnavailable,
-            ),
-        },
-      );
-
-  void _onBuyTokensPressed(BuildContext context) {
-    // TODO: Implement buying tokens page route
-  }
-
-  Widget _buildDomainsList(BuildContext context) {
-    // TODO: Build domains list
-    return Column(children: [
-      const SizedBox(height: 16),
-      Text(
-        AppLocalizations.of(context)!.userDomainsListTitle,
-        style: Theme.of(context).textTheme.headlineMedium,
-      ),
-      const SizedBox(height: 16),
-      const Placeholder(),
-    ]);
   }
 }
 
