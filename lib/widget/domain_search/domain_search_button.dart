@@ -27,6 +27,7 @@ class _DomainSearchButton extends StatelessWidget {
   Widget _buildRegisterButton(BuildContext context) => ReactiveFormConsumer(
         builder: (context, form, _) => RegisterDomainButton(
           onPressed: onRegister,
+          label: AppLocalizations.of(context)!.domainsSearchRegisterButton,
         ),
       );
 }

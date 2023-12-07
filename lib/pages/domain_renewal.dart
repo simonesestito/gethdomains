@@ -66,7 +66,7 @@ class DomainRenewalPage extends StatelessWidget {
               ),
               ReactiveFormConsumer(
                 builder: (context, form, _) => RegisterDomainButton(
-                  showEdit: true,
+                  label: AppLocalizations.of(context)!.domainsRenewalConfirmButton,
                   onPressed: () => _onSubmit(context),
                 ),
               ),

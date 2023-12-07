@@ -57,7 +57,7 @@ class DomainRegistrationPage extends StatelessWidget {
               ),
               ReactiveFormConsumer(
                 builder: (context, form, _) => RegisterDomainButton(
-                  showEdit: true,
+                  label: AppLocalizations.of(context)!.domainsSearchRegisterButton,
                   onPressed: () => _onSubmit(context),
                 ),
               ),
