@@ -9,6 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
+ganache*.AppImage
 
 # IntelliJ related
 *.iml
