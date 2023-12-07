@@ -16,8 +16,17 @@ Map<String, String Function(Object)> getValidationMessages(
           AppLocalizations.of(context)!.inputErrorDomainInvalid(
             DomainInputValidator.domainSuffix,
           ),
+      ValidationMessage.number: (_) =>
+          AppLocalizations.of(context)!.inputErrorNumber,
+      ValidationMessage.min: (min) =>
+          AppLocalizations.of(context)!.inputErrorMin(_getMin(min)),
+      ValidationMessage.max: (max) =>
+          AppLocalizations.of(context)!.inputErrorMax(_getMax(max)),
       IpfsCidValidator.validationName: (_) =>
           AppLocalizations.of(context)!.inputErrorIpfsCidInvalid,
       TorAddressValidator.validationName: (_) =>
           AppLocalizations.of(context)!.inputErrorTorHashInvalid,
     };
+
+int _getMin(dynamic minErrorResult) => minErrorResult['min'] as int;
+int _getMax(dynamic maxErrorResult) => maxErrorResult['max'] as int;

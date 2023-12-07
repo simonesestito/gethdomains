@@ -15,6 +15,23 @@
   "inputErrorRequired": "This field is required",
   "inputErrorDomainTooShort": "This domain name is too short",
   "inputErrorDomainInvalid": "This is not a valid {domainSuffix} domain name",
+  "inputErrorNumber": "This is not a valid number",
+  "inputErrorMin": "This value must be at least {min}",
+  "@inputErrorMin": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "inputErrorMax": "This value must be at most {max}",
+  "@inputErrorMax": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
   "@inputErrorDomainInvalid": {
     "placeholders": {
       "domainSuffix": {
@@ -36,6 +53,7 @@
   "domainSearchResultNotFound": "No domain found, you can register it",
   "domainSearchResultError": "An error occurred while searching for this domain",
   "domainRegistrationTitle": "Register new domain name",
+  "domainEditingTitle": "Edit domain name",
   "loginStatusPageTitle": "Account",
   "loginStatusPageLoggedOut": "You are not logged in",
   "loginStatusPageLoggedIn": "You are logged in as {address}",
@@ -70,6 +88,7 @@
   "userDomainsListUnavailable": "Your domains list is unavailable",
   "userDomainsListEmpty": "You own no domains",
   "userDomainItemResellTooltip": "Resell this domain",
+  "userDomainItemRenewTooltip": "Renew this domain",
   "userDomainItemDescription": "{type} -> {address}\nValid until block no. {validUntilBlock}",
   "@userDomainItemDescription": {
     "placeholders": {
@@ -84,5 +103,8 @@
       }
     }
   },
-  "settingsItemLicense": "License"
+  "settingsItemLicense": "License",
+  "userDomainItemEditTooltip": "Edit this domain",
+  "domainRegistrationValidityBlocksLabel": "Valid for no. blocks",
+  "domainRegistrationValidityBlocksHelper": "The domain will be valid for this number of blocks, starting from the current block in the blockchain"
 }

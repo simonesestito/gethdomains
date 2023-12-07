@@ -5,12 +5,14 @@ import 'package:reactive_forms/reactive_forms.dart';
 class AppReactiveTextField<T> extends StatelessWidget {
   final String formControlName;
   final String hintText;
+  final String? helperText;
   final ReactiveFormFieldCallback<T> onSubmit;
   final ReactiveFormFieldCallback<T>? onChanged;
 
   const AppReactiveTextField({
     super.key,
     required this.formControlName,
+    this.helperText,
     required this.hintText,
     required this.onSubmit,
     this.onChanged,
@@ -23,6 +25,7 @@ class AppReactiveTextField<T> extends StatelessWidget {
       decoration: AppTextFieldDecoration(
         context,
         hintText: hintText,
+        helperText: helperText,
       ),
       validationMessages: getValidationMessages(context),
       onChanged: onChanged,
@@ -37,9 +40,13 @@ class AppReactiveTextField<T> extends StatelessWidget {
 }
 
 class AppTextFieldDecoration extends InputDecoration {
-  AppTextFieldDecoration(BuildContext context, {required String hintText})
-      : super(
+  AppTextFieldDecoration(
+    BuildContext context, {
+    required String hintText,
+    String? helperText,
+  }) : super(
           hintText: hintText,
+          helperText: helperText,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16.0),
             borderSide: BorderSide.none,
