@@ -82,5 +82,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "settingsItemLicense": "License"
 }

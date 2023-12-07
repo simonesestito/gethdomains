@@ -18,6 +18,14 @@ class SettingsPage extends StatelessWidget {
       appBar: gethAppBar(
         context,
         title: AppLocalizations.of(context)!.settingsPageTitle,
+        actions: [
+          // Legal and License page button
+          IconButton(
+            onPressed: () => showLicensePage(context: context),
+            icon: const Icon(Icons.balance),
+            tooltip: AppLocalizations.of(context)!.settingsItemLicense,
+          ),
+        ],
       ),
       body: BodyContainer(child: _SettingsForm()),
     );
