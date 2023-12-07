@@ -1,5 +1,10 @@
 # GethDomains
 
+<div align="center">
+   <b>Decentralized Domain Name Registrar for IPFS and Tor.</b>
+</div>
+<hr>
+
 Deployed on Sepolia test network at address **{????????}**.
 
 This project is developed as part of the Blockchain and Distributed Ledger Technologies course in the Computer Science master's degree program at Sapienza University of Rome. It serves as a practical application of theoretical concepts covered in the course.
