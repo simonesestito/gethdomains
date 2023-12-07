@@ -32,7 +32,7 @@ class LoginStatusPage extends StatelessWidget {
         },
         child: BodyContainer(
           child: LocalHeroScope(
-            duration: const Duration(milliseconds: 120),
+            duration: const Duration(milliseconds: 200),
             curve: Curves.easeInOut,
             child: BlocBuilder<AuthBloc, AuthState>(
               builder: (context, state) => switch (state) {
