@@ -4,8 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 const _primaryLightColor = Colors.blue;
 const _primaryDarkColor = Colors.blueGrey;
 final _accentColor = Colors.blueAccent[900];
-final appBarLightTextColor = Colors.grey[900];
-const appBarDarkTextColor = Colors.white;
 
 TextTheme _textTheme(ThemeData baseTheme) =>
     GoogleFonts.montserratTextTheme(baseTheme.textTheme);
