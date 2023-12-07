@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gethdomains/model/account.dart';
 import 'package:gethdomains/repository/auth_repository.dart';
+import 'package:gethdomains/utils/bloc_loading_debounce.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -25,15 +26,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void logout() => add(const AuthLogout());
 
   FutureOr<void> _onLogin(AuthLogin event, Emitter<AuthState> emit) async {
-    emit(const AuthLoading());
-
     if (!await authRepository.canLogin()) {
       emit(const AuthMissingProvider());
       return;
     }
 
     try {
-      final loginResult = await authRepository.login();
+      final loginResult = await delayLoading(
+        action: authRepository.login,
+        emitLoading: () => emit(const AuthLoading()),
+      );
       if (loginResult != null) {
         emit(AuthLoggedIn(loginResult));
       } else {
@@ -45,8 +47,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   FutureOr<void> _onLogout(AuthLogout event, Emitter<AuthState> emit) async {
-    emit(const AuthLoading());
-    await authRepository.logout();
+    await delayLoading(
+      action: authRepository.logout,
+      emitLoading: () => emit(const AuthLoading()),
+    );
     emit(const AuthLoggedOut());
   }
 

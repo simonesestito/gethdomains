@@ -7,6 +7,7 @@ import 'package:gethdomains/bloc/balance/balance_bloc.dart';
 import 'package:gethdomains/widget/body_container.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/login_provider_error_banner.dart';
+import 'package:local_hero/local_hero.dart';
 
 @RoutePage<bool>()
 class LoginStatusPage extends StatelessWidget {
@@ -30,15 +31,19 @@ class LoginStatusPage extends StatelessWidget {
           }
         },
         child: BodyContainer(
-          child: BlocBuilder<AuthBloc, AuthState>(
-            builder: (context, state) => switch (state) {
-              AuthLoggedOut() => const _LoginStatusLoggedOut(),
-              AuthMissingProvider() => const LoginProviderErrorBanner(),
-              AuthLoggedIn loggedInState => _LoginStatusLoggedIn(
-                  authState: loggedInState,
-                ),
-              AuthLoading() => const _LoginStatusLoading(),
-            },
+          child: LocalHeroScope(
+            duration: const Duration(milliseconds: 120),
+            curve: Curves.easeInOut,
+            child: BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) => switch (state) {
+                AuthLoggedOut() => const _LoginStatusLoggedOut(),
+                AuthMissingProvider() => const LoginProviderErrorBanner(),
+                AuthLoggedIn loggedInState => _LoginStatusLoggedIn(
+                    authState: loggedInState,
+                  ),
+                AuthLoading() => const _LoginStatusLoading(),
+              },
+            ),
           ),
         ),
       ),
@@ -56,10 +61,13 @@ class _LoginStatusLoggedOut extends StatelessWidget {
       children: [
         Text(AppLocalizations.of(context)!.loginStatusPageLoggedOut),
         const SizedBox(height: 16),
-        FloatingActionButton.extended(
-          onPressed: () => context.read<AuthBloc>().login(),
-          icon: const Icon(Icons.login),
-          label: Text(AppLocalizations.of(context)!.login),
+        LocalHero(
+          tag: 'login-button',
+          child: FloatingActionButton.extended(
+            onPressed: () => context.read<AuthBloc>().login(),
+            icon: const Icon(Icons.login),
+            label: Text(AppLocalizations.of(context)!.login),
+          ),
         ),
       ],
     );
@@ -80,10 +88,13 @@ class _LoginStatusLoggedIn extends StatelessWidget {
           authState.account.address,
         )),
         const SizedBox(height: 16),
-        FloatingActionButton.extended(
-          onPressed: () => context.read<AuthBloc>().logout(),
-          icon: const Icon(Icons.logout),
-          label: Text(AppLocalizations.of(context)!.logout),
+        LocalHero(
+          tag: 'login-button',
+          child: FloatingActionButton.extended(
+            onPressed: () => context.read<AuthBloc>().logout(),
+            icon: const Icon(Icons.logout),
+            label: Text(AppLocalizations.of(context)!.logout),
+          ),
         ),
         const SizedBox(height: 16),
         const Divider(),
