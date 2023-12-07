@@ -106,5 +106,13 @@
   "settingsItemLicense": "License",
   "userDomainItemEditTooltip": "Edit this domain",
   "domainRegistrationValidityBlocksLabel": "Valid for no. blocks",
-  "domainRegistrationValidityBlocksHelper": "The domain will be valid for this number of blocks, starting from the current block in the blockchain"
+  "domainRegistrationValidityBlocksHelper": "The domain will be valid for this number of blocks, starting from the current block in the blockchain",
+  "domainRegistrationValidityBlocksEstimatedCost": "Estimated cost: {cost} GETH",
+  "@domainRegistrationValidityBlocksEstimatedCost": {
+    "placeholders": {
+      "cost": {
+        "type": "String"
+      }
+    }
+  }
 }

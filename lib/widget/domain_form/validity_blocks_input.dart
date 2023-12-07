@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/utils/form_utils.dart';
@@ -9,6 +10,9 @@ class ValidityBlocksCountInput extends StatelessWidget {
   static const int minBlocks = 10;
   static const int maxBlocks = _fiveYearsInBlocks;
   static const String kValidityBlocksCount = 'validityBlocksCount';
+
+  // TODO: Define the cost in GETH per block
+  static final Decimal costPerBlock = Decimal.parse('0.0001');
 
   final void Function() onSubmit;
 
@@ -34,13 +38,43 @@ class ValidityBlocksCountInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppReactiveTextField(
-      formControlName: kValidityBlocksCount,
-      hintText:
-          AppLocalizations.of(context)!.domainRegistrationValidityBlocksLabel,
-      helperText:
-          AppLocalizations.of(context)!.domainRegistrationValidityBlocksHelper,
-      onSubmit: (_) => onSubmit(),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AppReactiveTextField(
+          formControlName: kValidityBlocksCount,
+          hintText: AppLocalizations.of(context)!
+              .domainRegistrationValidityBlocksLabel,
+          helperText: AppLocalizations.of(context)!
+              .domainRegistrationValidityBlocksHelper,
+          onSubmit: (_) => onSubmit(),
+        ),
+        ReactiveValueListenableBuilder(
+          formControlName: kValidityBlocksCount,
+          builder: (context, control, child) {
+            if (control.value != null) {
+              control.markAsTouched();
+            }
+
+            final validityBlocksCount = control.value as int?;
+            String estimatedCostDisplayMessage = '';
+            if (control.valid && validityBlocksCount != null) {
+              // Show an estimated cost for the domain registration
+              final estimatedCost =
+                  costPerBlock * Decimal.fromInt(validityBlocksCount);
+
+              estimatedCostDisplayMessage = AppLocalizations.of(context)!
+                  .domainRegistrationValidityBlocksEstimatedCost(
+                      estimatedCost.toString());
+            }
+
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(estimatedCostDisplayMessage),
+            );
+          },
+        ),
+      ],
     );
   }
 }

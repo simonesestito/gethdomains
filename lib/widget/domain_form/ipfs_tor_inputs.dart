@@ -3,6 +3,7 @@ import 'package:gethdomains/input/validators/ipfs_cid_validator.dart';
 import 'package:gethdomains/input/validators/tor_address_validator.dart';
 import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/utils/form_utils.dart';
+import 'package:gethdomains/widget/column_gap.dart';
 import 'package:gethdomains/widget/text_field_decoration.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -72,7 +73,6 @@ class IpfsTorFormInputs extends StatelessWidget {
         ReactiveValueListenableBuilder(
           formControlName: kDomainType,
           builder: (context, form, _) {
-            debugPrint('form.value: ${form.value}');
             _updateHashValidators(form.value as DomainType?);
 
             if (form.value == DomainType.ipfs) {
@@ -107,7 +107,7 @@ class IpfsTorFormInputs extends StatelessWidget {
             }
           },
         ),
-      ],
+      ].withColumnGap(),
     );
   }
 
