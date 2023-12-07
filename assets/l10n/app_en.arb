@@ -11,6 +11,7 @@
   "domainsSearchInputHint": "Search for a domain name",
   "domainsSearchSubmitButton": "Search",
   "domainsSearchRegisterButton": "Register",
+  "domainsSearchConfirmEditButton": "Save edits",
   "inputErrorRequired": "This field is required",
   "inputErrorDomainTooShort": "This domain name is too short",
   "inputErrorDomainInvalid": "This is not a valid {domainSuffix} domain name",

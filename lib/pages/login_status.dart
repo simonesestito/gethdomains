@@ -7,7 +7,7 @@ import 'package:gethdomains/widget/body_container.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/geth_balance_tile.dart';
 import 'package:gethdomains/widget/login_provider_error_banner.dart';
-import 'package:gethdomains/widget/owned_domains_list.dart';
+import 'package:gethdomains/widget/domains_list/owned_domains_list.dart';
 import 'package:local_hero/local_hero.dart';
 
 @RoutePage<bool>()
