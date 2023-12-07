@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const _primaryLightColor = Colors.blue;
 const _primaryDarkColor = Colors.blueGrey;
 final _accentColor = Colors.blueAccent[900];
 final appBarLightTextColor = Colors.grey[900];
 const appBarDarkTextColor = Colors.white;
+
+TextTheme _textTheme(ThemeData baseTheme) =>
+    GoogleFonts.montserratTextTheme(baseTheme.textTheme);
 
 ThemeData createDarkTheme() {
   final baseTheme = ThemeData.dark();
@@ -20,6 +24,7 @@ ThemeData createDarkTheme() {
     appBarTheme: baseTheme.appBarTheme.copyWith(
       color: _primaryDarkColor,
     ),
+    textTheme: _textTheme(baseTheme),
   );
 }
 
@@ -34,5 +39,6 @@ ThemeData createLightTheme() {
   return baseTheme.copyWith(
     colorScheme: colorScheme,
     primaryColor: _primaryLightColor,
+    textTheme: _textTheme(baseTheme),
   );
 }
