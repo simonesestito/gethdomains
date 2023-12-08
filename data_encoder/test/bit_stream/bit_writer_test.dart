@@ -56,7 +56,6 @@ void main() {
       bitWriter.writeBits(int.parse(bitsString1, radix: 2), 8);
       bitWriter.writeBits(int.parse(bitsString2, radix: 2), 1);
 
-      final buffer1_2 = bitWriter.getBuffer();
       expect(bitWriter.getBuffer(), [
         int.parse(bitsString1, radix: 2),
         int.parse(bitsString2+('0'*7), radix: 2),

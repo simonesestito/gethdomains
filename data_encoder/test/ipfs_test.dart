@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cid/cid.dart';
 import 'package:data_encoder/src/ipfs/ipfs_cid_encoder.dart';
 import 'package:test/test.dart';
