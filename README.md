@@ -51,7 +51,7 @@ The project is deployed on the Sepolia test network, allowing for real-world tes
 
 ### Copyright
 
-    Copyright (C) 2023-2024
+Copyright (C) 2023-2024
 [Alessandro Scifoni](https://github.com/ernutella001)
 [Andrea Tarricone](https://github.com/MyNameIsTarric)
 [Simone Sestito](https://github.com/simonesestito)
