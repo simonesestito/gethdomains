@@ -1,10 +1,10 @@
-import 'package:gethdomains/input/tor_parser.dart';
+import 'package:data_encoder/data_encoder.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class TorAddressValidator extends Validator<String> {
   static const String validationName = 'torFormat';
 
-  final torParser = const TorAddressParser();
+  final torParser = const TorAddressEncoder();
 
   const TorAddressValidator() : super();
 
