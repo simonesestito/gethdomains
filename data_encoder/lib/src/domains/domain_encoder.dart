@@ -20,9 +20,14 @@ class DomainEncoder extends AbstractDomainEncoder {
     // This is possible because the size of the char_5_bits encoding depends only on the length of the input:
     // size_in_bits = 5 * (input length) + 1 (for the first bit)
     final char5BytesSize = ((5 * data.length + 1) / 8).ceil();
+    print('Encoded strings sizes:');
+    print('  - Huffman: ${huffmanEncoded.length} bytes');
+    print('  - Five bits encoding: ${char5BytesSize} bytes');
     if (huffmanEncoded.length > char5BytesSize) {
+      print('Encoding with 5 bits encoding');
       return char5BitsEncoder.encode(data);
     } else {
+      print('Compressing with Huffman');
       return huffmanEncoded;
     }
   }
