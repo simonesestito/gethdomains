@@ -3,38 +3,104 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
+/**
+ * @dev Extension of {ERC20} that allows {DomainMarketplace} to get full allowance
+ * on transfer coin from the balance of domain buyers. Token holders still need to 
+ * approve spenders outside of DomainMarketplace. {ERC20-decimals} is overwritten
+ * to have 1:1 ratio between wei and {Geth}.
+ */
 contract Geth is ERC20, Ownable {
-    // Costruttore del contratto
 
-    address geth721;
+
+    // Costruttore del contratto
+    uint256 etherToGeth = 1000;
+    address operator;
+     
+     /**
+      * @dev Emitted when a new smart contract is allowed to spend geth
+      *
+      * Note that {operator} may not be {DomainMarketplace}.
+      */
+    // evento emesso se cambia lo smart contract che utilizza questo erc20
+    event SetSM(address operator);
+    /**
+     * @dev Emitted when a new ratio is set
+     *
+     * Note that {newRatio} cannot be zero.
+     */
+    // evento emesso se cambia il ratio di conversione ether:geth
+    event SetRatio(uint256 newRatio);
+
     constructor() ERC20("name", "symbol") Ownable(msg.sender) {
-        // Assegna l'intera fornitura iniziale al proprietario del contratto
+        // Assegna assegna dei token al proprietario per delle prove
         _mint(owner(), 100000);
     }
 
+    /**
+     * @dev See {ERC20-decimals}.
+     */
     function decimals() public pure override returns (uint8) {
         return 0;
     }
+    /**
+     * @dev function to buy tokens with Ether and transfer them to the buyer.
+     */
+    function purchaseTokens() external payable {
+        uint256 etherAmount = msg.value;
+        uint256 tokenAmount = calculateTokenAmount(etherAmount);
+        // se volessimo mettere un maxSupply
+        // require(balanceOf(address(this)) >= tokenAmount, "Insufficient token balance in the contract");
 
-    // Funzione per mintare nuovi token (solo owner)
-    function mint(address to, uint256 amount) external onlyOwner {
-        _mint(to, amount);
+        // Trasferisci i token all'acquirente
+        transfer(msg.sender, tokenAmount);
+        payable(owner()).transfer(etherAmount);
     }
 
-    // Funzione per bruciare token
-    function burn(uint256 amount) external {
-        _burn(msg.sender, amount);
+    /**
+     * @dev function to calculate the amount of tokens to be transferred to the buyer.
+     * Returns the amount of tokens that can be purchased with the sent amount of Ether.
+     */
+    function calculateTokenAmount(uint256 etherAmount) internal view returns (uint256) {
+        return etherAmount * etherToGeth;
+    }
+    /** 
+     * @dev function to set the {etherToGeth} ratio between ether and geth.
+     * Notice this function can be called only by the contract owner.
+     * Emits a {SetRatio} event.
+     */
+    function setEtherToGeth(uint ratio) external onlyOwner {
+        require(ratio > 0, "Ratio cannot be zero");
+        etherToGeth = ratio;
+        emit SetRatio(ratio);
     }
 
+    /**
+     * @dev function to withdraw Ether from the contract.
+     */
+     // Funzione per consentire al proprietario di ritirare Ether dal contratto NON SERVE gia vanno all'owner
+    function withdrawEther(uint256 amount) external onlyOwner {
+        require(amount <= address(this).balance, "Insufficient Ether balance in the contract");
+        payable(owner()).transfer(amount);
+    }
+    /**
+     * @dev function to set the {operator} smart contract address.
+     * Notice this function can be called only by the contract owner.
+     * Emits a {SetSM} event.
+     * Additionally, owner can set others smart contracts to spend geth,
+     * but in our project only {DomainMarketplace} is allowed to do so.
+     */
     function setOperator(address operator) external onlyOwner() {
         geth721 = operator;
+        emit SetSM(operator);
     }
 
-
-    // DomainMarketplace può sempre spendere 
+     /**
+     * @dev See {IERC20-allowance}.
+     *
+     * Note that {operator} can always spend geth.
+     */
     function allowance(address owner, address spender) public view override returns (uint256) {
-        if (spender == geth721){
+        if (spender == operator){
             return type(uint256).max;
         }
         return super.allowance(owner, spender);
