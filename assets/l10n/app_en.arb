@@ -90,7 +90,7 @@
   "userDomainsListEmpty": "You own no domains",
   "userDomainItemResellTooltip": "Resell this domain",
   "userDomainItemRenewTooltip": "Renew this domain",
-  "userDomainItemDescription": "{type} -> {address}\nValid until block no. {validUntilBlock}",
+  "userDomainItemDescription": "{type} -> {address}",
   "@userDomainItemDescription": {
     "placeholders": {
       "type": {
@@ -98,9 +98,6 @@
       },
       "address": {
         "type": "String"
-      },
-      "validUntilBlock": {
-        "type": "int"
       }
     }
   },

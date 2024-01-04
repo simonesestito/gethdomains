@@ -6,9 +6,8 @@ import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/widget/body_container.dart';
 import 'package:gethdomains/widget/column_gap.dart';
 import 'package:gethdomains/widget/domain_form/ipfs_tor_inputs.dart';
-import 'package:gethdomains/widget/domain_form/validity_blocks_input.dart';
-import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/domain_form/register_domain_button.dart';
+import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/text_field_decoration.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -47,10 +46,6 @@ class DomainRegistrationPage extends StatelessWidget {
                 hintText: '',
                 onSubmit: (_) {},
               ),
-              ValidityBlocksCountInput(
-                form: form,
-                onSubmit: () => _onSubmit(context),
-              ),
               IpfsTorFormInputs(
                 form: form,
                 onSubmit: () => _onSubmit(context),
@@ -79,10 +74,6 @@ class DomainRegistrationPage extends StatelessWidget {
         form.value[IpfsTorFormInputs.kDomainType] == DomainType.ipfs
             ? form.value[IpfsTorFormInputs.kIpfsHash].toString()
             : form.value[IpfsTorFormInputs.kTorHash].toString();
-
-    final validityBlocksCount =
-        form.value[ValidityBlocksCountInput.kValidityBlocksCount] as int;
-    debugPrint('Validity blocks count: $validityBlocksCount');
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(realAddressPointer)),

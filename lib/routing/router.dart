@@ -1,13 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gethdomains/pages/domain_registration.dart';
+import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/pages/domain_editing.dart';
-import 'package:gethdomains/pages/domain_renewal.dart';
+import 'package:gethdomains/pages/domain_registration.dart';
 import 'package:gethdomains/pages/home.dart';
 import 'package:gethdomains/pages/login_status.dart';
 import 'package:gethdomains/pages/settings.dart';
 import 'package:gethdomains/routing/guard/auth_guard.dart';
-import 'package:gethdomains/model/domain.dart';
 
 part 'router.gr.dart';
 
@@ -30,7 +29,6 @@ class AppRouter extends _$AppRouter {
           AutoRoute(
               path: '/domainRegistration', page: DomainRegistrationRoute.page),
           AutoRoute(path: '/domainEditing', page: DomainEditingRoute.page),
-          AutoRoute(path: '/renewDomain', page: DomainRenewalRoute.page),
         ]),
       ];
 

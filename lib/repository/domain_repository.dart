@@ -11,7 +11,6 @@ class DomainRepository {
           'bafybeifx7yeb55armcsxwwitkymga5xf53dxiarykms3ygqic223w5sk3m',
       type: DomainType.ipfs,
       owner: '0x000000000000000000000000000000000000dead',
-      validUntilBlockNumber: 6000000,
     ),
     Domain(
       domainName: 'tor${DomainInputValidator.domainSuffix}',
@@ -19,7 +18,6 @@ class DomainRepository {
           'duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion',
       type: DomainType.tor,
       owner: '0x000000000000000000000000000000000000dead',
-      validUntilBlockNumber: 6000000,
     ),
   ];
 
