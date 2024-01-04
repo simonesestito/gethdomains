@@ -11,6 +11,8 @@ class DomainRepository {
           'bafybeifx7yeb55armcsxwwitkymga5xf53dxiarykms3ygqic223w5sk3m',
       type: DomainType.ipfs,
       owner: '0x000000000000000000000000000000000000dead',
+      resoldTimes: 20,
+      price: 100,
     ),
     Domain(
       domainName: 'tor${DomainInputValidator.domainSuffix}',
@@ -18,6 +20,8 @@ class DomainRepository {
           'duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion',
       type: DomainType.tor,
       owner: '0x000000000000000000000000000000000000dead',
+      resoldTimes: 20,
+      price: 0,
     ),
   ];
 
@@ -42,5 +46,15 @@ class DomainRepository {
   Future<List<Domain>> getDomainsOf(String ownerAddress) async {
     await Future.delayed(const Duration(milliseconds: 100));
     return List.unmodifiable(_mockDomains);
+  }
+
+  Future<List<Domain>> getAllDomains() async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    return List.unmodifiable(_mockDomains);
+  }
+
+  Future<List<Domain>> getDomainsForSale() async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    return List.unmodifiable(_mockDomains.sublist(0, 1));
   }
 }

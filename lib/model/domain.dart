@@ -9,7 +9,13 @@ class Domain with _$Domain {
     required String realAddress,
     required DomainType type,
     required String owner,
+    required int resoldTimes,
+    required int price,
   }) = _Domain;
+
+  const Domain._();
+
+  bool get isForSale => price > 0;
 }
 
 enum DomainType {
