@@ -13,7 +13,7 @@ contract DomainMarketplace is ERC721Royalty {
         // address originalOwner;
         // address currentOwner;
         // uint256 id;
-        bool inSale;
+        // bool inSale;
         uint256 price;
         uint256 resoldTimes ; //contatore per sapere quante volte il dominio è stato venduto
         bytes dominioTor;
@@ -90,7 +90,7 @@ contract DomainMarketplace is ERC721Royalty {
         require(payGeth.balanceOf(msg.sender) >= _domains[domain].price, "Insufficient payment");
 
         // Verifica che il domain sia in vendita Serve????
-        require(_domains[domain].inSale, "Domain not for sale");
+        require(_domains[domain].price > 0, "Domain not for sale");
 
         _domains[domain].resoldTimes++;
 
@@ -119,8 +119,8 @@ contract DomainMarketplace is ERC721Royalty {
         // trasferimento dominio
         _transfer(owner, msg.sender,id);
 
-        // Trasferisci il dominio al compratore
-        _domains[domain].inSale = false;
+        // setta il prezzo a 0 quindi non in vendita
+        _domains[domain].price = 0;
 
         // Emetti l'evento per ricordare di aggiornare la lista dei domini in vendita SERVE???
         emit DomainSold(msg.sender, domain);
@@ -140,12 +140,9 @@ contract DomainMarketplace is ERC721Royalty {
         // prezzo maggiore di zero
         require(price > 0, "Domain are not free :(");
         // setta il dominio in vendita
-        // serve insale o basta approve?
-        _domains[domain].inSale = true;
 
         _domains[domain].price = price;
 
-        // _transfer(msg.sender, address(this), id);
         // evento per notificare gli altri utenti che un certo dominio è in vendita
         emit DomainForSale(domain, msg.sender, price);
         return price;
@@ -153,8 +150,6 @@ contract DomainMarketplace is ERC721Royalty {
 
     function retrieveDomain(bytes calldata domain) external onlyDomainOwner(domain){
         // uint256 id = uint256(keccak256(abi.encodePacked(domain)));
-
-        _domains[domain].inSale = false;
 
         _domains[domain].price = 0;
 
