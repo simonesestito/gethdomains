@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
-import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
-import "../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
+import "./node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "./node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract DomainMarketplace is ERC721Royalty {
 
@@ -65,7 +65,7 @@ contract DomainMarketplace is ERC721Royalty {
     // } 
 
     // Funzione per acquistare un dominio ex novo
-    function purchaseNewDomain(bytes calldata domain, bytes calldata torOrIpfs, bool isTor) external returns (uint256 current){
+    function purchaseNewDomain(bytes calldata domain, bytes calldata torOrIpfs, bool isTor) external {
         // Verifica che il dominio non sia già stato creato
         // require(ownerOf(_domains[domain].id) == address(0), "Domain already created");
         require(_domains[domain].resoldTimes == 0, "Domain already created");
@@ -80,10 +80,9 @@ contract DomainMarketplace is ERC721Royalty {
         _setTokenRoyalty(nextId, msg.sender, feeNumerator);
         _domains[domain] = Domain(false, 0, 0,dominiotor, isTor);
         keys.push(domain);
-        _domains[domain].resoldTimes++;
-        uint256 idAssociated = nextId;
+        _domains[domain].resoldTimes++;      
         nextId++;
-        return idAssociated;
+       
 
     }
     
