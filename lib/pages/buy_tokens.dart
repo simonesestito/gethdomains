@@ -13,6 +13,45 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 @RoutePage<BigInt>()
 class BuyTokensPage extends StatelessWidget {
+  const BuyTokensPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final title = AppLocalizations.of(context)!.buyTokensButtonLabel;
+    final inputHint = AppLocalizations.of(context)!.buyTokensAmountHint;
+    final tokenFeesFuture =
+        context.read<BalanceRepository>().getPurchaseTokensFees();
+    return _BuySellTokensPage(
+      title: title,
+      inputHint: inputHint,
+      tokenFeesFuture: tokenFeesFuture,
+    );
+  }
+}
+
+@RoutePage<BigInt>()
+class SellTokensPage extends StatelessWidget {
+  const SellTokensPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final title = AppLocalizations.of(context)!.sellTokensButtonLabel;
+    final inputHint = AppLocalizations.of(context)!.sellTokensAmountHint;
+    final tokenFeesFuture =
+        context.read<BalanceRepository>().getSellTokensFees();
+    return _BuySellTokensPage(
+      title: title,
+      inputHint: inputHint,
+      tokenFeesFuture: tokenFeesFuture,
+    );
+  }
+}
+
+class _BuySellTokensPage extends StatelessWidget {
+  final String title;
+  final String inputHint;
+  final Future<BigInt> tokenFeesFuture;
+
   static const _kTokensAmount = 'tokensAmount';
 
   final FormGroup form = FormGroup({
@@ -25,14 +64,18 @@ class BuyTokensPage extends StatelessWidget {
     ),
   });
 
-  BuyTokensPage({super.key});
+  _BuySellTokensPage({
+    required this.title,
+    required this.inputHint,
+    required this.tokenFeesFuture,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: gethAppBar(
         context,
-        title: AppLocalizations.of(context)!.buyTokensButtonLabel,
+        title: title,
       ),
       body: BodyContainer(
         child: ReactiveForm(
@@ -46,15 +89,14 @@ class BuyTokensPage extends StatelessWidget {
                 onSubmit: (_) {},
               ),
               LoadingFutureBuilder(
-                future:
-                    context.read<BalanceRepository>().getPurchaseTokensFees(),
+                future: tokenFeesFuture,
                 builder: (context, fees) => Text(
                   AppLocalizations.of(context)!.buyTokensFees(fees.toString()),
                 ),
               ),
               ReactiveFormConsumer(
                 builder: (context, form, _) => RegisterDomainButton(
-                  label: AppLocalizations.of(context)!.buyTokensButtonLabel,
+                  label: title,
                   onPressed: () => _onSubmit(context),
                 ),
               ),

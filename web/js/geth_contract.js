@@ -495,6 +495,9 @@ async function geth_purchaseTokens(amount) {
     }
 
     const contract = new web3.eth.Contract(abi, geth_contract_address);
-    const gas = await contract.methods.purchaseTokens().estimateGas({from: user, value: web3.utils.toWei(amount, "ether")});
-    await contract.methods.purchaseTokens().send({from: user, value: web3.utils.toWei(amount, "ether"), gas: gas});
+
+    const weiAmount = web3.utils.toWei(amount, "ether").slice(0, -3); // Same as /1000
+
+    const gas = await contract.methods.purchaseTokens().estimateGas({from: user, value: weiAmount});
+    await contract.methods.purchaseTokens().send({from: user, value: weiAmount, gas: gas});
 }

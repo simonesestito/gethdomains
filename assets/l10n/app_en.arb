@@ -123,5 +123,7 @@
       }
     }
   },
-  "buyTokensAmountHint": "Amount of GETH to buy"
+  "buyTokensAmountHint": "Amount of GETH to buy",
+  "sellTokensButtonLabel": "Sell GETH",
+  "sellTokensAmountHint": "Amount of GETH to sell"
 }

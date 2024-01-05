@@ -17,4 +17,10 @@ class BalanceRepository {
   /// Purchase tokens
   Future<void> purchaseTokens(BigInt amount) =>
       gethContract.purchaseTokens(amount);
+
+  /// Get the fees for selling tokens
+  Future<BigInt> getSellTokensFees() => gethContract.sellTokensFees(BigInt.one);
+
+  /// Sell tokens
+  Future<void> sellTokens(BigInt amount) => gethContract.sellTokens(amount);
 }
