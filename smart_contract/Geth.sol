@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./node_modules/@openzeppelin/contracts/access/Ownable.sol";
+
 /**
  * @dev Extension of {ERC20} that allows {DomainMarketplace} to get full allowance
  * on transfer coin from the balance of domain buyers. Token holders still need to 
@@ -39,6 +40,7 @@ contract Geth is ERC20, Ownable {
     function decimals() public pure override returns (uint8) {
         return 0;
     }
+
     /**
      * @dev function to buy tokens with Ether and transfer them to the buyer.
      */
@@ -68,9 +70,8 @@ contract Geth is ERC20, Ownable {
      * Additionally, owner can set others smart contracts to spend geth,
      * but in our project only {DomainMarketplace} is allowed to do so.
      */
-    function setOperator(address operator) external onlyOwner() {
-        geth721 = operator;
-        emit SetSM(operator);
+    function setOperator(address newOperator) external onlyOwner() {
+        operator = newOperator;
     }
 
      /**
