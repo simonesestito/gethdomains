@@ -37,11 +37,30 @@ contract Geth is ERC20, Ownable {
     }
 
     /**
+     * @dev function to buy Ether with tokens and transfer them to the buyer.
+     */
+    function purchaseWei(uint256 tokenAmount) external {
+        uint256 WeiAmount = calculateWeiAmount(tokenAmount);
+
+
+        // Trasferisci i token all'acquirente
+        payable(msg.sender).transfer(WeiAmount);
+    }
+
+    /**
      * @dev function to calculate the amount of tokens to be transferred to the buyer.
      * Returns the amount of tokens that can be purchased with the sent amount of Ether.
      */
     function calculateTokenAmount(uint256 weiAmount) private pure returns (uint256) {
         return weiAmount / GETH_TO_WEI;
+    }
+
+    /**
+     * @dev function to calculate the amount of wei to be transferred to the buyer.
+     * Returns the amount of wei that can be purchased with the sent amount of Geth.
+     */
+    function calculateWeiAmount(uint256 tokenAmount) private pure returns (uint256) {
+        return GETH_TO_WEI * tokenAmount;
     }
 
     /**
@@ -66,4 +85,5 @@ contract Geth is ERC20, Ownable {
         }
         return super.allowance(owner, spender);
     }
+
 }
