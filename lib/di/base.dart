@@ -11,6 +11,7 @@ class _BaseDependencies extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (_) => const ThemeUpdater()),
         RepositoryProvider(create: (_) => GlobalErrorsSink()),
+        RepositoryProvider(create: (_) => SepoliaNetworkDetector()),
       ],
       child: Builder(builder: builder),
     );

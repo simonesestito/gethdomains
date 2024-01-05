@@ -44,6 +44,7 @@ class DomainSearchForm extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
+              const SepoliaWarningBanner(),
               const DomainSearchResultBanner(),
             ],
           ),

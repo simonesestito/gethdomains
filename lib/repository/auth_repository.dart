@@ -6,6 +6,7 @@ import 'dart:js_util';
 
 import 'package:flutter/foundation.dart';
 import 'package:gethdomains/model/account.dart';
+import 'package:gethdomains/service/sepolia_detector.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @JS('canLogin')
@@ -20,8 +21,9 @@ external JSPromise _getCurrentUser();
 class AuthRepository {
   static const _kWasLoggedIn = 'wasLoggedIn';
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final SepoliaNetworkDetector sepoliaNetworkDetector;
 
-  AuthRepository();
+  AuthRepository({required this.sepoliaNetworkDetector});
 
   Future<bool> canLogin() async {
     try {
@@ -39,12 +41,13 @@ class AuthRepository {
 
   Future<UserAccount?> login() async {
     try {
+      await sepoliaNetworkDetector.useSepoliaNetwork();
       final accountAddress = await promiseToFuture<String>(_login());
 
       // Store that the user was logged in
       final prefs = await _prefs;
       await prefs.setBool(_kWasLoggedIn, true);
-      
+
       return UserAccount(address: accountAddress);
     } catch (err) {
       debugPrint('Error logging in: $err');

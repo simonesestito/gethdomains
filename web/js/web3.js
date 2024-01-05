@@ -7,6 +7,28 @@ function getWeb3() {
     return window.appWeb3;
 }
 
+async function isSepoliaNetwork() {
+    const web3 = getWeb3();
+    const networkId = await web3.eth.net.getId();
+    return networkId === 0xaa36a7;
+}
+
+async function useSepoliaNetwork() {
+    if (await isSepoliaNetwork()) {
+        return;
+    }
+
+    const web3 = getWeb3();
+    if (web3.currentProvider.request) {
+        await web3.currentProvider.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{chainId: '0xaa36a7'}]
+        });
+    }
+
+    return isSepoliaNetwork();
+}
+
 async function getCurrentUser() {
     const web3 = getWeb3();
 

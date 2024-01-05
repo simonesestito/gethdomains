@@ -32,6 +32,7 @@ class BannerCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 icon,

@@ -20,6 +20,11 @@ class _BlocDependencies extends StatelessWidget {
           create: (context) => SettingsCubit(),
         ),
         BlocProvider(
+          create: (context) => SepoliaNetworkBloc(
+            sepoliaNetworkDetector: context.read(),
+          ),
+        ),
+        BlocProvider(
           create: (context) => BalanceBloc(
             balanceRepository: context.read(),
             globalErrorsSink: context.read(),

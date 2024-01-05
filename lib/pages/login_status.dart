@@ -4,10 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/widget/body_container.dart';
+import 'package:gethdomains/widget/domains_list/owned_domains_list.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/geth_balance_tile.dart';
 import 'package:gethdomains/widget/login_provider_error_banner.dart';
-import 'package:gethdomains/widget/domains_list/owned_domains_list.dart';
+import 'package:gethdomains/widget/sepolia_warning_banner.dart';
 import 'package:local_hero/local_hero.dart';
 
 @RoutePage<bool>()
@@ -85,6 +86,7 @@ class _LoginStatusLoggedIn extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SepoliaWarningBanner(),
         SelectableText(AppLocalizations.of(context)!.loginStatusPageLoggedIn(
           authState.account.address,
         )),

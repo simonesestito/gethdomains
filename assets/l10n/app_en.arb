@@ -136,5 +136,7 @@
     }
   },
   "sellTokensButtonLabel": "Sell GETH",
-  "sellTokensAmountHint": "Amount of GETH to sell"
+  "sellTokensAmountHint": "Amount of GETH to sell",
+  "sepoliaWarningBanner": "You are not using Sepolia test network, where the smart contracts are!",
+  "sepoliaWarningBannerButton": "Switch to Sepolia"
 }

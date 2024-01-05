@@ -10,7 +10,10 @@ class _RepositoryDependencies extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => const DomainRepository()),
-        RepositoryProvider(create: (_) => AuthRepository()),
+        RepositoryProvider(
+            create: (_) => AuthRepository(
+                  sepoliaNetworkDetector: context.read(),
+                )),
         RepositoryProvider(
             create: (context) => BalanceRepository(
                   context.read(),

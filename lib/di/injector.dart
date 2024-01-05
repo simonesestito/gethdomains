@@ -4,6 +4,7 @@ import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/bloc/balance/balance_bloc.dart';
 import 'package:gethdomains/bloc/domains/domains_bloc.dart';
 import 'package:gethdomains/bloc/global_errors/global_errors.dart';
+import 'package:gethdomains/bloc/sepolia/sepolia_bloc.dart';
 import 'package:gethdomains/bloc/settings/settings.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';
 import 'package:gethdomains/contracts/geth_contract.dart';
@@ -12,6 +13,7 @@ import 'package:gethdomains/repository/balance_repository.dart';
 import 'package:gethdomains/repository/domain_repository.dart';
 import 'package:gethdomains/routing/guard/auth_guard.dart';
 import 'package:gethdomains/routing/router.dart';
+import 'package:gethdomains/service/sepolia_detector.dart';
 import 'package:gethdomains/service/theme_updater.dart';
 
 part 'base.dart';
