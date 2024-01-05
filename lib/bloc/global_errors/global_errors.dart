@@ -11,7 +11,7 @@ class GlobalErrorsSink {
       _web3ErrorsStreamController.stream;
 
   void addWeb3Error(Web3Exception error) {
-    debugPrint('Web3Error: $error');
+    debugPrint('[Web3Error] $error');
     _web3ErrorsStreamController.add(error);
   }
 }

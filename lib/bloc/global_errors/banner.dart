@@ -51,7 +51,7 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
           child: BannerCard(
             color: Colors.red,
             icon: const Icon(Icons.error_outline),
-            content: Text(_error.toString()), // TODO: Add error message
+            content: Text(_error.getDisplayMessage()),
           ),
         ),
       ),
