@@ -63,17 +63,7 @@ contract Geth is ERC20, Ownable {
     function calculateTokenAmount(uint256 etherAmount) internal view returns (uint256) {
         return etherAmount * etherToGeth;
     }
-    /** 
-     * @dev function to set the {etherToGeth} ratio between ether and geth.
-     * Notice this function can be called only by the contract owner.
-     * Emits a {SetRatio} event.
-     */
-    function setEtherToGeth(uint ratio) external onlyOwner {
-        require(ratio > 0, "Ratio cannot be zero");
-        etherToGeth = ratio;
-        emit SetRatio(ratio);
-    }
-
+   
     /**
      * @dev function to set the {operator} smart contract address.
      * Notice this function can be called only by the contract owner.
