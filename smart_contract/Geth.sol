@@ -34,7 +34,6 @@ contract Geth is ERC20, Ownable {
 
         // Trasferisci i token all'acquirente
         transfer(msg.sender, tokenAmount);
-        payable(owner()).transfer(etherAmount);
     }
 
     /**
