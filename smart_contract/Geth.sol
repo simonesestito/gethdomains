@@ -43,7 +43,7 @@ contract Geth is ERC20, Ownable {
         require(balanceOf(msg.sender) >= tokenAmount,"you don't have this amount of token");
         uint256 WeiAmount = calculateWeiAmount(tokenAmount);
 
-
+        _burn(msg.sender, tokenAmount);
         // Trasferisci i token all'acquirente
         payable(msg.sender).transfer(WeiAmount);
     }
