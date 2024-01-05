@@ -5,7 +5,7 @@ import "./node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Roy
 import "./node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "./node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract DomainMarketplace is ERC721Royalty {
+contract DomainMarketplace is ERC721Royalty, Ownable {
 
     // Struct per rappresentare un dominio
     struct Domain {
@@ -14,8 +14,8 @@ contract DomainMarketplace is ERC721Royalty {
         // address currentOwner;
         // uint256 id;
         // bool inSale;
-        uint256 price;
-        uint256 resoldTimes ; //contatore per sapere quante volte il dominio è stato venduto
+        uint32 price;
+        uint32 resoldTimes ; //contatore per sapere quante volte il dominio è stato venduto
         bytes dominioTorOrIpfs;
         bool isTor; // 1 byte
         // bytes dominioIpfs; // header > 1 byte ?
@@ -27,7 +27,7 @@ contract DomainMarketplace is ERC721Royalty {
     // uint256 public nextId;
 
     // prezzo base
-    uint256 public prezzoBase=1000;
+    uint32 public prezzoBase=1000;
 
     // Mappa per associare l'ID del dominio alla struttura Domain
     mapping(bytes => Domain) public _domains;
@@ -52,7 +52,7 @@ contract DomainMarketplace is ERC721Royalty {
     event IpfsOverwritten(bytes indexed domain, address indexed owner);
 
     // Costruttore del contratto
-    constructor() ERC721("name", "symbol") {
+    constructor() ERC721("name", "symbol") Ownable(msg.sender){
         payGeth = IERC20(0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B);
     }
 
@@ -78,7 +78,7 @@ contract DomainMarketplace is ERC721Royalty {
         _mint(msg.sender, nextId);  // TODO ci servono dei data oltre alla struttura salavata?
         uint96 feeNumerator = 1;  // default is 5% royalty (1/20)
         _setTokenRoyalty(nextId, msg.sender, feeNumerator);
-        _domains[domain] = Domain(false, 0, 0,dominiotor, isTor);
+        _domains[domain] = Domain(0, 0,torOrIpfs, isTor);
         keys.push(domain);
         _domains[domain].resoldTimes++;      
         nextId++;
@@ -146,7 +146,7 @@ contract DomainMarketplace is ERC721Royalty {
     }
     
     // Funzione per mettere un dominio in vendita
-    function sellDomain(bytes calldata domain, uint256 price) external onlyDomainOwner(domain) returns (uint256 prezzo){
+    function sellDomain(bytes calldata domain, uint32 price) external onlyDomainOwner(domain) returns (uint256 prezzo){
         // uint256 id = uint256(keccak256(abi.encodePacked(domain)));
         // prezzo maggiore di zero
         require(price > 0, "Domain are not free :(");
@@ -172,19 +172,23 @@ contract DomainMarketplace is ERC721Royalty {
     function setTor(bytes calldata domain, bytes calldata dominioTor) external onlyDomainOwner(domain) {
         // require(_domains[domain].dominioIpfs.length==0,"Your domain cannot point both ipfs and tor");
         _domains[domain].dominioTorOrIpfs = dominioTor;
-        if (dominioTorOrIpfs>0 && _domains[domain].isTor==false) { //la prima volta è false ma perchè non è stato settato nulla magari
-            emit IpfsOverwritten(domain, owner);                    // se forziamo a mettere tor o ipfs da subito si può levare il check
+        if ( _domains[domain].dominioTorOrIpfs.length>0 && _domains[domain].isTor==false) { //la prima volta è false ma perchè non è stato settato nulla magari
+            emit IpfsOverwritten(domain, msg.sender);                    // se forziamo a mettere tor o ipfs da subito si può levare il check
             _domains[domain].isTor = true;
         }   
     }
 
     function setIpfs(bytes calldata domain, bytes calldata dominioIpfs) external  onlyDomainOwner(domain) {
         // require(_domains[domain].dominioTor.length==0,"Your domain cannot point both ipfs and tor");
-        _domains[domain].dominioIpfs = dominioIpfs;
-        if (domains[domain].isTor) {
-            emit TorOverwritten(domain, owner);
+        _domains[domain].dominioTorOrIpfs = dominioIpfs;
+        if (_domains[domain].isTor) {
+            emit TorOverwritten(domain, msg.sender);
             _domains[domain].isTor = false;
         }   
+    }
+
+    function setPrezzoBase(uint32 prezzo) external onlyOwner {
+        prezzoBase = prezzo;
     }
 
 }
