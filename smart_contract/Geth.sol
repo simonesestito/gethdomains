@@ -12,25 +12,8 @@ import "./node_modules/@openzeppelin/contracts/access/Ownable.sol";
  */
 contract Geth is ERC20, Ownable {
 
-
-    // Costruttore del contratto
-    uint256 etherToGeth = 1000;
-    address operator;
-     
-     /**
-      * @dev Emitted when a new smart contract is allowed to spend geth
-      *
-      * Note that {operator} may not be {DomainMarketplace}.
-      */
-    // evento emesso se cambia lo smart contract che utilizza questo erc20
-    event SetSM(address operator);
-    /**
-     * @dev Emitted when a new ratio is set
-     *
-     * Note that {newRatio} cannot be zero.
-     */
-    // evento emesso se cambia il ratio di conversione ether:geth
-    event SetRatio(uint256 newRatio);
+    uint64 constant private GETH_TO_WEI = 1000000000000000;
+    address private operator;
 
     constructor() ERC20("Geth", "G") Ownable(msg.sender) {}
 
@@ -45,8 +28,7 @@ contract Geth is ERC20, Ownable {
      * @dev function to buy tokens with Ether and transfer them to the buyer.
      */
     function purchaseTokens() external payable {
-        uint256 etherAmount = msg.value;
-        uint256 tokenAmount = calculateTokenAmount(etherAmount);
+        uint256 tokenAmount = calculateTokenAmount(msg.value);
         // se volessimo mettere un maxSupply
         // require(balanceOf(address(this)) >= tokenAmount, "Insufficient token balance in the contract");
 
@@ -59,10 +41,10 @@ contract Geth is ERC20, Ownable {
      * @dev function to calculate the amount of tokens to be transferred to the buyer.
      * Returns the amount of tokens that can be purchased with the sent amount of Ether.
      */
-    function calculateTokenAmount(uint256 etherAmount) internal view returns (uint256) {
-        return etherAmount * etherToGeth;
+    function calculateTokenAmount(uint256 weiAmount) private pure returns (uint256) {
+        return weiAmount / GETH_TO_WEI;
     }
-   
+
     /**
      * @dev function to set the {operator} smart contract address.
      * Notice this function can be called only by the contract owner.
@@ -74,13 +56,13 @@ contract Geth is ERC20, Ownable {
         operator = newOperator;
     }
 
-     /**
-     * @dev See {IERC20-allowance}.
+    /**
+    * @dev See {IERC20-allowance}.
      *
      * Note that {operator} can always spend geth.
      */
     function allowance(address owner, address spender) public view override returns (uint256) {
-        if (spender == operator){
+        if (spender == operator) {
             return type(uint256).max;
         }
         return super.allowance(owner, spender);
