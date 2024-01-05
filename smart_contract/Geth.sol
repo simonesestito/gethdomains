@@ -75,14 +75,6 @@ contract Geth is ERC20, Ownable {
     }
 
     /**
-     * @dev function to withdraw Ether from the contract.
-     */
-     // Funzione per consentire al proprietario di ritirare Ether dal contratto NON SERVE gia vanno all'owner
-    function withdrawEther(uint256 amount) external onlyOwner {
-        require(amount <= address(this).balance, "Insufficient Ether balance in the contract");
-        payable(owner()).transfer(amount);
-    }
-    /**
      * @dev function to set the {operator} smart contract address.
      * Notice this function can be called only by the contract owner.
      * Emits a {SetSM} event.
