@@ -40,6 +40,7 @@ contract Geth is ERC20, Ownable {
      * @dev function to buy Ether with tokens and transfer them to the buyer.
      */
     function purchaseWei(uint256 tokenAmount) external {
+        require(balanceOf(msg.sender) >= tokenAmount);
         uint256 WeiAmount = calculateWeiAmount(tokenAmount);
 
 
