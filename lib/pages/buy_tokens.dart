@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -53,6 +54,7 @@ class _BuySellTokensPage extends StatelessWidget {
   final Future<BigInt> tokenFeesFuture;
 
   static const _kTokensAmount = 'tokensAmount';
+  static final ethPerGeth = Decimal.parse('1000.0');
 
   final FormGroup form = FormGroup({
     _kTokensAmount: FormControl<int>(
@@ -88,6 +90,20 @@ class _BuySellTokensPage extends StatelessWidget {
                 hintText: AppLocalizations.of(context)!.buyTokensAmountHint,
                 onSubmit: (_) {},
               ),
+              ReactiveFormConsumer(builder: (context, form, _) {
+                if (!form.control(_kTokensAmount).valid) {
+                  return const SizedBox.shrink();
+                }
+
+                final tokensAmount = form.control(_kTokensAmount).value as int;
+                final ethAmount = Decimal.fromInt(tokensAmount) / ethPerGeth;
+                return Text(
+                  AppLocalizations.of(context)!.tokensAmountEthConversion(
+                    tokensAmount,
+                    ethAmount.toDecimal().toString(),
+                  ),
+                );
+              }),
               LoadingFutureBuilder(
                 future: tokenFeesFuture,
                 builder: (context, fees) => Text(

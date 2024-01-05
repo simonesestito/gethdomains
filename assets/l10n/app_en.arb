@@ -124,6 +124,17 @@
     }
   },
   "buyTokensAmountHint": "Amount of GETH to buy",
+  "tokensAmountEthConversion": "{geth} GETH = {eth} ETH",
+  "@tokensAmountEthConversion": {
+    "placeholders": {
+      "geth": {
+        "type": "int"
+      },
+      "eth": {
+        "type": "String"
+      }
+    }
+  },
   "sellTokensButtonLabel": "Sell GETH",
   "sellTokensAmountHint": "Amount of GETH to sell"
 }
