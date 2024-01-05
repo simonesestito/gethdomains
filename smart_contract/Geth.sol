@@ -85,5 +85,11 @@ contract Geth is ERC20, Ownable {
         }
         return super.allowance(owner, spender);
     }
+    /**
+     * @dev function to destroy the contract and transfer the balance to the owner.
+     */
+    function destroy() external onlyOwner() {
+        selfdestruct(payable(owner()));
+    }
 
 }
