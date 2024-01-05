@@ -114,5 +114,14 @@
       }
     }
   },
-  "domainRenewalTitle": "Renew domain"
+  "domainRenewalTitle": "Renew domain",
+  "buyTokensFees": "Fees: {fees} gas units",
+  "@buyTokensFees": {
+    "placeholders": {
+      "fees": {
+        "type": "String"
+      }
+    }
+  },
+  "buyTokensAmountHint": "Amount of GETH to buy"
 }

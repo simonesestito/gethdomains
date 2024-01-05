@@ -18,6 +18,7 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
     // TODO: Add a listener for events from the smart contract, propagated through the repository
     on<LoadBalanceEvent>(_onLoadBalanceEvent);
     on<_UpdateBalanceEvent>(_onUpdateBalanceEvent);
+    on<BuyTokensEvent>(_onBuyTokensEvent);
 
     // Listen to the auth state changes
     // They should reset the balance status
@@ -54,6 +55,22 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
       emit(const UnavailableBalanceState());
     } else {
       emit(BalanceStateData(event.balance!));
+    }
+  }
+
+  void buyTokens(BigInt amount) => add(BuyTokensEvent(amount));
+
+  FutureOr<void> _onBuyTokensEvent(
+    BuyTokensEvent event,
+    Emitter<BalanceState> emit,
+  ) async {
+    emit(const LoadingBalanceState());
+    try {
+      await balanceRepository.purchaseTokens(event.amount);
+      final balance = await balanceRepository.getBalance();
+      emit(BalanceStateData(balance));
+    } catch (e) {
+      emit(const UnavailableBalanceState());
     }
   }
 }

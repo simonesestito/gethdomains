@@ -14,3 +14,9 @@ class _UpdateBalanceEvent extends BalanceEvent {
 class LoadBalanceEvent extends BalanceEvent {
   const LoadBalanceEvent();
 }
+
+class BuyTokensEvent extends BalanceEvent {
+  final BigInt amount;
+
+  const BuyTokensEvent(this.amount);
+}

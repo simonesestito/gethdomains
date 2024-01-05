@@ -11,7 +11,10 @@ class _RepositoryDependencies extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (_) => const DomainRepository()),
         RepositoryProvider(create: (_) => AuthRepository()),
-        RepositoryProvider(create: (_) => const BalanceRepository()),
+        RepositoryProvider(
+            create: (context) => BalanceRepository(
+                  context.read(),
+                )),
       ],
       child: Builder(builder: builder),
     );

@@ -5,6 +5,7 @@ import 'package:gethdomains/bloc/balance/balance_bloc.dart';
 import 'package:gethdomains/bloc/domains/domains_bloc.dart';
 import 'package:gethdomains/bloc/settings/settings.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';
+import 'package:gethdomains/geth_contract.dart';
 import 'package:gethdomains/repository/auth_repository.dart';
 import 'package:gethdomains/repository/balance_repository.dart';
 import 'package:gethdomains/repository/domain_repository.dart';
@@ -16,6 +17,7 @@ part 'base.dart';
 part 'bloc.dart';
 part 'guard.dart';
 part 'repository.dart';
+part 'service.dart';
 
 class DependencyInjector extends StatelessWidget {
   final WidgetBuilder builder;
@@ -25,13 +27,15 @@ class DependencyInjector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _BaseDependencies(
-      builder: (context) => _RepositoryDependencies(
-        builder: (context) => _BlocDependencies(
-          builder: (context) => _GuardDependencies(
-            builder: (context) => RepositoryProvider(
-              create: (context) =>
-                  AppRouter(authenticationGuard: context.read()),
-              child: Builder(builder: builder),
+      builder: (context) => _ServiceDependencies(
+        builder: (context) => _RepositoryDependencies(
+          builder: (context) => _BlocDependencies(
+            builder: (context) => _GuardDependencies(
+              builder: (context) => RepositoryProvider(
+                create: (context) =>
+                    AppRouter(authenticationGuard: context.read()),
+                child: Builder(builder: builder),
+              ),
             ),
           ),
         ),
