@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "./node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "./node_modules/@openzeppelin/contracts/access/Ownable.sol";
 /**
  * @dev Extension of {ERC20} that allows {DomainMarketplace} to get full allowance
  * on transfer coin from the balance of domain buyers. Token holders still need to 
@@ -31,7 +31,7 @@ contract Geth is ERC20, Ownable {
     // evento emesso se cambia il ratio di conversione ether:geth
     event SetRatio(uint256 newRatio);
 
-    constructor() ERC20("name", "symbol") Ownable(msg.sender) {
+    constructor() ERC20("Geth", "G") Ownable(msg.sender) {
         // Assegna assegna dei token al proprietario per delle prove
         _mint(owner(), 100000);
     }

@@ -48,3 +48,6 @@ app.*.map.json
 
 # wsl files
 **/*:Zone.Identifier
+
+# openzeppelin files
+node_modules/

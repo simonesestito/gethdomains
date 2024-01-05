@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract DomainMarketplace is ERC721Royalty {
 
@@ -16,8 +16,9 @@ contract DomainMarketplace is ERC721Royalty {
         // bool inSale;
         uint256 price;
         uint256 resoldTimes ; //contatore per sapere quante volte il dominio è stato venduto
-        bytes dominioTor;
-        bytes dominioIpfs;
+        bytes dominioTorOrIpfs;
+        bool isTor; // 1 byte
+        // bytes dominioIpfs; // header > 1 byte ?
     }
 
     IERC20 payGeth;
@@ -31,6 +32,8 @@ contract DomainMarketplace is ERC721Royalty {
     // Mappa per associare l'ID del dominio alla struttura Domain
     mapping(bytes => Domain) public _domains;
 
+    bytes[] public keys;
+
     // Evento emesso quando un dominio viene messo in vendita
     // indexed è utilizzato per permettere i destinatari di filtrare gli eventi in base al valore del par
     event DomainForSale(bytes indexed domain, address indexed seller, uint256 price);
@@ -42,13 +45,19 @@ contract DomainMarketplace is ERC721Royalty {
     // Evento emesso quando un dominio viene acquistato e le royalties vengono inviate all'acquirente originale
     event RoyaltiesPaid(address indexed originalOwner, address indexed buyer, bytes indexed domain, uint256 royaltiesAmount);
 
+    // Evento emesso quando sovrascrivi un dominioTor con uno ipfs
+    event TorOverwritten(bytes indexed domain, address indexed owner);
+
+    // Evento emesso quando sovrascrivi un dominioIpfs con uno tor
+    event IpfsOverwritten(bytes indexed domain, address indexed owner);
+
     // Costruttore del contratto
     constructor() ERC721("name", "symbol") {
         payGeth = IERC20(0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B);
     }
 
     function _feeDenominator() internal pure override returns (uint96) {
-        return 100;
+        return 20;
     }
 
     // function approveGeth(uint256 amount) external {
@@ -56,7 +65,7 @@ contract DomainMarketplace is ERC721Royalty {
     // } 
 
     // Funzione per acquistare un dominio ex novo
-    function purchaseNewDomain(bytes calldata domain, bytes calldata dominiotor, bytes calldata dominioipfs) external returns (uint256 current){
+    function purchaseNewDomain(bytes calldata domain, bytes calldata torOrIpfs, bool isTor) external returns (uint256 current){
         // Verifica che il dominio non sia già stato creato
         // require(ownerOf(_domains[domain].id) == address(0), "Domain already created");
         require(_domains[domain].resoldTimes == 0, "Domain already created");
@@ -67,9 +76,10 @@ contract DomainMarketplace is ERC721Royalty {
         // payGeth.burn(prezzoBase);
         uint256 nextId = uint256(keccak256(abi.encodePacked(domain)));
         _mint(msg.sender, nextId);  // TODO ci servono dei data oltre alla struttura salavata?
-        uint96 feeNumerator = 5;
+        uint96 feeNumerator = 1;  // default is 5% royalty (1/20)
         _setTokenRoyalty(nextId, msg.sender, feeNumerator);
-        _domains[domain] = Domain(false, 0, 0,dominiotor, dominioipfs);
+        _domains[domain] = Domain(false, 0, 0,dominiotor, isTor);
+        keys.push(domain);
         _domains[domain].resoldTimes++;
         uint256 idAssociated = nextId;
         nextId++;
@@ -77,7 +87,9 @@ contract DomainMarketplace is ERC721Royalty {
 
     }
     
-    
+    function getKeys() external view returns (bytes[] memory) {
+        return keys;
+    }
     
     function purchaseExistingDomain(bytes calldata domain) external {
         uint256 id = uint256(keccak256(abi.encodePacked(domain)));
@@ -159,13 +171,21 @@ contract DomainMarketplace is ERC721Royalty {
     }
 
     function setTor(bytes calldata domain, bytes calldata dominioTor) external onlyDomainOwner(domain) {
-        require(_domains[domain].dominioIpfs.length==0,"Your domain cannot point both ipfs and tor");
-        _domains[domain].dominioTor = dominioTor;
+        // require(_domains[domain].dominioIpfs.length==0,"Your domain cannot point both ipfs and tor");
+        _domains[domain].dominioTorOrIpfs = dominioTor;
+        if (dominioTorOrIpfs>0 && _domains[domain].isTor==false) { //la prima volta è false ma perchè non è stato settato nulla magari
+            emit IpfsOverwritten(domain, owner);                    // se forziamo a mettere tor o ipfs da subito si può levare il check
+            _domains[domain].isTor = true;
+        }   
     }
 
     function setIpfs(bytes calldata domain, bytes calldata dominioIpfs) external  onlyDomainOwner(domain) {
-        require(_domains[domain].dominioTor.length==0,"Your domain cannot point both ipfs and tor");
+        // require(_domains[domain].dominioTor.length==0,"Your domain cannot point both ipfs and tor");
         _domains[domain].dominioIpfs = dominioIpfs;
+        if (domains[domain].isTor) {
+            emit TorOverwritten(domain, owner);
+            _domains[domain].isTor = false;
+        }   
     }
 
 }
