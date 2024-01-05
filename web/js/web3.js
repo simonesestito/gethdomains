@@ -1,9 +1,10 @@
 function getWeb3() {
-    if (window.web3 === undefined) {
-        window.web3 = new Web3(window.ethereum || "ws://localhost:7545");
+    if (window.appWeb3 === undefined) {
+        window.appWeb3 = new Web3(window.ethereum || "ws://localhost:7545");
+        window.web3 = window.appWeb3;
     }
 
-    return window.web3;
+    return window.appWeb3;
 }
 
 async function getCurrentUser() {
