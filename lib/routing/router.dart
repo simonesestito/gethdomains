@@ -31,6 +31,7 @@ class AppRouter extends _$AppRouter {
               path: '/domainRegistration', page: DomainRegistrationRoute.page),
           AutoRoute(path: '/domainEditing', page: DomainEditingRoute.page),
           AutoRoute(path: '/buyTokens', page: BuyTokensRoute.page),
+          AutoRoute(path: '/sellTokens', page: SellTokensRoute.page),
         ]),
       ];
 

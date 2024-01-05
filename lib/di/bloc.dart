@@ -22,6 +22,7 @@ class _BlocDependencies extends StatelessWidget {
         BlocProvider(
           create: (context) => BalanceBloc(
             balanceRepository: context.read(),
+            globalErrorsSink: context.read(),
             authStateChanges: authBloc.stream,
           ),
           lazy: false,

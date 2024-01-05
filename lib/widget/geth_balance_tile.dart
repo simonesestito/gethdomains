@@ -11,15 +11,29 @@ class GethBalanceTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocBuilder<BalanceBloc, BalanceState>(
     builder: (context, state) => switch (state) {
-      LoadingBalanceState() => const SizedBox.shrink(),
-      BalanceStateData balanceState => ListTile(
-        title: Text(AppLocalizations.of(context)!.userTokenBalanceMessage(
-          balanceState.balance,
-        )),
-        trailing: OutlinedButton.icon(
-          onPressed: () => _onBuyTokensPressed(context),
-                icon: const Icon(Icons.money),
-                label: Text(AppLocalizations.of(context)!.buyTokensButtonLabel),
+          LoadingBalanceState() => const CircularProgressIndicator(),
+          BalanceStateData balanceState => ListTile(
+              title: Text(AppLocalizations.of(context)!.userTokenBalanceMessage(
+                balanceState.balance,
+              )),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: () => _onBuyTokensPressed(context),
+                    icon: const Icon(Icons.money),
+                    label: Text(
+                        AppLocalizations.of(context)!.buyTokensButtonLabel),
+                  ),
+                  const SizedBox(width: 8),
+                  OutlinedButton.icon(
+                    onPressed: () => _onSellTokensPressed(context),
+                    icon: const Icon(Icons.sell),
+                    label: Text(
+                        AppLocalizations.of(context)!.sellTokensButtonLabel),
+                  ),
+                ],
               ),
             ),
           UnavailableBalanceState() => Text(
@@ -30,9 +44,17 @@ class GethBalanceTile extends StatelessWidget {
 
   void _onBuyTokensPressed(BuildContext context) async {
     final balanceBloc = context.read<BalanceBloc>();
-    final amount = await context.pushRoute<BigInt>(BuyTokensRoute());
+    final amount = await context.pushRoute<BigInt>(const BuyTokensRoute());
     if (amount != null) {
       balanceBloc.buyTokens(amount);
+    }
+  }
+
+  void _onSellTokensPressed(BuildContext context) async {
+    final balanceBloc = context.read<BalanceBloc>();
+    final amount = await context.pushRoute<BigInt>(const SellTokensRoute());
+    if (amount != null) {
+      balanceBloc.sellTokens(amount);
     }
   }
 }

@@ -10,6 +10,7 @@ class _BaseDependencies extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => const ThemeUpdater()),
+        RepositoryProvider(create: (_) => GlobalErrorsSink()),
       ],
       child: Builder(builder: builder),
     );

@@ -20,3 +20,9 @@ class BuyTokensEvent extends BalanceEvent {
 
   const BuyTokensEvent(this.amount);
 }
+
+class SellTokensEvent extends BalanceEvent {
+  final BigInt amount;
+
+  const SellTokensEvent(this.amount);
+}

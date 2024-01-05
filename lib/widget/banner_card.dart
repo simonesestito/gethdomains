@@ -5,6 +5,7 @@ class BannerCard extends StatelessWidget {
   final Widget icon;
   final Widget content;
   final Widget? action;
+  final int backgroundAlpha;
 
   const BannerCard({
     Key? key,
@@ -12,6 +13,7 @@ class BannerCard extends StatelessWidget {
     required this.icon,
     required this.content,
     this.action,
+    this.backgroundAlpha = 80,
   }) : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class BannerCard extends StatelessWidget {
     return Card(
       elevation: 0,
       // Otherwise, background is not transparent
-      color: color.withAlpha(80),
+      color: color.withAlpha(backgroundAlpha),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: BorderSide(color: color),

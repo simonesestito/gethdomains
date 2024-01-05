@@ -1,4 +1,4 @@
-const geth_contract_address = "0x631BeE7107D4fAC081A608a03df5eA4C01EFf4Ab";
+const geth_contract_address = "0x19D5662F590966AEbbEcb330Fdb5F6d9BFE4150A";
 const abi = [
  	{
  		"inputs": [
@@ -461,32 +461,7 @@ const abi = [
  	}
  ];
 
-async function geth_getMyBalance() {
-    const web3 = getWeb3();
-    const user = await getCurrentUser();
-
-    if (user === null) {
-        return 0;
-    }
-
-    const contract = new web3.eth.Contract(abi, geth_contract_address);
-    return contract.methods.balanceOf(user).call();
-}
-
-async function geth_purchaseTokens_fees(amount) {
-    const web3 = getWeb3();
-    const user = await getCurrentUser();
-
-    if (user === null) {
-        return 0;
-    }
-
-    const contract = new web3.eth.Contract(abi, geth_contract_address);
-    const gas = await contract.methods.purchaseTokens().estimateGas({from: user, value: web3.utils.toWei(amount, "ether")});
-    return gas.toString();
-}
-
-async function geth_purchaseTokens(amount) {
+async function _initializeGethContract() {
     const web3 = getWeb3();
     const user = await getCurrentUser();
 
@@ -496,8 +471,34 @@ async function geth_purchaseTokens(amount) {
 
     const contract = new web3.eth.Contract(abi, geth_contract_address);
 
-    const weiAmount = web3.utils.toWei(amount, "ether").slice(0, -3); // Same as /1000
+    return [contract, user];
+}
 
+async function geth_getMyBalance() {
+    const [contract, user] = await _initializeGethContract();
+    return contract.methods.balanceOf(user).call();
+}
+
+async function geth_purchaseTokens_fees(amount) {
+    const [contract, user] = await _initializeGethContract();
+    const gas = await contract.methods.purchaseTokens().estimateGas({from: user, value: web3.utils.toWei(amount, "ether")});
+    return gas.toString();
+}
+
+async function geth_purchaseTokens(amount) {
+    const [contract, user] = await _initializeGethContract();
     const gas = await contract.methods.purchaseTokens().estimateGas({from: user, value: weiAmount});
     await contract.methods.purchaseTokens().send({from: user, value: weiAmount, gas: gas});
+}
+
+async function geth_withdrawEther_fees(amount) {
+    const [contract, user] = await _initializeGethContract();
+    const gas = await contract.methods.purchaseWei(amount).estimateGas({from: user});
+    return gas.toString();
+}
+
+async function geth_withdrawEther(amount) {
+    const [contract, user] = await _initializeGethContract();
+    const gas = await contract.methods.purchaseWei(amount).estimateGas({from: user});
+    await contract.methods.purchaseWei(amount).send({from: user, gas: gas});
 }

@@ -1,7 +1,6 @@
-import 'package:gethdomains/geth_contract.dart';
+import 'package:gethdomains/contracts/geth_contract.dart';
 
 /// Repository for balance
-/// TODO: Implement interaction with the smart contract to get the balance
 class BalanceRepository {
   final GethContract gethContract;
 
@@ -23,4 +22,7 @@ class BalanceRepository {
 
   /// Sell tokens
   Future<void> sellTokens(BigInt amount) => gethContract.sellTokens(amount);
+
+  /// Handle balance changes
+// TODO: Stream<BigInt> get balanceChanges => gethContract.balanceChanges;
 }

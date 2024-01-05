@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
+import 'package:gethdomains/bloc/global_errors/global_errors.dart';
+import 'package:gethdomains/contracts/exceptions.dart';
 import 'package:gethdomains/repository/balance_repository.dart';
 
 part 'balance_event.dart';
@@ -10,15 +12,18 @@ part 'balance_state.dart';
 
 class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
   final BalanceRepository balanceRepository;
+  final GlobalErrorsSink globalErrorsSink;
 
   BalanceBloc({
     required this.balanceRepository,
+    required this.globalErrorsSink,
     required Stream<AuthState> authStateChanges,
   }) : super(const LoadingBalanceState()) {
     // TODO: Add a listener for events from the smart contract, propagated through the repository
     on<LoadBalanceEvent>(_onLoadBalanceEvent);
     on<_UpdateBalanceEvent>(_onUpdateBalanceEvent);
     on<BuyTokensEvent>(_onBuyTokensEvent);
+    on<SellTokensEvent>(_onSellTokensEvent);
 
     // Listen to the auth state changes
     // They should reset the balance status
@@ -49,8 +54,7 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
   /// So, the data it gives can be trusted (not coming from outside classes).
   FutureOr<void> _onUpdateBalanceEvent(
     _UpdateBalanceEvent event,
-    Emitter<BalanceState> emit,
-  ) async {
+    Emitter<BalanceState> emit,) async {
     if (event.balance == null) {
       emit(const UnavailableBalanceState());
     } else {
@@ -60,17 +64,31 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
 
   void buyTokens(BigInt amount) => add(BuyTokensEvent(amount));
 
-  FutureOr<void> _onBuyTokensEvent(
-    BuyTokensEvent event,
-    Emitter<BalanceState> emit,
-  ) async {
+  FutureOr<T?> _wrapSmartContractInvocation<T>(Future<T> Function() invocation,
+      Emitter<BalanceState> emit,) async {
     emit(const LoadingBalanceState());
     try {
-      await balanceRepository.purchaseTokens(event.amount);
+      return await invocation();
+    } on Web3Exception catch (e) {
+      globalErrorsSink.addWeb3Error(e);
+    } finally {
       final balance = await balanceRepository.getBalance();
-      emit(BalanceStateData(balance));
-    } catch (e) {
-      emit(const UnavailableBalanceState());
+      add(_UpdateBalanceEvent(balance: balance));
     }
+    return null;
   }
+
+  FutureOr<void> _onBuyTokensEvent(BuyTokensEvent event,
+      Emitter<BalanceState> emit,) =>
+      _wrapSmartContractInvocation(() {
+        return balanceRepository.purchaseTokens(event.amount);
+      }, emit);
+
+  void sellTokens(BigInt amount) => add(SellTokensEvent(amount));
+
+  FutureOr<void> _onSellTokensEvent(SellTokensEvent event,
+      Emitter<BalanceState> emit,) =>
+      _wrapSmartContractInvocation(() {
+        return balanceRepository.sellTokens(event.amount);
+      }, emit);
 }

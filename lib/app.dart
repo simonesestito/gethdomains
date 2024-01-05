@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:gethdomains/bloc/global_errors/banner.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';
 import 'package:gethdomains/di/injector.dart';
 import 'package:gethdomains/routing/router.dart';
@@ -32,6 +33,12 @@ class GethDomainsApp extends StatelessWidget {
           darkTheme: createDarkTheme(),
           // ignore: deprecated_member_use
           routerConfig: context.read<AppRouter>().config(initialDeepLink: '/'),
+          builder: (context, router) => Stack(
+            children: [
+              router ?? const SizedBox.shrink(),
+              const GlobalErrorsBanner(),
+            ],
+          ),
         ),
       );
 
