@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/repository/balance_repository.dart';
 import 'package:gethdomains/widget/body_container.dart';
 import 'package:gethdomains/widget/column_gap.dart';
-import 'package:gethdomains/widget/domain_form/register_domain_button.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 import 'package:gethdomains/widget/loading_future_builder.dart';
 import 'package:gethdomains/widget/text_field_decoration.dart';
@@ -26,6 +25,7 @@ class BuyTokensPage extends StatelessWidget {
       title: title,
       inputHint: inputHint,
       tokenFeesFuture: tokenFeesFuture,
+      actionIcon: const Icon(Icons.money),
     );
   }
 }
@@ -44,6 +44,7 @@ class SellTokensPage extends StatelessWidget {
       title: title,
       inputHint: inputHint,
       tokenFeesFuture: tokenFeesFuture,
+      actionIcon: const Icon(Icons.sell),
     );
   }
 }
@@ -52,6 +53,7 @@ class _BuySellTokensPage extends StatelessWidget {
   final String title;
   final String inputHint;
   final Future<BigInt> tokenFeesFuture;
+  final Widget actionIcon;
 
   static const _kTokensAmount = 'tokensAmount';
   static final ethPerGeth = Decimal.parse('1000.0');
@@ -70,6 +72,7 @@ class _BuySellTokensPage extends StatelessWidget {
     required this.title,
     required this.inputHint,
     required this.tokenFeesFuture,
+    required this.actionIcon,
   });
 
   @override
@@ -111,9 +114,11 @@ class _BuySellTokensPage extends StatelessWidget {
                 ),
               ),
               ReactiveFormConsumer(
-                builder: (context, form, _) => RegisterDomainButton(
-                  label: title,
+                builder: (context, form, _) => FloatingActionButton.extended(
+                  backgroundColor: Colors.green,
                   onPressed: () => _onSubmit(context),
+                  label: Text(title),
+                  icon: actionIcon,
                 ),
               ),
             ].withColumnGap(),
