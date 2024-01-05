@@ -31,10 +31,7 @@ contract Geth is ERC20, Ownable {
     // evento emesso se cambia il ratio di conversione ether:geth
     event SetRatio(uint256 newRatio);
 
-    constructor() ERC20("Geth", "G") Ownable(msg.sender) {
-        // Assegna assegna dei token al proprietario per delle prove
-        _mint(owner(), 100000);
-    }
+    constructor() ERC20("Geth", "G") Ownable(msg.sender) {}
 
     /**
      * @dev See {ERC20-decimals}.
