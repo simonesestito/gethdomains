@@ -33,7 +33,7 @@ contract Geth is ERC20, Ownable {
         // require(balanceOf(address(this)) >= tokenAmount, "Insufficient token balance in the contract");
 
         // Trasferisci i token all'acquirente
-        transfer(msg.sender, tokenAmount);
+        _mint(msg.sender, tokenAmount);
     }
 
     /**
