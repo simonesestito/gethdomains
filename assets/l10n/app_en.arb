@@ -138,5 +138,44 @@
   "sellTokensButtonLabel": "Sell GETH",
   "sellTokensAmountHint": "Amount of GETH to sell",
   "sepoliaWarningBanner": "You are not using Sepolia test network, where the smart contracts are!",
-  "sepoliaWarningBannerButton": "Switch to Sepolia"
+  "sepoliaWarningBannerButton": "Switch to Sepolia",
+  "transactionSentEventLabel": "Transaction sent (hash: {hash})",
+  "@transactionSentEventLabel": {
+    "placeholders": {
+      "hash": {
+        "type": "String"
+      }
+    }
+  },
+  "coinTransferSent": "You successfully bought {amount} GETH",
+  "@coinTransferSent": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "coinTransferReceived": "You successfully sold {amount} GETH",
+  "@coinTransferReceived": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "coinTransferExchanged": "Successful transaction of {amount} GETH from {from} to {to}",
+  "@coinTransferExchanged": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "etherscanLinkLabel": "View on Etherscan"
 }

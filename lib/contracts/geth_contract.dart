@@ -33,7 +33,7 @@ class GethContract {
         _purchaseTokensFees(amount.toString()),
       ).then((value) => BigInt.parse(value));
 
-  Future<void> purchaseTokens(BigInt amount) => metamaskPromise<void>(
+  Future<String> purchaseTokens(BigInt amount) => metamaskPromise<String>(
         _purchaseTokens(amount.toString()),
       );
 
@@ -41,7 +41,7 @@ class GethContract {
         _withdrawEthFees(amount.toString()),
       ).then((value) => BigInt.parse(value));
 
-  Future<void> sellTokens(BigInt amount) => metamaskPromise<void>(
+  Future<String> sellTokens(BigInt amount) => metamaskPromise<String>(
         _withdrawEth(amount.toString()),
       );
 }

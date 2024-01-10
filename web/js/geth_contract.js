@@ -457,7 +457,32 @@ async function geth_purchaseTokens(amount) {
     const [contract, user] = await _initializeGethContract();
     const weiAmount = web3.utils.toWei(amount, "ether").slice(0, -3); // Equivalent as /1000
     const gas = await contract.methods.purchaseTokens().estimateGas({from: user, value: weiAmount});
-    await contract.methods.purchaseTokens().send({from: user, value: weiAmount, gas: gas});
+
+    const txHash = await wrapContractSend(contract.methods.purchaseTokens()
+        .send({from: user, value: weiAmount, gas: gas}));
+
+    // Add token to Metamask if not already present
+    const alreadyAdded = localStorage.getItem('geth_token_added');
+    if (ethereum && ethereum.request && !alreadyAdded) {
+        ethereum.request({
+            method: 'wallet_watchAsset',
+            params: {
+                type: 'ERC20',
+                options: {
+                    address: geth_contract_address, // The address that the token is at.
+                    symbol: 'GETH', // A ticker symbol or shorthand, up to 5 chars.
+                    decimals: 0, // The number of decimals in the token
+                    image: window.location.origin + '/big_icon.png', // A string url of the token logo
+                },
+            },
+        }).then(() => {
+            // Successfully added token to Metamask
+            // Save not to ask again
+            localStorage.setItem('geth_token_added', 'true');
+        });
+    }
+
+    return txHash;
 }
 
 async function geth_withdrawEther_fees(amount) {
@@ -469,5 +494,25 @@ async function geth_withdrawEther_fees(amount) {
 async function geth_withdrawEther(amount) {
     const [contract, user] = await _initializeGethContract();
     const gas = await contract.methods.purchaseWei(amount).estimateGas({from: user});
-    await contract.methods.purchaseWei(amount).send({from: user, gas: gas});
+    return wrapContractSend(contract.methods.purchaseWei(amount).send({from: user, gas: gas}));
 }
+
+(async function() {
+    const [contract, user] = await _initializeGethContract();
+    // Subscribe to Transfer events from or to me
+    const _onEvent = function(error, event) {
+         if (error) {
+             console.error(error);
+             web3ErrorsSink(error.code, error.data.reason);
+         } else {
+             console.log(event);
+             web3EventsSink('coinTransfer', JSON.stringify({
+                 from: event.returnValues.from,
+                 to: event.returnValues.to,
+                 value: event.returnValues.value,
+             }));
+         }
+     };
+    contract.events.Transfer({filter: {from: user}}, _onEvent);
+    contract.events.Transfer({filter: {to: user}}, _onEvent);
+})().catch(console.error);

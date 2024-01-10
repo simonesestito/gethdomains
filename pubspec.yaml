@@ -52,6 +52,7 @@ dependencies:
   url_launcher: ^6.2.1
   local_hero: ^0.3.0
   decimal: ^2.3.3
+  js: ^0.6.7
   data_encoder:
     path: ./data_encoder
 

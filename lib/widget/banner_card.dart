@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gethdomains/contracts/exceptions.dart';
 
 class BannerCard extends StatelessWidget {
   final Color color;
@@ -52,5 +53,23 @@ class BannerCard extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ErrorBannerCard extends BannerCard {
+  const ErrorBannerCard({
+    Key? key,
+    required Widget content,
+    Widget? action,
+  }) : super(
+          key: key,
+          color: Colors.red,
+          icon: const Icon(Icons.error_outline),
+          content: content,
+          action: action,
+        );
+
+  factory ErrorBannerCard.fromWeb3Error(Web3Exception error) {
+    return ErrorBannerCard(content: Text(error.getDisplayMessage()));
   }
 }

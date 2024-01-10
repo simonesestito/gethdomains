@@ -14,14 +14,14 @@ class BalanceRepository {
       gethContract.purchaseTokensFees(BigInt.one);
 
   /// Purchase tokens
-  Future<void> purchaseTokens(BigInt amount) =>
+  Future<String> purchaseTokens(BigInt amount) =>
       gethContract.purchaseTokens(amount);
 
   /// Get the fees for selling tokens
   Future<BigInt> getSellTokensFees() => gethContract.sellTokensFees(BigInt.one);
 
   /// Sell tokens
-  Future<void> sellTokens(BigInt amount) => gethContract.sellTokens(amount);
+  Future<String> sellTokens(BigInt amount) => gethContract.sellTokens(amount);
 
   /// Handle balance changes
 // TODO: Stream<BigInt> get balanceChanges => gethContract.balanceChanges;

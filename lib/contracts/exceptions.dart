@@ -1,6 +1,7 @@
+import 'package:gethdomains/contracts/events.dart';
 import 'package:gethdomains/contracts/js_error_info.dart';
 
-class Web3Exception implements Exception {
+class Web3Exception extends Web3Notice implements Exception {
   final int code;
 
   const Web3Exception(this.code);
@@ -18,6 +19,7 @@ class Web3Exception implements Exception {
     return '$runtimeType{code: $code}';
   }
 
+  @override
   String getDisplayMessage() => 'Unknown error with code $code';
 }
 

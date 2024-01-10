@@ -67,3 +67,30 @@ async function login() {
 
     return getCurrentUser();
 }
+
+async function wrapContractSend(originalSend) {
+    // Return as soon as the transactionHash is ready
+    return new Promise((resolve, reject) => {
+        let txHash = null;
+
+        originalSend.once('transactionHash', function(hash) {
+                console.log('Transaction Hash:', hash);
+                txHash = hash;
+                resolve(hash);
+            })
+            .on('error', function(error) {
+                console.log('Error:', error);
+                if (txHash === null) {
+                    reject(error);
+                } else {
+                    // Use events
+                    const reason = error.data && error.data.reason ? error.data.reason : error.message;
+                    web3ErrorsSink(error.code, reason);
+                }
+            })
+            .then(function(receipt) {
+                // will be fired once the receipt is mined
+                console.log('Receipt mined!', receipt);
+            });
+    });
+}
