@@ -178,5 +178,6 @@
     }
   },
   "etherscanLinkLabel": "View on Etherscan",
-  "refreshButtonLabel": "Refresh"
+  "refreshButtonLabel": "Refresh",
+  "insufficientGasForTransaction": "You have insufficient funds for the gas fees of this transaction"
 }

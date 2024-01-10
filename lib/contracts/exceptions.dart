@@ -41,5 +41,10 @@ class SmartContractRuntimeError extends Web3Exception {
   }
 
   @override
-  String getDisplayMessage() => reason;
+  String getDisplayMessage() {
+    if (reason.contains('insufficient funds for gas')) {
+      return 'Insufficient funds to pay for the gas of the transaction';
+    }
+    return reason;
+  }
 }

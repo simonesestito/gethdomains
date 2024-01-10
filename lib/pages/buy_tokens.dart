@@ -3,6 +3,7 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gethdomains/contracts/events.dart';
 import 'package:gethdomains/repository/balance_repository.dart';
 import 'package:gethdomains/widget/body_container.dart';
 import 'package:gethdomains/widget/column_gap.dart';
@@ -112,6 +113,7 @@ class _BuySellTokensPage extends StatelessWidget {
                 builder: (context, fees) => Text(
                   AppLocalizations.of(context)!.buyTokensFees(fees.toString()),
                 ),
+                errorBuilder: _buildGasFeesError,
               ),
               ReactiveFormConsumer(
                 builder: (context, form, _) => FloatingActionButton.extended(
@@ -137,5 +139,19 @@ class _BuySellTokensPage extends StatelessWidget {
 
     final tokensAmount = BigInt.from(form.control(_kTokensAmount).value);
     context.popRoute(tokensAmount);
+  }
+
+  Widget _buildGasFeesError(BuildContext context, Exception error) {
+    final String label;
+    if (error is Web3Notice) {
+      label = (error as Web3Notice).getDisplayMessage();
+    } else {
+      label = error.toString();
+    }
+
+    return Text(
+      label,
+      style: TextStyle(color: Theme.of(context).colorScheme.error),
+    );
   }
 }
