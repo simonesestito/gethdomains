@@ -46,6 +46,8 @@ class BalanceBloc extends Bloc<BalanceEvent, BalanceState> {
     });
   }
 
+  void refresh() => add(const LoadBalanceEvent());
+
   FutureOr<void> _onLoadBalanceEvent(
     LoadBalanceEvent event,
     Emitter<BalanceState> emit,

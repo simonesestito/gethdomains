@@ -177,5 +177,6 @@
       }
     }
   },
-  "etherscanLinkLabel": "View on Etherscan"
+  "etherscanLinkLabel": "View on Etherscan",
+  "refreshButtonLabel": "Refresh"
 }

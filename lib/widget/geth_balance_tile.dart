@@ -10,7 +10,7 @@ class GethBalanceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<BalanceBloc, BalanceState>(
-    builder: (context, state) => switch (state) {
+        builder: (context, state) => switch (state) {
           LoadingBalanceState() => const CircularProgressIndicator(),
           BalanceStateData balanceState => ListTile(
               title: Text(AppLocalizations.of(context)!.userTokenBalanceMessage(
@@ -36,9 +36,22 @@ class GethBalanceTile extends StatelessWidget {
                 ],
               ),
             ),
-          UnavailableBalanceState() => Text(
-              AppLocalizations.of(context)!.userTokenBalanceUnavailable,
-            ),
+          UnavailableBalanceState() => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.userTokenBalanceUnavailable,
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.read<BalanceBloc>().refresh();
+                  },
+                  child: Text(
+                    AppLocalizations.of(context)!.refreshButtonLabel,
+                  ),
+                ),
+              ],
+            )
         },
       );
 
