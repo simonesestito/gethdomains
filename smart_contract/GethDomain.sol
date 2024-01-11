@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-import "./node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
-import "./node_modules/@openzeppelin/contracts/access/Ownable.sol";
-import "./node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract DomainMarketplace is ERC721Royalty, Ownable {
 
@@ -53,7 +53,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
     // Costruttore del contratto
     constructor() ERC721("name", "symbol") Ownable(msg.sender){
-        payGeth = IERC20(0xD7ACd2a9FD159E69Bb102A1ca21C9a3e3A5F771B);
+        payGeth = IERC20(0xa514C64fd0e5Fe44B2C4448AfB8C6f3268232169);
     }
 
     function _feeDenominator() internal pure override returns (uint96) {
@@ -80,10 +80,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         _setTokenRoyalty(nextId, msg.sender, feeNumerator);
         _domains[domain] = Domain(0, 0,torOrIpfs, isTor);
         keys.push(domain);
-        _domains[domain].resoldTimes++;      
-        nextId++;
-       
-
+        _domains[domain].resoldTimes++;
     }
     
     function getKeys() external view returns (bytes[] memory) {
