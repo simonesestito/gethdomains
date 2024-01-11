@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'dart:js_interop';
 import 'dart:js_util';
 
+import 'package:flutter/cupertino.dart';
+
 import 'exceptions.dart';
 import 'js_error_info.dart';
 
@@ -23,6 +25,7 @@ Future<T> metamaskPromise<T>(JSPromise promise) async {
 
 JsErrorInfo _handleJsNativeError(dynamic /* NativeError */ jsNativeError) {
   final jsNativeErrorString = jsNativeError.toString();
+  debugPrint('jsNativeError: $jsNativeErrorString');
   final data = const JsonDecoder().convert(
     jsNativeErrorString.substring(jsNativeErrorString.indexOf('{')),
   );

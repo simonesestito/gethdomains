@@ -1,14 +1,16 @@
 import 'dart:typed_data';
 
-import 'interface.dart';
 import 'five_bits_encoder.dart';
 import 'huffman/huffman_encoder.dart';
+import 'interface.dart';
 
 /// General encoder, which may use one technique or another,
 /// depending on the one that generates the smallest output.
 class DomainEncoder extends AbstractDomainEncoder {
-  final char5BitsEncoder = FiveBitsEncoder();
-  final huffmanEncoder = HuffmanEncoder();
+  final char5BitsEncoder = const FiveBitsEncoder();
+  final huffmanEncoder = const HuffmanEncoder();
+
+  const DomainEncoder();
 
   @override
   Uint8List encode(String data) {

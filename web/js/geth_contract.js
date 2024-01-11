@@ -1,4 +1,4 @@
-const geth_contract_address = "0xa514C64fd0e5Fe44B2C4448AfB8C6f3268232169";
+const geth_contract_address = "0xC5e8feF974A54A10EBef8675Aec6705eE10f82f1";
 const abi = [
             	{
             		"inputs": [
@@ -497,8 +497,12 @@ async function geth_withdrawEther(amount) {
     return wrapContractSend(contract.methods.purchaseWei(amount).send({from: user, gas: gas}));
 }
 
-(async function() {
+async function _initTokenEvents() {
     const [contract, user] = await _initializeGethContract();
+    if (user === null) {
+        return;
+    }
+
     // Subscribe to Transfer events from or to me
     const _onEvent = function(error, event) {
          if (error) {
@@ -515,4 +519,5 @@ async function geth_withdrawEther(amount) {
      };
     contract.events.Transfer({filter: {from: user}}, _onEvent);
     contract.events.Transfer({filter: {to: user}}, _onEvent);
-})().catch(console.error);
+}
+_initTokenEvents().catch(console.error);

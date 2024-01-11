@@ -113,6 +113,8 @@ class HuffmanEncoder extends AbstractDomainEncoder {
     ]
   ]);
 
+  const HuffmanEncoder();
+
   @override
   Uint8List encode(String data) {
     final bitWriter = BitWriter();

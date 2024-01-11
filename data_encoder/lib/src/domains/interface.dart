@@ -2,6 +2,8 @@ import '../encoder.dart';
 
 
 abstract class AbstractDomainEncoder extends AbstractEncoder {
+  const AbstractDomainEncoder();
+
   /// Check if the given [domain] is valid to be encoded.
   @override
   bool isValid(String domain) {

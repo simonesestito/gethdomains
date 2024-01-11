@@ -22,7 +22,4 @@ class BalanceRepository {
 
   /// Sell tokens
   Future<String> sellTokens(BigInt amount) => gethContract.sellTokens(amount);
-
-  /// Handle balance changes
-// TODO: Stream<BigInt> get balanceChanges => gethContract.balanceChanges;
 }

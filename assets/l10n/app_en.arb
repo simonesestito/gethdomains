@@ -147,7 +147,7 @@
       }
     }
   },
-  "coinTransferSent": "You successfully bought {amount} GETH",
+  "coinTransferSent": "You sent {amount} GETH",
   "@coinTransferSent": {
     "placeholders": {
       "amount": {
@@ -155,7 +155,7 @@
       }
     }
   },
-  "coinTransferReceived": "You successfully sold {amount} GETH",
+  "coinTransferReceived": "You received {amount} GETH",
   "@coinTransferReceived": {
     "placeholders": {
       "amount": {
@@ -163,21 +163,31 @@
       }
     }
   },
-  "coinTransferExchanged": "Successful transaction of {amount} GETH from {from} to {to}",
-  "@coinTransferExchanged": {
+  "etherscanLinkLabel": "View on Etherscan",
+  "refreshButtonLabel": "Refresh",
+  "insufficientGasForTransaction": "You have insufficient funds for the gas fees of this transaction",
+  "domainTransferSent": "You sent {domain}",
+  "@domainTransferSent": {
     "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "from": {
-        "type": "String"
-      },
-      "to": {
+      "domain": {
         "type": "String"
       }
     }
   },
-  "etherscanLinkLabel": "View on Etherscan",
-  "refreshButtonLabel": "Refresh",
-  "insufficientGasForTransaction": "You have insufficient funds for the gas fees of this transaction"
+  "domainTransferReceived": "You received {domain}",
+  "@domainTransferReceived": {
+    "placeholders": {
+      "domain": {
+        "type": "String"
+      }
+    }
+  },
+  "domainsSearchRegisterFees": "Fees: {fees} gas units",
+  "@domainsSearchRegisterFees": {
+    "placeholders": {
+      "fees": {
+        "type": "String"
+      }
+    }
+  }
 }

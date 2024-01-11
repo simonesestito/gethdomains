@@ -30,6 +30,9 @@ class GlobalEventsSink {
   Stream<Web3CoinTransfer> get coinTransfers =>
       _getWeb3Events<Web3CoinTransfer>();
 
+  Stream<Web3DomainTransfer> get domainTransfers =>
+      _getWeb3Events<Web3DomainTransfer>();
+
   void addWeb3Event(Web3Event event) {
     debugPrint('[Web3Event] $event');
     _web3ErrorsStreamController.add(event);

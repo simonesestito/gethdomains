@@ -12,7 +12,17 @@ class _UpdateDomainsEvent extends DomainsEvent {
 }
 
 class LoadDomainsEvent extends DomainsEvent {
-  final String ownerAddress;
+  const LoadDomainsEvent();
+}
 
-  const LoadDomainsEvent({required this.ownerAddress});
+class PurchaseDomainEvent extends DomainsEvent {
+  final String domainName;
+  final String pointedAddress;
+  final DomainType domainType;
+
+  const PurchaseDomainEvent({
+    required this.domainName,
+    required this.pointedAddress,
+    required this.domainType,
+  });
 }

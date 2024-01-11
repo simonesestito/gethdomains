@@ -1,60 +1,88 @@
-import 'dart:math';
-
+import 'package:data_encoder/data_encoder.dart';
+import 'package:gethdomains/contracts/geth_domains.dart';
 import 'package:gethdomains/input/validators/domain_input.dart';
 import 'package:gethdomains/model/domain.dart';
 
 class DomainRepository {
-  static const _mockDomains = [
-    Domain(
-      domainName: 'test${DomainInputValidator.domainSuffix}',
-      realAddress:
-          'bafybeifx7yeb55armcsxwwitkymga5xf53dxiarykms3ygqic223w5sk3m',
-      type: DomainType.ipfs,
-      owner: '0x000000000000000000000000000000000000dead',
-      resoldTimes: 20,
-      price: 100,
-    ),
-    Domain(
-      domainName: 'tor${DomainInputValidator.domainSuffix}',
-      realAddress:
-          'duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion',
-      type: DomainType.tor,
-      owner: '0x000000000000000000000000000000000000dead',
-      resoldTimes: 20,
-      price: 0,
-    ),
-  ];
+  final GethDomainsContract contract;
+  final IpfsCidEncoder ipfsCidEncoder;
+  final TorAddressEncoder torAddressEncoder;
+  final DomainEncoder domainEncoder;
 
-  const DomainRepository();
+  const DomainRepository({
+    required this.contract,
+    required this.ipfsCidEncoder,
+    required this.torAddressEncoder,
+    required this.domainEncoder,
+  });
 
   Future<Domain?> searchDomain(String domainName) async {
     // Simulate fake waiting time
     await Future.delayed(const Duration(milliseconds: 100));
-
-    // with some probability, throw an exception
-    if (Random().nextDouble() < 0.25) {
-      throw Exception('Error searching domain');
-    }
-
-    // ignore: unnecessary_cast
-    return _mockDomains.map((d) => d as Domain?).firstWhere(
-          (domain) => domain?.domainName == domainName,
-          orElse: () => null,
-        );
+    return null;
   }
 
-  Future<List<Domain>> getDomainsOf(String ownerAddress) async {
+  Future<Domain?> getDomainById(BigInt id) async {
+    // Simulate fake waiting time
     await Future.delayed(const Duration(milliseconds: 100));
-    return List.unmodifiable(_mockDomains);
+    return null;
   }
 
-  Future<List<Domain>> getAllDomains() async {
+  Future<List<Domain>> getMyDomains() async {
     await Future.delayed(const Duration(milliseconds: 100));
-    return List.unmodifiable(_mockDomains);
+    return List.empty();
   }
 
   Future<List<Domain>> getDomainsForSale() async {
     await Future.delayed(const Duration(milliseconds: 100));
-    return List.unmodifiable(_mockDomains.sublist(0, 1));
+    return List.empty();
+  }
+
+  Future<BigInt> predictDomainPurchaseFees(
+    String domainName,
+    String pointedAddress,
+    DomainType domainType,
+  ) {
+    if (domainName.endsWith(DomainInputValidator.domainSuffix)) {
+      domainName = domainName.substring(
+        0,
+        domainName.length - DomainInputValidator.domainSuffix.length,
+      );
+    }
+
+    final encodedDomain = domainEncoder.encode(domainName);
+    final encodedPointer = switch (domainType) {
+      DomainType.ipfs => ipfsCidEncoder.encode(pointedAddress),
+      DomainType.tor => torAddressEncoder.encode(pointedAddress),
+    };
+    return contract.purchaseNewDomainFees(
+      encodedDomain,
+      encodedPointer,
+      domainType,
+    );
+  }
+
+  Future<String> purchaseNewDomain(
+    String domainName,
+    String pointedAddress,
+    DomainType domainType,
+  ) async {
+    if (domainName.endsWith(DomainInputValidator.domainSuffix)) {
+      domainName = domainName.substring(
+        0,
+        domainName.length - DomainInputValidator.domainSuffix.length,
+      );
+    }
+
+    final encodedDomain = domainEncoder.encode(domainName);
+    final encodedPointer = switch (domainType) {
+      DomainType.ipfs => ipfsCidEncoder.encode(pointedAddress),
+      DomainType.tor => torAddressEncoder.encode(pointedAddress),
+    };
+    return contract.purchaseNewDomain(
+      encodedDomain,
+      encodedPointer,
+      domainType,
+    );
   }
 }

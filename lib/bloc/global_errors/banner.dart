@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/contracts/events.dart';
 import 'package:gethdomains/contracts/exceptions.dart';
 import 'package:gethdomains/widget/banner_card.dart';
@@ -48,11 +49,11 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 56),
-      child: _buildCardForNotice(_error),
+      child: _buildCardForNotice(context, _error),
     );
   }
 
-  Widget _buildCardForNotice(Web3Notice? notice) {
+  Widget _buildCardForNotice(BuildContext context, Web3Notice? notice) {
     if (notice == null) {
       return const SizedBox.shrink();
     }
@@ -88,22 +89,41 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
       );
     }
 
+    final authenticatedAccount =
+        (context.read<AuthBloc>().state as AuthLoggedIn?)?.account.address;
+
     if (notice is Web3CoinTransfer) {
       final String label;
-      if (notice.fromNoOne()) {
+      if (notice.from == authenticatedAccount) {
         label = AppLocalizations.of(context)!.coinTransferSent(
           notice.value.toString(),
         );
-      } else if (notice.toNoOne()) {
+      } else if (notice.to == authenticatedAccount) {
         label = AppLocalizations.of(context)!.coinTransferReceived(
           notice.value.toString(),
         );
       } else {
-        label = AppLocalizations.of(context)!.coinTransferExchanged(
-          notice.value.toString(),
-          notice.from,
-          notice.to,
+        // I don't care about this event
+        return const SizedBox.shrink();
+      }
+
+      return BannerCard(color: color, icon: icon, content: Text(label));
+    }
+
+    if (notice is Web3DomainTransfer) {
+      final String label;
+
+      if (notice.from == authenticatedAccount) {
+        label = AppLocalizations.of(context)!.domainTransferSent(
+          notice.domainName,
         );
+      } else if (notice.to == authenticatedAccount) {
+        label = AppLocalizations.of(context)!.domainTransferReceived(
+          notice.domainName,
+        );
+      } else {
+        // I don't care about this event
+        return const SizedBox.shrink();
       }
 
       return BannerCard(color: color, icon: icon, content: Text(label));

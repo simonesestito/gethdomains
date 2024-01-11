@@ -10,6 +10,7 @@ class _ServiceDependencies extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => const GethContract()),
+        RepositoryProvider(create: (_) => const GethDomainsContract()),
       ],
       child: Builder(builder: builder),
     );

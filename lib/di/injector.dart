@@ -1,3 +1,4 @@
+import 'package:data_encoder/data_encoder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:gethdomains/bloc/sepolia/sepolia_bloc.dart';
 import 'package:gethdomains/bloc/settings/settings.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';
 import 'package:gethdomains/contracts/geth_contract.dart';
+import 'package:gethdomains/contracts/geth_domains.dart';
 import 'package:gethdomains/repository/auth_repository.dart';
 import 'package:gethdomains/repository/balance_repository.dart';
 import 'package:gethdomains/repository/domain_repository.dart';

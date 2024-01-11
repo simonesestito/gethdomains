@@ -8,6 +8,8 @@ import 'interface.dart';
 class FiveBitsEncoder extends AbstractDomainEncoder {
   static const bool techniqueIdentifier = false;
 
+  const FiveBitsEncoder();
+
   @override
   Uint8List encode(String data) {
     if (!isValid(data)) {
