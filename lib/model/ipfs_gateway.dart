@@ -6,7 +6,6 @@ part 'ipfs_gateway.g.dart';
 class IpfsGateway {
   static final ipfsGateways = List.unmodifiable([
     // The first gateway is the default one.
-    IpfsGateway._fromUrl('https://ipfs.io/ipfs/'),
     IpfsGateway._fromUrl('https://gateway.ipfs.io/ipfs/'),
     IpfsGateway._fromUrl('https://gateway.pinata.cloud/ipfs/'),
     IpfsGateway._fromUrl('https://storry.tv/ipfs/'),
