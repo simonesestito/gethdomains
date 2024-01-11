@@ -11,6 +11,15 @@ abstract class Web3Notice {
 
   @override
   String toString() => '$runtimeType{message: "${getDisplayMessage()}"}';
+
+  @override
+  bool operator ==(Object other) {
+    if (other is! Web3Notice) return false;
+    return getDisplayMessage() == other.getDisplayMessage();
+  }
+
+  @override
+  int get hashCode => getDisplayMessage().hashCode;
 }
 
 sealed class Web3Event extends Web3Notice {

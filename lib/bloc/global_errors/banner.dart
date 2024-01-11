@@ -25,7 +25,7 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
   StreamSubscription<Web3Notice>? _errorsSubscription;
   StreamSubscription<Web3Notice>? _eventsSubscription;
 
-  final _notices = List<Web3Notice>.empty(growable: true);
+  final _notices = <Web3Notice>{}; // Empty set
 
   @override
   void initState() {
@@ -141,6 +141,10 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
   }
 
   void _onEvent(Web3Notice event) {
+    if (_notices.contains(event)) {
+      return;
+    }
+
     setState(() {
       _notices.add(event);
     });
