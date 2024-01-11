@@ -35,7 +35,9 @@ JsErrorInfo _handleJsNativeError(dynamic /* NativeError */ jsNativeError) {
   }
 
   final errorCode = data['code'] as int;
-  final errorReason = data['data']['reason'] as String?;
+  final errorData = data.containsKey('data') ? data['data'] : null;
+  final validData = errorData != null && errorData is! String;
+  final errorReason = validData ? data['data']['reason'] as String? : null;
   final message = data['message'] as String?;
 
   return JsErrorInfo(errorCode, errorReason ?? message);
@@ -44,8 +46,8 @@ JsErrorInfo _handleJsNativeError(dynamic /* NativeError */ jsNativeError) {
 JsErrorInfo _handleJsObjectError(Object error) {
   final errorCode = getProperty(error, 'code');
   final errorData = getProperty(error, 'data');
-  final reason =
-      errorData != null ? getProperty(errorData, 'reason').toString() : null;
+  final validData = errorData != null && errorData is! String;
+  final reason = validData ? getProperty(errorData, 'reason').toString() : null;
   final message = getProperty(error, 'message');
   return JsErrorInfo(errorCode, reason ?? message);
 }

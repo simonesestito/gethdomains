@@ -7,11 +7,15 @@ class Web3Exception extends Web3Notice implements Exception {
   const Web3Exception(this.code);
 
   factory Web3Exception.fromErrorInfo(JsErrorInfo info) {
-    return switch (info.code) {
-      4001 => const UserTransactionRefusedException(),
-      -32000 => SmartContractRuntimeError(info.reason!),
-      _ => Web3Exception(info.code),
-    };
+    if (info.code == 4001) {
+      return const UserTransactionRefusedException();
+    }
+
+    if (info.reason != null) {
+      return SmartContractRuntimeError(info.reason!);
+    }
+
+    return Web3Exception(info.code);
   }
 
   @override
