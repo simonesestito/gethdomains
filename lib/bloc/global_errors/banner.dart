@@ -25,8 +25,7 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
   StreamSubscription<Web3Notice>? _errorsSubscription;
   StreamSubscription<Web3Notice>? _eventsSubscription;
 
-  Web3Notice? _error;
-  Timer? _timer;
+  final _notices = List<Web3Notice>.empty(growable: true);
 
   @override
   void initState() {
@@ -49,7 +48,12 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 56),
-      child: _buildCardForNotice(context, _error),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (final notice in _notices) _buildCardForNotice(context, notice),
+        ],
+      ),
     );
   }
 
@@ -137,21 +141,16 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
   }
 
   void _onEvent(Web3Notice event) {
-    // An error came, so cancel the timer (don't hide the banner)
-    _timer?.cancel();
-
     setState(() {
-      _error = event;
-
-      // Hide the banner after 5 seconds, if no other error comes
-      _timer = Timer(_errorHideDuration, _hideError);
+      _notices.add(event);
     });
-  }
 
-  void _hideError() {
-    _timer = null;
-    setState(() {
-      _error = null;
-    });
+    // Hide the banner after N seconds
+    Future.delayed(
+      _errorHideDuration,
+      () => setState(() {
+        _notices.remove(event);
+      }),
+    );
   }
 }
