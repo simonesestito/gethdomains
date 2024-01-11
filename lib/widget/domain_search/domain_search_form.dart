@@ -39,7 +39,7 @@ class DomainSearchForm extends StatelessWidget {
                   const SizedBox(width: 16),
                   _DomainSearchButton(
                     onSubmit: _onFormSubmit,
-                    onRegister: _onRegistrationRequest,
+                    onRegister: () => _onRegistrationRequest(context),
                   ),
                 ],
               ),
@@ -60,9 +60,10 @@ class DomainSearchForm extends StatelessWidget {
     }
   }
 
-  void _onRegistrationRequest() {
+  void _onRegistrationRequest(BuildContext context) {
     if (form.valid) {
       onRegister(form.control(_kDomain).value);
+      context.read<DomainSearchBloc>().clear();
     }
   }
 }
