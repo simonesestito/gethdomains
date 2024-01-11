@@ -34,15 +34,17 @@ class DomainRepository {
     );
   }
 
-  Future<Domain?> getDomainById(BigInt id) async {
-    // Simulate fake waiting time
-    await Future.delayed(const Duration(milliseconds: 100));
-    return null;
-  }
-
   Future<List<Domain>> getMyDomains() async {
-    await Future.delayed(const Duration(milliseconds: 100));
-    return List.empty();
+    final jsonResult = await contract.getMyDomains();
+    return jsonResult.map((jsonItem) {
+      final domainName = jsonItem['domain'] as Uint8List;
+      return Domain.fromSmartContract(
+        domainEncoder.decode(domainName),
+        jsonItem,
+        ipfsCidEncoder,
+        torAddressEncoder,
+      );
+    }).toList();
   }
 
   Future<List<Domain>> getDomainsForSale() async {

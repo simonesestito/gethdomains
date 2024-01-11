@@ -24,6 +24,9 @@ external JSPromise _purchaseNewDomain(
 @JS('domains_searchDomain')
 external JSPromise _searchDomain(String domain);
 
+@JS('domains_getMyDomains')
+external JSPromise _getMyDomains();
+
 class GethDomainsContract {
   const GethDomainsContract();
 
@@ -59,5 +62,20 @@ class GethDomainsContract {
     jsonData['pointedAddress'] =
         receiveUint8ListFromHex(jsonData['pointedAddress']);
     return jsonData;
+  }
+
+  Future<List<Map<String, dynamic>>> getMyDomains() async {
+    final jsonString = await metamaskPromise<String?>(_getMyDomains());
+    if (jsonString == null) {
+      return [];
+    }
+
+    final List<dynamic> jsonData = jsonDecode(jsonString);
+    for (var i = 0; i < jsonData.length; i++) {
+      jsonData[i]['pointedAddress'] =
+          receiveUint8ListFromHex(jsonData[i]['pointedAddress']);
+      jsonData[i]['domain'] = receiveUint8ListFromHex(jsonData[i]['domain']);
+    }
+    return jsonData.cast<Map<String, dynamic>>();
   }
 }

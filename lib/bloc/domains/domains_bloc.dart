@@ -56,7 +56,7 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     try {
       final domains = await domainsRepository.getMyDomains();
       emit(DomainsStateData(domains));
-    } catch (e) {
+    } catch (e, stackTrace) {
       emit(const UnavailableDomainsState());
     }
   }

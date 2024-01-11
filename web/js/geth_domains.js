@@ -1018,6 +1018,50 @@ async function domains_searchDomain(domain) {
 }
 
 
+async function domains_getMyDomains() {
+    const [contract, user] = await _initializeGethDomainsContract();
+    const balance = await contract.methods.balanceOf(user).call({from: user});
+
+    async function _worker(j, n) {
+        let i = j;
+        const result = [];
+        while (result.length < Number.parseInt(balance)) {
+            try {
+                const domainBytes = await contract.methods.keys(i).call({from: user});
+                const domainId = await contract.methods.getId(domainBytes).call({from: user});
+                const owner = await contract.methods.ownerOf(domainId).call({from: user});
+                if (owner === user) {
+                    const domain = await contract.methods.domains(domainBytes).call({from: user});
+                    result.push({
+                        domain: domainBytes,
+                        price: domain.price,
+                        resoldTimes: domain.resoldTimes,
+                        pointedAddress: domain.dominioTorOrIpfs,
+                        isTor: domain.isTor,
+                        owner: user,
+                    });
+                }
+                i += n;
+            } catch (e) {
+                break;
+            }
+        }
+        return result;
+    }
+
+    // Use 5 "parallel" workers
+    const results = await Promise.all([
+        _worker(0, 5),
+        _worker(1, 5),
+        _worker(2, 5),
+        _worker(3, 5),
+        _worker(4, 5),
+    ]);
+    // Return flattened array
+    return JSON.stringify(results.flat());
+}
+
+
 let domains_sent_event_emitter = null;
 let domains_received_event_emitter = null;
 async function _initDomainsEvents() {
