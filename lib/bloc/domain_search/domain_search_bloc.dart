@@ -1,20 +1,31 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gethdomains/bloc/global_errors/global_events.dart';
 import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/repository/domain_repository.dart';
 
 part 'domain_search_event.dart';
-
 part 'domain_search_state.dart';
 
 class DomainSearchBloc extends Bloc<DomainSearchEvent, DomainSearchState> {
   final DomainRepository domainRepository;
+  final GlobalEventsSink globalEventsSink;
 
-  DomainSearchBloc({required this.domainRepository})
-      : super(const DomainSearchStateInitial()) {
+  DomainSearchBloc({
+    required this.domainRepository,
+    required this.globalEventsSink,
+  }) : super(const DomainSearchStateInitial()) {
     on<DomainSearchEventSearch>(_onSearch);
     on<DomainSearchEventClear>(_onClear);
+
+    // Listen for events in domains
+    globalEventsSink.domainTransfers.listen((event) {
+      if (_getLastSearchedDomain() == event.domainName) {
+        // Reload the domain
+        search(event.domainName);
+      }
+    });
   }
 
   void search(String domain) => add(DomainSearchEventSearch(domain));
@@ -33,10 +44,13 @@ class DomainSearchBloc extends Bloc<DomainSearchEvent, DomainSearchState> {
       if (domain != null) {
         emit(DomainSearchStateSuccess(domain));
       } else {
-        emit(const DomainSearchStateNoResults());
+        emit(DomainSearchStateNoResults(event.domainName));
       }
     } catch (e) {
-      emit(DomainSearchStateError(e.toString()));
+      emit(DomainSearchStateError(
+        errorMessage: e.toString(),
+        domainName: event.domainName,
+      ));
     }
   }
 
@@ -46,4 +60,12 @@ class DomainSearchBloc extends Bloc<DomainSearchEvent, DomainSearchState> {
   ) async {
     emit(const DomainSearchStateInitial());
   }
+
+  String? _getLastSearchedDomain() => switch (state) {
+        DomainSearchStateInitial() => null,
+        DomainSearchStateLoading() => null,
+        DomainSearchStateNoResults state => state.domainName,
+        DomainSearchStateSuccess state => state.domainSearchResult.domainName,
+        DomainSearchStateError state => state.domainName,
+      };
 }

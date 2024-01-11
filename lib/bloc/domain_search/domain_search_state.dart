@@ -13,7 +13,9 @@ class DomainSearchStateLoading extends DomainSearchState {
 }
 
 class DomainSearchStateNoResults extends DomainSearchState {
-  const DomainSearchStateNoResults();
+  final String domainName;
+
+  const DomainSearchStateNoResults(this.domainName);
 }
 
 class DomainSearchStateSuccess extends DomainSearchState {
@@ -24,6 +26,10 @@ class DomainSearchStateSuccess extends DomainSearchState {
 
 class DomainSearchStateError extends DomainSearchState {
   final String errorMessage;
+  final String? domainName;
 
-  const DomainSearchStateError(this.errorMessage);
+  const DomainSearchStateError({
+    required this.errorMessage,
+    this.domainName,
+  });
 }

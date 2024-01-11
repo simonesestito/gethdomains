@@ -514,7 +514,8 @@ async function _initTokenEvents() {
         return;
     }
 
-    // Subscribe to Transfer events from or to me
+    // Subscribe to Transfer events from or to ANYONE
+    // Anyone is required to make the domain search reactive
     const _onEvent = function(event) {
          console.log(event);
          web3EventsSink('coinTransfer', JSON.stringify({
@@ -527,7 +528,7 @@ async function _initTokenEvents() {
         console.error(error);
         web3ErrorsSink(error.code, error.data.reason);
     };
-    token_sent_event_emitter = contract.events.Transfer({filter: {from: user}}).on('data', _onEvent).on('error', _onError);
-    token_received_event_emitter = contract.events.Transfer({filter: {to: user}}).on('data', _onEvent).on('error', _onError);
+    token_sent_event_emitter = contract.events.Transfer().on('data', _onEvent).on('error', _onError);
+    token_received_event_emitter = contract.events.Transfer().on('data', _onEvent).on('error', _onError);
 }
 _initTokenEvents().catch(console.error);
