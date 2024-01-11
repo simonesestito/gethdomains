@@ -24,7 +24,7 @@ class Domain with _$Domain {
   ) {
     final isTor = data['isTor'] == true;
     final decodedDomain = (isTor ? torAddressEncoder : ipfsCidEncoder)
-        .decode(data['dominioTorOrIpfs']);
+        .decode(data['pointedAddress']);
     return Domain(
       domainName: originalDomain,
       realAddress: decodedDomain,
@@ -35,7 +35,7 @@ class Domain with _$Domain {
     );
   }
 
-  bool get isForSale => price > 0;
+  bool get isForSale => price.compareTo(BigInt.zero) > 0;
 }
 
 enum DomainType {

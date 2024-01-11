@@ -1,4 +1,4 @@
-const geth_domains_address = "0x0806Dfae0DcA325998a8B290955429fDb8491c78";
+const geth_domains_address = "0xA4eC183d35DC830e9280796d536049597168DB0a";
 const geth_domains_abi = [
                          	{
                          		"inputs": [
@@ -656,12 +656,31 @@ const geth_domains_abi = [
                          	{
                          		"inputs": [
                          			{
+                         				"internalType": "address",
+                         				"name": "owner",
+                         				"type": "address"
+                         			}
+                         		],
+                         		"name": "balanceOf",
+                         		"outputs": [
+                         			{
+                         				"internalType": "uint256",
+                         				"name": "",
+                         				"type": "uint256"
+                         			}
+                         		],
+                         		"stateMutability": "view",
+                         		"type": "function"
+                         	},
+                         	{
+                         		"inputs": [
+                         			{
                          				"internalType": "bytes",
                          				"name": "",
                          				"type": "bytes"
                          			}
                          		],
-                         		"name": "_domains",
+                         		"name": "domains",
                          		"outputs": [
                          			{
                          				"internalType": "uint32",
@@ -690,25 +709,6 @@ const geth_domains_abi = [
                          	{
                          		"inputs": [
                          			{
-                         				"internalType": "address",
-                         				"name": "owner",
-                         				"type": "address"
-                         			}
-                         		],
-                         		"name": "balanceOf",
-                         		"outputs": [
-                         			{
-                         				"internalType": "uint256",
-                         				"name": "",
-                         				"type": "uint256"
-                         			}
-                         		],
-                         		"stateMutability": "view",
-                         		"type": "function"
-                         	},
-                         	{
-                         		"inputs": [
-                         			{
                          				"internalType": "uint256",
                          				"name": "tokenId",
                          				"type": "uint256"
@@ -723,6 +723,25 @@ const geth_domains_abi = [
                          			}
                          		],
                          		"stateMutability": "view",
+                         		"type": "function"
+                         	},
+                         	{
+                         		"inputs": [
+                         			{
+                         				"internalType": "bytes",
+                         				"name": "domain",
+                         				"type": "bytes"
+                         			}
+                         		],
+                         		"name": "getId",
+                         		"outputs": [
+                         			{
+                         				"internalType": "uint256",
+                         				"name": "id",
+                         				"type": "uint256"
+                         			}
+                         		],
+                         		"stateMutability": "pure",
                          		"type": "function"
                          	},
                          	{
@@ -983,7 +1002,7 @@ async function domains_searchDomain(domain) {
     domain = _receiveBytes(domain);
     const [contract, user] = await _initializeGethDomainsContract();
     const result = await contract.methods.domains(domain).call({from: user});
-    if (result.dominoTorOrIpfs == null) {
+    if (result.dominioTorOrIpfs == null) {
         // Result not found.
         return null;
     }

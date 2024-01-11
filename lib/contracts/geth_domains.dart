@@ -47,15 +47,17 @@ class GethDomainsContract {
         ),
       );
 
-  Future<Map<String, dynamic>?> searchDomain(String domain) async {
-    final jsonString = await metamaskPromise<String?>(_searchDomain(domain));
+  Future<Map<String, dynamic>?> searchDomain(Uint8List domain) async {
+    final jsonString = await metamaskPromise<String?>(_searchDomain(
+      sendUint8List(domain),
+    ));
     if (jsonString == null) {
       return null;
     }
 
     final jsonData = jsonDecode(jsonString);
-    jsonData['dominioTorOrIpfs'] =
-        receiveUint8ListFromHex(jsonData['dominioTorOrIpfs']);
+    jsonData['pointedAddress'] =
+        receiveUint8ListFromHex(jsonData['pointedAddress']);
     return jsonData;
   }
 }

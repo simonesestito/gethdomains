@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gethdomains/bloc/global_errors/global_events.dart';
 import 'package:gethdomains/model/domain.dart';
@@ -21,6 +22,11 @@ class DomainSearchBloc extends Bloc<DomainSearchEvent, DomainSearchState> {
 
     // Listen for events in domains
     globalEventsSink.domainTransfers.listen((event) {
+      debugPrint('[DomainSearchBloc] transfer event received: $event');
+      debugPrint(
+          '[DomainSearchBloc] last searched domain: ${_getLastSearchedDomain()}');
+      debugPrint('[DomainSearchBloc] event domain: ${event.domainName}');
+
       if (_getLastSearchedDomain() == event.domainName) {
         // Reload the domain
         search(event.domainName);
@@ -46,7 +52,10 @@ class DomainSearchBloc extends Bloc<DomainSearchEvent, DomainSearchState> {
       } else {
         emit(DomainSearchStateNoResults(event.domainName));
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint(e.toString());
+      debugPrintStack(stackTrace: stackTrace);
+
       emit(DomainSearchStateError(
         errorMessage: e.toString(),
         domainName: event.domainName,
