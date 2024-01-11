@@ -83,10 +83,6 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         _domains[domain].resoldTimes++;
     }
     
-    function getKeys() external view returns (bytes[] memory) {
-        return keys;
-    }
-    
     function purchaseExistingDomain(bytes calldata domain) external {
         uint256 id = uint256(keccak256(abi.encodePacked(domain)));
         address owner = ownerOf(id);
