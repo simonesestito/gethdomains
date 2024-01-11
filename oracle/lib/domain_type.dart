@@ -1,0 +1,4 @@
+enum DomainType {
+  tor,
+  ipfs,
+}

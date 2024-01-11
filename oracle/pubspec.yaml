@@ -1,15 +1,17 @@
 name: oracle
-description: A sample command-line application.
+description: An oracle to verify domains which are registered on the GethDomain smart contract.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+publish_to: 'none'
+repository: https://github.com/simonesestito/gethdomains
 
 environment:
   sdk: ^3.2.1
 
 # Add regular dependencies here.
 dependencies:
-  # path: ^1.8.0
+  web3dart: ^2.7.2
+  data_encoder:
+    path: ../data_encoder
 
 dev_dependencies:
   lints: ^2.1.0
-  test: ^1.24.0
