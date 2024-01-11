@@ -52,7 +52,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
     event IpfsOverwritten(bytes indexed domain, address indexed owner);
 
     // Costruttore del contratto
-    constructor() ERC721("GethDomain", "GETHD") Ownable(msg.sender){
+    constructor() ERC721("GethDomain", "GETHD") Ownable(msg.sender) {
         payGeth = IERC20(0xa514C64fd0e5Fe44B2C4448AfB8C6f3268232169);
     }
 
@@ -62,7 +62,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
     // function approveGeth(uint256 amount) external {
     //     require(payGeth.approve(address(this), amount), "Approval failed");
-    // } 
+    // }
 
     // Funzione per acquistare un dominio ex novo
     function purchaseNewDomain(bytes calldata domain, bytes calldata torOrIpfs, bool isTor) external {
@@ -82,7 +82,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         keys.push(domain);
         domains[domain].resoldTimes++;
     }
-    
+
     function purchaseExistingDomain(bytes calldata domain) external {
         uint256 id = uint256(keccak256(abi.encodePacked(domain)));
         address owner = ownerOf(id);
@@ -100,8 +100,8 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
         //GESTIONE ROYALTIES
 
-       address receiver;
-       uint256 royaltyAmount;// Trasferisce il compenso all'acquirente originale (generatore)
+        address receiver;
+        uint256 royaltyAmount;// Trasferisce il compenso all'acquirente originale (generatore)
         if (domains[domain].resoldTimes > 2) {
 
             // Calcola il compenso per l'acquirente originale (generatore)
@@ -137,7 +137,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         require(msg.sender == ownerOf(id), "Not the domain owner");
         _;
     }
-    
+
     // Funzione per mettere un dominio in vendita
     function sellDomain(bytes calldata domain, uint32 price) external onlyDomainOwner(domain) returns (uint256 prezzo){
         // uint256 id = uint256(keccak256(abi.encodePacked(domain)));
@@ -150,7 +150,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         // evento per notificare gli altri utenti che un certo dominio è in vendita
         emit DomainForSale(domain, msg.sender, price);
         return price;
-    }  
+    }
 
     function retrieveDomain(bytes calldata domain) external onlyDomainOwner(domain){
         // uint256 id = uint256(keccak256(abi.encodePacked(domain)));
@@ -186,5 +186,29 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
     function getId(bytes calldata domain) external pure returns (uint256 id) {
         return uint256(keccak256(abi.encodePacked(domain)));
+    }
+
+    function getMyDomainIndexes() external view returns (uint256[] memory) {
+        uint256[] memory myDomains = new uint256[](balanceOf(msg.sender));
+        uint256 j = 0;
+        for (uint256 i = 0; i < keys.length; i++) {
+            // Collect the indexes of all the domains owned by current user
+            bytes memory domain = keys[i];
+            if (ownerOf(uint256(keccak256(abi.encodePacked(domain)))) == msg.sender) {
+                myDomains[j] = i;
+                j += 1;
+            }
+        }
+        return myDomains;
+    }
+
+    function findDomainById(uint256 id) external view returns (uint256) {
+        for (uint256 i = 0; i < keys.length; i++) {
+            bytes memory domain = keys[i];
+            if (uint256(keccak256(abi.encodePacked(domain))) == id) {
+                return i;
+            }
+        }
+        return 0;
     }
 }
