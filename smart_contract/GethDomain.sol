@@ -52,7 +52,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
     event IpfsOverwritten(bytes indexed domain, address indexed owner);
 
     // Costruttore del contratto
-    constructor() ERC721("name", "symbol") Ownable(msg.sender){
+    constructor() ERC721("GethDomain", "GETHD") Ownable(msg.sender){
         payGeth = IERC20(0xa514C64fd0e5Fe44B2C4448AfB8C6f3268232169);
     }
 
