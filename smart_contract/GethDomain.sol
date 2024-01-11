@@ -27,7 +27,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
     // uint256 public nextId;
 
     // prezzo base
-    uint32 public prezzoBase=1000;
+    uint32 public prezzoBase = 10;
 
     // Mappa per associare l'ID del dominio alla struttura Domain
     mapping(bytes => Domain) public _domains;
