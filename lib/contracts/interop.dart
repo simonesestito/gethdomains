@@ -26,9 +26,13 @@ Future<T> metamaskPromise<T>(JSPromise promise) async {
 JsErrorInfo _handleJsNativeError(dynamic /* NativeError */ jsNativeError) {
   final jsNativeErrorString = jsNativeError.toString();
   debugPrint('jsNativeError: $jsNativeErrorString');
-  final data = const JsonDecoder().convert(
+  Map<String, dynamic> data = const JsonDecoder().convert(
     jsNativeErrorString.substring(jsNativeErrorString.indexOf('{')),
   );
+
+  if (data.containsKey('originalError')) {
+    data = data['originalError'];
+  }
 
   final errorCode = data['code'] as int;
   final errorReason = data['data']['reason'] as String?;
