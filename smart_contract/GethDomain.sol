@@ -65,16 +65,16 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
     // } 
 
     // Funzione per acquistare un dominio ex novo
-    function purchaseNewDomain(bytes calldata domain, bytes calldata torOrIpfs, bool isTor) external {
+    function purchaseNewDomain(bytes calldata domain, bytes calldata torOrIpfs, bool isTor) external returns (uint256 nextId) {
         // Verifica che il dominio non sia già stato creato
         // require(ownerOf(_domains[domain].id) == address(0), "Domain already created");
         require(_domains[domain].resoldTimes == 0, "Domain already created");
         // Verifica che il creator abbia abbastanza token
-        require(payGeth.balanceOf(msg.sender)>= prezzoBase, "Insufficient Geth, buy them with getGeth func");
+        require(payGeth.balanceOf(msg.sender) >= prezzoBase, "Insufficient Geth, buy them with getGeth func");
         // levare il costo dal balance
         payGeth.transferFrom(msg.sender, address(this), prezzoBase);
         // payGeth.burn(prezzoBase);
-        uint256 nextId = uint256(keccak256(abi.encodePacked(domain)));
+        nextId = uint256(keccak256(abi.encodePacked(domain)));
         _mint(msg.sender, nextId);  // TODO ci servono dei data oltre alla struttura salavata?
         uint96 feeNumerator = 1;  // default is 5% royalty (1/20)
         _setTokenRoyalty(nextId, msg.sender, feeNumerator);
