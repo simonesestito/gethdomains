@@ -982,8 +982,7 @@ async function domains_purchaseNewDomain(domain, pointedAddress, domainType) {
 async function domains_searchDomain(domain) {
     domain = _receiveBytes(domain);
     const [contract, user] = await _initializeGethDomainsContract();
-    // FIXME: _domains should be renamed to domains, since it's not private
-    const result = await contract.methods._domains(domain).call({from: user});
+    const result = await contract.methods.domains(domain).call({from: user});
     if (result.dominoTorOrIpfs == null) {
         // Result not found.
         return null;

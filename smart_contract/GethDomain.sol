@@ -67,10 +67,10 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
     // Funzione per acquistare un dominio ex novo
     function purchaseNewDomain(bytes calldata domain, bytes calldata torOrIpfs, bool isTor) external {
         // Verifica che il dominio non sia già stato creato
-        // require(ownerOf(_domains[domain].id) == address(0), "Domain already created");
-        require(_domains[domain].resoldTimes == 0, "Domain already created");
+        // require(ownerOf(domains[domain].id) == address(0), "Domain already created");
+        require(domains[domain].resoldTimes == 0, "Domain already created");
         // Verifica che il creator abbia abbastanza token
-        require(payGeth.balanceOf(msg.sender)>= prezzoBase, "Insufficient Geth, buy them with getGeth func");
+        require(payGeth.balanceOf(msg.sender) >= prezzoBase, "Insufficient Geth, buy them with getGeth func");
         // levare il costo dal balance
         payGeth.transferFrom(msg.sender, address(this), prezzoBase);
         // payGeth.burn(prezzoBase);
@@ -78,9 +78,9 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         _mint(msg.sender, nextId);  // TODO ci servono dei data oltre alla struttura salavata?
         uint96 feeNumerator = 1;  // default is 5% royalty (1/20)
         _setTokenRoyalty(nextId, msg.sender, feeNumerator);
-        _domains[domain] = Domain(0, 0,torOrIpfs, isTor);
+        domains[domain] = Domain(0, 0, torOrIpfs, isTor);
         keys.push(domain);
-        _domains[domain].resoldTimes++;
+        domains[domain].resoldTimes++;
     }
     
     function purchaseExistingDomain(bytes calldata domain) external {
@@ -91,22 +91,22 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         require(msg.sender != owner, "You cannot buy your own domain");
 
         // Verifica che l'acquirente abbia abbastanza token
-        require(payGeth.balanceOf(msg.sender) >= _domains[domain].price, "Insufficient payment");
+        require(payGeth.balanceOf(msg.sender) >= domains[domain].price, "Insufficient payment");
 
         // Verifica che il domain sia in vendita Serve????
-        require(_domains[domain].price > 0, "Domain not for sale");
+        require(domains[domain].price > 0, "Domain not for sale");
 
-        _domains[domain].resoldTimes++;
+        domains[domain].resoldTimes++;
 
         //GESTIONE ROYALTIES
 
        address receiver;
        uint256 royaltyAmount;// Trasferisce il compenso all'acquirente originale (generatore)
-        if (_domains[domain].resoldTimes > 2) {
+        if (domains[domain].resoldTimes > 2) {
 
-             // Calcola il compenso per l'acquirente originale (generatore)
-            (receiver, royaltyAmount) = royaltyInfo(id, _domains[domain].price);
-            
+            // Calcola il compenso per l'acquirente originale (generatore)
+            (receiver, royaltyAmount) = royaltyInfo(id, domains[domain].price);
+
             // trasferimento royalties
             payGeth.transferFrom(msg.sender, receiver, royaltyAmount);
 
@@ -115,7 +115,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         }
 
         // Guadagno reale dalla vendita del dominio, escluse le royalties
-        uint256 realAmount = _domains[domain].price-royaltyAmount;
+        uint256 realAmount = domains[domain].price - royaltyAmount;
 
         // trasferimento amount al venditore
         payGeth.transferFrom(msg.sender, owner, realAmount);
@@ -124,7 +124,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         _transfer(owner, msg.sender,id);
 
         // setta il prezzo a 0 quindi non in vendita
-        _domains[domain].price = 0;
+        domains[domain].price = 0;
 
         // Emetti l'evento per ricordare di aggiornare la lista dei domini in vendita SERVE???
         emit DomainSold(msg.sender, domain);
@@ -145,7 +145,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         require(price > 0, "Domain are not free :(");
         // setta il dominio in vendita
 
-        _domains[domain].price = price;
+        domains[domain].price = price;
 
         // evento per notificare gli altri utenti che un certo dominio è in vendita
         emit DomainForSale(domain, msg.sender, price);
@@ -155,7 +155,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
     function retrieveDomain(bytes calldata domain) external onlyDomainOwner(domain){
         // uint256 id = uint256(keccak256(abi.encodePacked(domain)));
 
-        _domains[domain].price = 0;
+        domains[domain].price = 0;
 
         // _transfer(address(this), msg.sender, id);
         // Emetti l'evento per ricordare di aggiornare la lista dei domini in vendita SERVE???
@@ -163,20 +163,20 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
     }
 
     function setTor(bytes calldata domain, bytes calldata dominioTor) external onlyDomainOwner(domain) {
-        // require(_domains[domain].dominioIpfs.length==0,"Your domain cannot point both ipfs and tor");
-        _domains[domain].dominioTorOrIpfs = dominioTor;
-        if ( _domains[domain].dominioTorOrIpfs.length>0 && _domains[domain].isTor==false) { //la prima volta è false ma perchè non è stato settato nulla magari
+        // require(domains[domain].dominioIpfs.length==0,"Your domain cannot point both ipfs and tor");
+        domains[domain].dominioTorOrIpfs = dominioTor;
+        if (domains[domain].dominioTorOrIpfs.length > 0 && domains[domain].isTor == false) { //la prima volta è false ma perchè non è stato settato nulla magari
             emit IpfsOverwritten(domain, msg.sender);                    // se forziamo a mettere tor o ipfs da subito si può levare il check
-            _domains[domain].isTor = true;
-        }   
+            domains[domain].isTor = true;
+        }
     }
 
     function setIpfs(bytes calldata domain, bytes calldata dominioIpfs) external  onlyDomainOwner(domain) {
-        // require(_domains[domain].dominioTor.length==0,"Your domain cannot point both ipfs and tor");
-        _domains[domain].dominioTorOrIpfs = dominioIpfs;
-        if (_domains[domain].isTor) {
+        // require(domains[domain].dominioTor.length==0,"Your domain cannot point both ipfs and tor");
+        domains[domain].dominioTorOrIpfs = dominioIpfs;
+        if (domains[domain].isTor) {
             emit TorOverwritten(domain, msg.sender);
-            _domains[domain].isTor = false;
+            domains[domain].isTor = false;
         }
     }
 
