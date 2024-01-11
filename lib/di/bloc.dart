@@ -34,6 +34,12 @@ class _BlocDependencies extends StatelessWidget {
           lazy: false,
         ),
         BlocProvider(
+          create: (context) => DomainSearchBloc(
+            domainRepository: context.read(),
+            globalEventsSink: context.read(),
+          ),
+        ),
+        BlocProvider(
           create: (context) => DomainsBloc(
             domainsRepository: context.read(),
             authStateChanges: authBloc.stream,

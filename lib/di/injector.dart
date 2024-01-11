@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/bloc/balance/balance_bloc.dart';
+import 'package:gethdomains/bloc/domain_search/domain_search_bloc.dart';
 import 'package:gethdomains/bloc/domains/domains_bloc.dart';
 import 'package:gethdomains/bloc/global_errors/global_errors.dart';
 import 'package:gethdomains/bloc/global_errors/global_events.dart';
