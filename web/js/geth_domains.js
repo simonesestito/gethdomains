@@ -978,29 +978,40 @@ async function domains_purchaseNewDomain(domain, pointedAddress, domainType) {
     return txHash;
 }
 
+let domains_sent_event_emitter = null;
+let domains_received_event_emitter = null;
 async function _initDomainsEvents() {
+    if (domains_sent_event_emitter !== null) {
+        domains_sent_event_emitter.removeAllListeners('data');
+        domains_sent_event_emitter.removeAllListeners('error');
+    }
+    if (domains_received_event_emitter !== null) {
+        domains_received_event_emitter.removeAllListeners('data');
+        domains_received_event_emitter.removeAllListeners('error');
+    }
+
     const [contract, user] = await _initializeGethDomainsContract();
     if (user === null) {
         return;
     }
 
     // Subscribe to Transfer events from or to me
-    const _onEvent = async function(error, event) {
-         if (error) {
-             console.error(error);
-             web3ErrorsSink(error.code, error.data.reason);
-         } else {
-             console.log(event);
-             const tokenId = event.returnValues.tokenId;
-             const domainBytes = await contract.methods.keys(0).call(); // FIXME
-             web3EventsSink('domainTransfer', JSON.stringify({
-                 from: event.returnValues.from,
-                 to: event.returnValues.to,
-                 domainBytes: domainBytes,
-             }));
-         }
-     };
-    contract.events.Transfer({filter: {from: user}}, _onEvent);
-    contract.events.Transfer({filter: {to: user}}, _onEvent);
+    const _onEvent = async function(event) {
+        console.log(event);
+         const tokenId = event.returnValues.tokenId;
+         const domainBytes = await contract.methods.keys(0).call(); // FIXME
+         web3EventsSink('domainTransfer', JSON.stringify({
+             from: event.returnValues.from,
+             to: event.returnValues.to,
+             domainBytes: domainBytes,
+         }));
+    };
+    const _onError = async function(error) {
+        console.error(error);
+        web3ErrorsSink(error.code, error.data.reason);
+    };
+
+    domains_sent_event_emitter = contract.events.Transfer({filter: {from: user}}).on('data', _onEvent).on('error', _onError);
+    domains_received_event_emitter = contract.events.Transfer({filter: {to: user}}).on('data', _onEvent).on('error', _onError);
 }
 _initDomainsEvents().catch(console.error);

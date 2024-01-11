@@ -497,27 +497,37 @@ async function geth_withdrawEther(amount) {
     return wrapContractSend(contract.methods.purchaseWei(amount).send({from: user, gas: gas}));
 }
 
+let token_sent_event_emitter = null;
+let token_received_event_emitter = null;
 async function _initTokenEvents() {
+    if (token_sent_event_emitter !== null) {
+        token_sent_event_emitter.removeAllListeners('data');
+        token_sent_event_emitter.removeAllListeners('error');
+    }
+    if (token_received_event_emitter !== null) {
+        token_received_event_emitter.removeAllListeners('data');
+        token_received_event_emitter.removeAllListeners('error');
+    }
+
     const [contract, user] = await _initializeGethContract();
     if (user === null) {
         return;
     }
 
     // Subscribe to Transfer events from or to me
-    const _onEvent = function(error, event) {
-         if (error) {
-             console.error(error);
-             web3ErrorsSink(error.code, error.data.reason);
-         } else {
-             console.log(event);
-             web3EventsSink('coinTransfer', JSON.stringify({
-                 from: event.returnValues.from,
-                 to: event.returnValues.to,
-                 value: event.returnValues.value,
-             }));
-         }
+    const _onEvent = function(event) {
+         console.log(event);
+         web3EventsSink('coinTransfer', JSON.stringify({
+             from: event.returnValues.from,
+             to: event.returnValues.to,
+             value: event.returnValues.value,
+         }));
      };
-    contract.events.Transfer({filter: {from: user}}, _onEvent);
-    contract.events.Transfer({filter: {to: user}}, _onEvent);
+    const _onError = function(error) {
+        console.error(error);
+        web3ErrorsSink(error.code, error.data.reason);
+    };
+    token_sent_event_emitter = contract.events.Transfer({filter: {from: user}}).on('data', _onEvent).on('error', _onError);
+    token_received_event_emitter = contract.events.Transfer({filter: {to: user}}).on('data', _onEvent).on('error', _onError);
 }
 _initTokenEvents().catch(console.error);
