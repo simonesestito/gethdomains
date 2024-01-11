@@ -9,6 +9,7 @@ import 'dart:js_interop';
 import 'dart:typed_data';
 
 import 'package:gethdomains/model/domain.dart';
+import 'package:gethdomains/utils/bytes_convertion.dart';
 
 import 'interop.dart';
 
@@ -20,8 +21,8 @@ external JSPromise _purchaseNewDomainFees(
 external JSPromise _purchaseNewDomain(
     String domain, String pointedAddress, String domainType);
 
-// Convert to base64 for compatibility purposes
-String _sendUint8List(Uint8List input) => base64Encode(input);
+@JS('domains_searchDomain')
+external JSPromise _searchDomain(String domain);
 
 class GethDomainsContract {
   const GethDomainsContract();
@@ -30,8 +31,8 @@ class GethDomainsContract {
           Uint8List domain, Uint8List pointedAddress, DomainType domainType) =>
       metamaskPromise<String>(
         _purchaseNewDomainFees(
-          _sendUint8List(domain),
-          _sendUint8List(pointedAddress),
+          sendUint8List(domain),
+          sendUint8List(pointedAddress),
           domainType.name,
         ),
       ).then((value) => BigInt.parse(value));
@@ -40,9 +41,21 @@ class GethDomainsContract {
           Uint8List domain, Uint8List pointedAddress, DomainType domainType) =>
       metamaskPromise<String>(
         _purchaseNewDomain(
-          _sendUint8List(domain),
-          _sendUint8List(pointedAddress),
+          sendUint8List(domain),
+          sendUint8List(pointedAddress),
           domainType.name,
         ),
       );
+
+  Future<Map<String, dynamic>?> searchDomain(String domain) async {
+    final jsonString = await metamaskPromise<String?>(_searchDomain(domain));
+    if (jsonString == null) {
+      return null;
+    }
+
+    final jsonData = jsonDecode(jsonString);
+    jsonData['dominioTorOrIpfs'] =
+        receiveUint8ListFromHex(jsonData['dominioTorOrIpfs']);
+    return jsonData;
+  }
 }

@@ -978,6 +978,28 @@ async function domains_purchaseNewDomain(domain, pointedAddress, domainType) {
     return txHash;
 }
 
+
+async function domains_searchDomain(domain) {
+    domain = _receiveBytes(domain);
+    const [contract, user] = await _initializeGethDomainsContract();
+    // FIXME: _domains should be renamed to domains, since it's not private
+    const result = await contract.methods._domains(domain).call({from: user});
+    if (result.dominoTorOrIpfs == null) {
+        // Result not found.
+        return null;
+    }
+    const domainId = await contract.methods.getId(domain).call({from: user});
+    const owner = await contract.methods.ownerOf(domainId).call({from: user});
+    return JSON.stringify({
+        price: result.price,
+        resoldTimes: result.resoldTimes,
+        pointedAddress: result.dominioTorOrIpfs,
+        isTor: result.isTor,
+        owner: owner,
+    });
+}
+
+
 let domains_sent_event_emitter = null;
 let domains_received_event_emitter = null;
 async function _initDomainsEvents() {

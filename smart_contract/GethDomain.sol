@@ -30,7 +30,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
     uint32 public prezzoBase = 10;
 
     // Mappa per associare l'ID del dominio alla struttura Domain
-    mapping(bytes => Domain) public _domains;
+    mapping(bytes => Domain) public domains;
 
     bytes[] public keys;
 
@@ -177,11 +177,14 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         if (_domains[domain].isTor) {
             emit TorOverwritten(domain, msg.sender);
             _domains[domain].isTor = false;
-        }   
+        }
     }
 
     function setPrezzoBase(uint32 prezzo) external onlyOwner {
         prezzoBase = prezzo;
     }
 
+    function getId(bytes calldata domain) external pure returns (uint256 id) {
+        return uint256(keccak256(abi.encodePacked(domain)));
+    }
 }

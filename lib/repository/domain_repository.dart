@@ -17,9 +17,17 @@ class DomainRepository {
   });
 
   Future<Domain?> searchDomain(String domainName) async {
-    // Simulate fake waiting time
-    await Future.delayed(const Duration(milliseconds: 100));
-    return null;
+    final jsonResult = await contract.searchDomain(domainName);
+    if (jsonResult == null) {
+      return null;
+    }
+
+    return Domain.fromSmartContract(
+      domainName,
+      jsonResult,
+      ipfsCidEncoder,
+      torAddressEncoder,
+    );
   }
 
   Future<Domain?> getDomainById(BigInt id) async {
@@ -38,11 +46,9 @@ class DomainRepository {
     return List.empty();
   }
 
-  Future<BigInt> predictDomainPurchaseFees(
-    String domainName,
-    String pointedAddress,
-    DomainType domainType,
-  ) {
+  Future<BigInt> predictDomainPurchaseFees(String domainName,
+      String pointedAddress,
+      DomainType domainType,) {
     if (domainName.endsWith(DomainInputValidator.domainSuffix)) {
       domainName = domainName.substring(
         0,
@@ -62,11 +68,9 @@ class DomainRepository {
     );
   }
 
-  Future<String> purchaseNewDomain(
-    String domainName,
-    String pointedAddress,
-    DomainType domainType,
-  ) async {
+  Future<String> purchaseNewDomain(String domainName,
+      String pointedAddress,
+      DomainType domainType,) async {
     if (domainName.endsWith(DomainInputValidator.domainSuffix)) {
       domainName = domainName.substring(
         0,
