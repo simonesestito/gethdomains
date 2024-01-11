@@ -20,6 +20,8 @@ class LoadingFutureBuilder<T> extends StatelessWidget {
         future: future,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
+            debugPrint('LoadingFutureBuilder error: ${snapshot.error}');
+            debugPrintStack(stackTrace: snapshot.stackTrace);
             return errorBuilder(context, snapshot.error as Exception);
           }
 
