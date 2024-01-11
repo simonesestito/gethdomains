@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:data_encoder/data_encoder.dart';
+import 'package:gethdomains/input/validators/domain_input.dart';
 
 abstract class Web3Notice {
   const Web3Notice();
@@ -91,7 +92,8 @@ class Web3DomainTransfer extends Web3Event {
     return Web3DomainTransfer(
       from: data['from'],
       to: data['to'],
-      domainName: domainEncoder.decode(domainBytes),
+      domainName:
+          domainEncoder.decode(domainBytes) + DomainInputValidator.domainSuffix,
     );
   }
 
