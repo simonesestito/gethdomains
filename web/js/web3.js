@@ -65,6 +65,9 @@ async function login() {
         });
     }
 
+    _initDomainsEvents();
+    _initTokenEvents();
+
     return getCurrentUser();
 }
 
