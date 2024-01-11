@@ -463,7 +463,7 @@ async function geth_purchaseTokens(amount) {
 
     // Add token to Metamask if not already present
     const alreadyAdded = localStorage.getItem('geth_token_added');
-    if (ethereum && ethereum.request && !alreadyAdded) {
+    if (window.ethereum && ethereum.request && !alreadyAdded) {
         ethereum.request({
             method: 'wallet_watchAsset',
             params: {

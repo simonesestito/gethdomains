@@ -1061,6 +1061,24 @@ async function domains_getMyDomains() {
     return JSON.stringify(results.flat());
 }
 
+async function domains_addDomainToMetamask(domainBytes) {
+    domainBytes = _receiveBytes(domainBytes);
+    const [contract, user] = await _initializeGethDomainsContract();
+    const domainId = await contract.methods.getId(domainBytes).call({from: user});
+    if (window.ethereum && ethereum.request) {
+        ethereum.request({
+            method: 'wallet_watchAsset',
+            params: {
+                type: 'ERC721',
+                options: {
+                    address: geth_domains_address, // The address that the token is at.
+                    tokenId: domainId,
+                },
+            },
+        });
+    }
+}
+
 
 let domains_sent_event_emitter = null;
 let domains_received_event_emitter = null;

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/input/validators/domain_input.dart';
 import 'package:gethdomains/model/domain.dart';
+import 'package:gethdomains/repository/domain_repository.dart';
 import 'package:gethdomains/routing/router.dart';
+import 'package:provider/provider.dart';
 
 class OwnedDomainListItem extends StatelessWidget {
   final Domain domain;
@@ -22,6 +24,12 @@ class OwnedDomainListItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          IconButton(
+            onPressed: () => _onAddToMetamask(context),
+            icon: const Icon(Icons.add_link),
+            tooltip: AppLocalizations.of(context)!
+                .userDomainItemAddToMetamaskTooltip,
+          ),
           IconButton(
             icon: const Icon(Icons.edit),
             tooltip: AppLocalizations.of(context)!.userDomainItemEditTooltip,
@@ -43,5 +51,9 @@ class OwnedDomainListItem extends StatelessWidget {
 
   void _onEditPressed(BuildContext context) {
     context.router.navigate(DomainEditingRoute(editingDomain: domain));
+  }
+
+  void _onAddToMetamask(BuildContext context) {
+    context.read<DomainRepository>().addDomainToMetamask(domain);
   }
 }

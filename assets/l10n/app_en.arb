@@ -90,6 +90,7 @@
   "userDomainsListEmpty": "You own no domains",
   "userDomainItemResellTooltip": "Resell this domain",
   "userDomainItemRenewTooltip": "Renew this domain",
+  "userDomainItemAddToMetamaskTooltip": "Add this domain to Metamask",
   "userDomainItemDescription": "{type} -> {address}",
   "@userDomainItemDescription": {
     "placeholders": {

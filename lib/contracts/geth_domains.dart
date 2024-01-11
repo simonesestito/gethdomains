@@ -27,6 +27,9 @@ external JSPromise _searchDomain(String domain);
 @JS('domains_getMyDomains')
 external JSPromise _getMyDomains();
 
+@JS('domains_addDomainToMetamask')
+external void _addDomainToMetamask(String domain);
+
 class GethDomainsContract {
   const GethDomainsContract();
 
@@ -77,5 +80,9 @@ class GethDomainsContract {
       jsonData[i]['domain'] = receiveUint8ListFromHex(jsonData[i]['domain']);
     }
     return jsonData.cast<Map<String, dynamic>>();
+  }
+
+  void addDomainToMetamask(Uint8List domainBytes) {
+    _addDomainToMetamask(sendUint8List(domainBytes));
   }
 }

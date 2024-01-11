@@ -84,6 +84,10 @@ class DomainRepository {
     );
   }
 
+  void addDomainToMetamask(Domain domain) {
+    contract.addDomainToMetamask(_encodeDomain(domain.domainName));
+  }
+
   Uint8List _encodeDomain(String domain) {
     if (domain.endsWith(DomainInputValidator.domainSuffix)) {
       domain = domain.substring(
