@@ -470,8 +470,6 @@ async function geth_purchaseTokens(amount) {
                 type: 'ERC20',
                 options: {
                     address: geth_contract_address, // The address that the token is at.
-                    symbol: 'GETH', // A ticker symbol or shorthand, up to 5 chars.
-                    decimals: 0, // The number of decimals in the token
                     image: window.location.origin + '/big_icon.png', // A string url of the token logo
                 },
             },
