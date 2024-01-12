@@ -1,4 +1,4 @@
-const geth_domains_address = "0xCe16845f4adc57BDCadb1f5b2B32a1b65f9d414E";
+const geth_domains_address = "0x663029224d9f577b186f0d63bfcf69d24dcb5f62";
 const geth_domains_abi = [
                          	{
                          		"inputs": [],
@@ -248,7 +248,7 @@ const geth_domains_abi = [
                          		"anonymous": false,
                          		"inputs": [
                          			{
-                         				"indexed": true,
+                         				"indexed": false,
                          				"internalType": "bytes",
                          				"name": "domain",
                          				"type": "bytes"
@@ -273,13 +273,19 @@ const geth_domains_abi = [
                          		"anonymous": false,
                          		"inputs": [
                          			{
+                         				"indexed": false,
+                         				"internalType": "address",
+                         				"name": "seller",
+                         				"type": "address"
+                         			},
+                         			{
                          				"indexed": true,
                          				"internalType": "address",
                          				"name": "buyer",
                          				"type": "address"
                          			},
                          			{
-                         				"indexed": true,
+                         				"indexed": false,
                          				"internalType": "bytes",
                          				"name": "domain",
                          				"type": "bytes"
@@ -292,7 +298,7 @@ const geth_domains_abi = [
                          		"anonymous": false,
                          		"inputs": [
                          			{
-                         				"indexed": true,
+                         				"indexed": false,
                          				"internalType": "bytes",
                          				"name": "domain",
                          				"type": "bytes"
@@ -342,7 +348,7 @@ const geth_domains_abi = [
                          				"type": "address"
                          			},
                          			{
-                         				"indexed": true,
+                         				"indexed": false,
                          				"internalType": "bytes",
                          				"name": "domain",
                          				"type": "bytes"
@@ -361,7 +367,7 @@ const geth_domains_abi = [
                          		"anonymous": false,
                          		"inputs": [
                          			{
-                         				"indexed": true,
+                         				"indexed": false,
                          				"internalType": "bytes",
                          				"name": "domain",
                          				"type": "bytes"
