@@ -140,7 +140,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
     // Funzione per mettere un dominio in vendita
     function sellDomain(bytes calldata domain, uint32 price) external onlyDomainOwner(domain) returns (uint256 prezzo){
-        require(domains[domain].price>0, "Domain already in sale");
+        require(domains[domain].price == 0, "Domain already in sale");
         // uint256 id = uint256(keccak256(abi.encodePacked(domain)));
         // prezzo maggiore di zero
         require(price > 0, "Domain are not free :(");
@@ -155,7 +155,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
     function retrieveDomain(bytes calldata domain) external onlyDomainOwner(domain){
         // uint256 id = uint256(keccak256(abi.encodePacked(domain)));
-        require(domains[domain].price==0, "Domain not in sale");
+        require(domains[domain].price > 0, "Domain not in sale");
 
         domains[domain].price = 0;
 
