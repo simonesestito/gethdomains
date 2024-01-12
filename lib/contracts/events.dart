@@ -116,7 +116,7 @@ class Web3DomainListingForSale extends Web3Event {
   final BigInt price;
 
   const Web3DomainListingForSale(this.domainName, this.seller, this.price)
-      : super('Domain $domainName listed for sale for $price');
+      : super('Domain $domainName listed for sale for $price GETH');
 
   factory Web3DomainListingForSale.fromJson(String json) {
     const domainEncoder = DomainEncoder(
@@ -130,6 +130,15 @@ class Web3DomainListingForSale extends Web3Event {
       data['seller'],
       BigInt.parse(data['price']),
     );
+  }
+
+  @override
+  String getDisplayMessage() {
+    // If zero, print a different message (not for sale)
+    if (price.compareTo(BigInt.zero) == 0) {
+      return 'Domain $domainName is not for sale';
+    }
+    return super.getDisplayMessage();
   }
 }
 
