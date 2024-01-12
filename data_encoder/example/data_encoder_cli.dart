@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:convert/convert.dart';
 import 'package:data_encoder/data_encoder.dart';
 
 final encoders = <String, AbstractEncoder>{
   'ipfs': IpfsCidEncoder(),
   'tor': TorAddressEncoder(),
-  'domain': DomainEncoder(),
+  'domain': DomainEncoder(domainSuffix: '.geth'),
 };
 
 void showHelpAndExit() {
