@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:data_encoder/data_encoder.dart';
 import 'package:gethdomains/contracts/geth_domains.dart';
-import 'package:gethdomains/input/validators/domain_input.dart';
 import 'package:gethdomains/model/domain.dart';
 
 class DomainRepository {
@@ -20,7 +19,7 @@ class DomainRepository {
 
   Future<Domain?> searchDomain(String domainName) async {
     final jsonResult = await contract.searchDomain(
-      _encodeDomain(domainName),
+      domainEncoder.encode(domainName),
     );
     if (jsonResult == null) {
       return null;
@@ -62,7 +61,7 @@ class DomainRepository {
       DomainType.tor => torAddressEncoder.encode(pointedAddress),
     };
     return contract.purchaseNewDomainFees(
-      _encodeDomain(domainName),
+      domainEncoder.encode(domainName),
       encodedPointer,
       domainType,
     );
@@ -78,24 +77,13 @@ class DomainRepository {
       DomainType.tor => torAddressEncoder.encode(pointedAddress),
     };
     return contract.purchaseNewDomain(
-      _encodeDomain(domainName),
+      domainEncoder.encode(domainName),
       encodedPointer,
       domainType,
     );
   }
 
   void addDomainToMetamask(Domain domain) {
-    contract.addDomainToMetamask(_encodeDomain(domain.domainName));
-  }
-
-  Uint8List _encodeDomain(String domain) {
-    if (domain.endsWith(DomainInputValidator.domainSuffix)) {
-      domain = domain.substring(
-        0,
-        domain.length - DomainInputValidator.domainSuffix.length,
-      );
-    }
-
-    return domainEncoder.encode(domain);
+    contract.addDomainToMetamask(domainEncoder.encode(domain.domainName));
   }
 }

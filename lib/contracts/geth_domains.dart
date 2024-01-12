@@ -18,8 +18,8 @@ external JSPromise _purchaseNewDomainFees(
     String domain, String pointedAddress, String domainType);
 
 @JS('domains_purchaseNewDomain')
-external JSPromise _purchaseNewDomain(
-    String domain, String pointedAddress, String domainType);
+external JSPromise _purchaseNewDomain(String domain, String pointedAddress,
+    String domainType);
 
 @JS('domains_searchDomain')
 external JSPromise _searchDomain(String domain);
@@ -30,11 +30,18 @@ external JSPromise _getMyDomains();
 @JS('domains_addDomainToMetamask')
 external void _addDomainToMetamask(String domain);
 
+@JS('domains_sellDomain_fees')
+external JSPromise _sellDomainFees(String domain);
+
+@JS('domains_sellDomain')
+external JSPromise _sellDomain(String domain);
+
+
 class GethDomainsContract {
   const GethDomainsContract();
 
-  Future<BigInt> purchaseNewDomainFees(
-          Uint8List domain, Uint8List pointedAddress, DomainType domainType) =>
+  Future<BigInt> purchaseNewDomainFees(Uint8List domain,
+      Uint8List pointedAddress, DomainType domainType) =>
       metamaskPromise<String>(
         _purchaseNewDomainFees(
           sendUint8List(domain),
@@ -85,4 +92,16 @@ class GethDomainsContract {
   void addDomainToMetamask(Uint8List domainBytes) {
     _addDomainToMetamask(sendUint8List(domainBytes));
   }
+
+  Future<BigInt> sellDomainFees(Uint8List domain) => metamaskPromise<String>(
+        _sellDomainFees(
+          sendUint8List(domain),
+        ),
+      ).then((value) => BigInt.parse(value));
+
+  Future<String> sellDomain(Uint8List domain) => metamaskPromise<String>(
+        _sellDomain(
+          sendUint8List(domain),
+        ),
+      );
 }

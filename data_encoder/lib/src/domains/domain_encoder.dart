@@ -7,13 +7,18 @@ import 'interface.dart';
 /// General encoder, which may use one technique or another,
 /// depending on the one that generates the smallest output.
 class DomainEncoder extends AbstractDomainEncoder {
+  final String domainSuffix;
   final char5BitsEncoder = const FiveBitsEncoder();
   final huffmanEncoder = const HuffmanEncoder();
 
-  const DomainEncoder();
+  const DomainEncoder({required this.domainSuffix});
 
   @override
   Uint8List encode(String data) {
+    if (data.endsWith(domainSuffix)) {
+      data = data.substring(0, data.length - domainSuffix.length);
+    }
+
     final huffmanEncoded = huffmanEncoder.encode(data);
 
     // Determine if Huffman will waste space.
@@ -24,7 +29,7 @@ class DomainEncoder extends AbstractDomainEncoder {
     final char5BytesSize = ((5 * data.length + 1) / 8).ceil();
     print('Encoded strings sizes:');
     print('  - Huffman: ${huffmanEncoded.length} bytes');
-    print('  - Five bits encoding: ${char5BytesSize} bytes');
+    print('  - Five bits encoding: $char5BytesSize bytes');
     if (huffmanEncoded.length > char5BytesSize) {
       print('Encoding with 5 bits encoding');
       return char5BitsEncoder.encode(data);

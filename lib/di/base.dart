@@ -15,7 +15,11 @@ class _BaseDependencies extends StatelessWidget {
         RepositoryProvider(create: (_) => SepoliaNetworkDetector()),
         RepositoryProvider(create: (_) => const IpfsCidEncoder()),
         RepositoryProvider(create: (_) => const TorAddressEncoder()),
-        RepositoryProvider(create: (_) => const DomainEncoder()),
+        RepositoryProvider(
+          create: (_) => const DomainEncoder(
+            domainSuffix: DomainInputValidator.domainSuffix,
+          ),
+        ),
       ],
       child: Builder(builder: builder),
     );
