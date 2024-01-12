@@ -159,7 +159,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
         // _transfer(address(this), msg.sender, id);
         // Emetti l'evento per ricordare di aggiornare la lista dei domini in vendita SERVE???
-        emit DomainSold(msg.sender, domain);
+        emit DomainForSale(domain, msg.sender, 0);
     }
 
     function setTor(bytes calldata domain, bytes calldata dominioTor) external onlyDomainOwner(domain) {
