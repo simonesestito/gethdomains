@@ -7,6 +7,7 @@ import 'package:gethdomains/bloc/global_errors/global_errors.dart';
 import 'package:gethdomains/bloc/global_errors/global_events.dart';
 import 'package:gethdomains/contracts/events.dart';
 import 'package:gethdomains/contracts/exceptions.dart';
+import 'package:gethdomains/input/validators/domain_input.dart';
 import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/repository/domain_repository.dart';
 import 'package:gethdomains/repository/selling_repository.dart';
@@ -115,11 +116,9 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
         domainType,
       );
 
-  void purchaseNewDomain(
-    String domainName,
-    String pointedAddress,
-    DomainType domainType,
-  ) =>
+  void purchaseNewDomain(String domainName,
+      String pointedAddress,
+      DomainType domainType,) =>
       add(PurchaseDomainEvent(
         domainName: domainName,
         pointedAddress: pointedAddress,
@@ -163,22 +162,26 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     }
   }
 
-  FutureOr<void> _onSellDomainEvent(SellDomainEvent event,
-      Emitter<DomainsState> emit,) =>
+  FutureOr<void> _onSellDomainEvent(
+    SellDomainEvent event,
+    Emitter<DomainsState> emit,
+  ) =>
       _wrapSellingDomainInvocation(
         event.domainName,
-            () => sellingRepository.sellDomain(event.domainName, event.price),
+        () => sellingRepository.sellDomain(event.domainName, event.price),
         emit,
       );
 
   void unlistDomain(String domainName) =>
       add(UnlistDomainEvent(domainName: domainName));
 
-  FutureOr<void> _onUnlistDomainEvent(UnlistDomainEvent event,
-      Emitter<DomainsState> emit,) =>
+  FutureOr<void> _onUnlistDomainEvent(
+    UnlistDomainEvent event,
+    Emitter<DomainsState> emit,
+  ) =>
       _wrapSellingDomainInvocation(
         event.domainName,
-            () => sellingRepository.unlistDomainFromSelling(event.domainName),
+        () => sellingRepository.unlistDomainFromSelling(event.domainName),
         emit,
       );
 
@@ -191,13 +194,15 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     loadingDomains.add(loadingDomain);
 
     final List<Domain> availableDomains =
-    state is DomainsStateData ? (state as DomainsStateData).domains : [];
+        state is DomainsStateData ? (state as DomainsStateData).domains : [];
 
     emit(DomainsStateData(availableDomains, loadingDomains));
   }
 
-  FutureOr<void> _onDomainListedForSaleEvent(DomainListedForSaleEvent event,
-      Emitter<DomainsState> emit,) {
+  FutureOr<void> _onDomainListedForSaleEvent(
+    DomainListedForSaleEvent event,
+    Emitter<DomainsState> emit,
+  ) {
     final oldState = state;
     if (oldState is! DomainsStateData) {
       // Reload from scratch
@@ -205,10 +210,18 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
       return null;
     }
 
+    final oldDomains = oldState.domains.map((e) {
+      final normalizedDomainName =
+          e.domainName.endsWith(DomainInputValidator.domainSuffix)
+              ? e.domainName
+              : e.domainName + DomainInputValidator.domainSuffix;
+      return e.copyWith(domainName: normalizedDomainName);
+    }).toList();
+
     // Remove the loading state of the current domain only
     oldState.loadingDomains.remove(event.domainName);
 
-    if (oldState.domains
+    if (oldDomains
         .where((domain) => domain.domainName == event.domainName)
         .isEmpty) {
       // unknown domain
@@ -218,16 +231,21 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     }
 
     // Replace the current domain with the loaded one
-    final oldDomain = oldState.domains
+    final oldDomain = oldDomains
         .firstWhere((domain) => domain.domainName == event.domainName);
     final newDomain = oldDomain.copyWith(
       price: event.price,
+      // Undo the normalization
+      domainName: event.domainName.substring(
+        0,
+        event.domainName.length - DomainInputValidator.domainSuffix.length,
+      ),
     );
 
     // Replace the current domain with the loaded one
     final newDomains = List.of([newDomain], growable: true);
     for (final domain in oldState.domains) {
-      if (domain.domainName != event.domainName) {
+      if (domain.domainName != newDomain.domainName) {
         newDomains.add(domain);
       }
     }
