@@ -1089,6 +1089,31 @@ async function domains_addDomainToMetamask(domainBytes) {
 }
 
 
+async function domains_sellDomain_fees(domainBytes, price) {
+    domainBytes = _receiveBytes(domainBytes);
+    const [contract, user] = await _initializeGethDomainsContract();
+    const gas = await contract.methods.sellDomain(domainBytes, price).estimateGas({from: user});
+    return gas.toString();
+}
+
+async function domains_sellDomain(domainBytes, price) {
+    domainBytes = _receiveBytes(domainBytes);
+    const [contract, user] = await _initializeGethDomainsContract();
+    const gas = await contract.methods.sellDomain(domainBytes, price).estimateGas({from: user});
+    const txHash = await wrapContractSend(contract.methods.sellDomain(domainBytes, price).send({from: user, gas: gas}));
+    return txHash;
+}
+
+
+async function domains_retrieveDomain(domainBytes) {
+    domainBytes = _receiveBytes(domainBytes);
+    const [contract, user] = await _initializeGethDomainsContract();
+    const txHash = await wrapContractSend(contract.methods.retrieveDomain(domainBytes).send({from: user}));
+    return txHash;
+}
+
+
+
 let domains_sent_event_emitter = null;
 let domains_received_event_emitter = null;
 async function _initDomainsEvents() {

@@ -6,7 +6,7 @@ class AppReactiveTextField<T> extends StatelessWidget {
   final String formControlName;
   final String hintText;
   final String? helperText;
-  final ReactiveFormFieldCallback<T> onSubmit;
+  final ReactiveFormFieldCallback<T>? onSubmit;
   final ReactiveFormFieldCallback<T>? onChanged;
 
   const AppReactiveTextField({
@@ -14,7 +14,7 @@ class AppReactiveTextField<T> extends StatelessWidget {
     required this.formControlName,
     this.helperText,
     required this.hintText,
-    required this.onSubmit,
+    this.onSubmit,
     this.onChanged,
   });
 
@@ -31,8 +31,8 @@ class AppReactiveTextField<T> extends StatelessWidget {
       onChanged: onChanged,
       onEditingComplete: (form) {
         form.markAllAsTouched();
-        if (form.parent?.valid != false) {
-          onSubmit(form);
+        if (form.parent?.valid != false && onSubmit != null) {
+          onSubmit!(form);
         }
       },
     );

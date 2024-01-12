@@ -190,5 +190,9 @@
         "type": "String"
       }
     }
-  }
+  },
+  "domainSellingTitle": "Sell a domain",
+  "domainSellingPriceHint": "Price in GETH",
+  "domainSellingSellButton": "Sell",
+  "userDomainItemCancelSale": "Unlist from sale"
 }

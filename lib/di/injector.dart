@@ -21,6 +21,8 @@ import 'package:gethdomains/routing/router.dart';
 import 'package:gethdomains/service/sepolia_detector.dart';
 import 'package:gethdomains/service/theme_updater.dart';
 
+import '../repository/selling_repository.dart';
+
 part 'base.dart';
 part 'bloc.dart';
 part 'guard.dart';

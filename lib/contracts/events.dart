@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:data_encoder/data_encoder.dart';
 import 'package:gethdomains/input/validators/domain_input.dart';
+import 'package:gethdomains/utils/bytes_convertion.dart';
 
 abstract class Web3Notice {
   const Web3Notice();
@@ -32,6 +32,7 @@ sealed class Web3Event extends Web3Notice {
       'transactionSent' => Web3TransactionSent(message),
       'coinTransfer' => Web3CoinTransfer.fromJson(message),
       'domainTransfer' => Web3DomainTransfer.fromJson(message),
+      'domainListingForSale' => Web3DomainListingForSale.fromJson(message),
       _ => throw Exception('Unknown Web3Event tag: $tag'),
     };
   }
@@ -89,14 +90,11 @@ class Web3DomainTransfer extends Web3Event {
   }) : super('Transfer domain $domainName from $from to $to');
 
   factory Web3DomainTransfer.fromJson(String json) {
-    const domainEncoder = DomainEncoder();
+    const domainEncoder = DomainEncoder(
+      domainSuffix: DomainInputValidator.domainSuffix,
+    );
     final data = jsonDecode(json);
-    final domainHex = data['domainBytes'] as String;
-    final domainBytes = Uint8List((domainHex.length - 2 /* 0x */) ~/ 2);
-    for (var i = 0; i < domainBytes.length; i++) {
-      domainBytes[i] =
-          int.parse(domainHex.substring(2 + i * 2, 4 + i * 2), radix: 16);
-    }
+    final domainBytes = receiveUint8ListFromHex(data['domainBytes']);
 
     return Web3DomainTransfer(
       from: data['from'],
@@ -109,4 +107,25 @@ class Web3DomainTransfer extends Web3Event {
   bool fromNoOne() => _addressIsNoOne(from);
 
   bool toNoOne() => _addressIsNoOne(to);
+}
+
+class Web3DomainListingForSale extends Web3Event {
+  final String domainName;
+  final BigInt price;
+
+  const Web3DomainListingForSale(this.domainName, this.price)
+      : super('Domain $domainName listed for sale for $price');
+
+  factory Web3DomainListingForSale.fromJson(String json) {
+    const domainEncoder = DomainEncoder(
+      domainSuffix: DomainInputValidator.domainSuffix,
+    );
+    final data = jsonDecode(json);
+    final domainBytes = receiveUint8ListFromHex(data['domainBytes']);
+
+    return Web3DomainListingForSale(
+      domainEncoder.decode(domainBytes) + DomainInputValidator.domainSuffix,
+      BigInt.parse(data['price']),
+    );
+  }
 }

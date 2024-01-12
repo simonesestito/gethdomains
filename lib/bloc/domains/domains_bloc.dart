@@ -9,17 +9,20 @@ import 'package:gethdomains/contracts/events.dart';
 import 'package:gethdomains/contracts/exceptions.dart';
 import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/repository/domain_repository.dart';
+import 'package:gethdomains/repository/selling_repository.dart';
 
 part 'domains_event.dart';
 part 'domains_state.dart';
 
 class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
   final DomainRepository domainsRepository;
+  final SellingRepository sellingRepository;
   final GlobalErrorsSink globalErrorsSink;
   final GlobalEventsSink globalEventsSink;
 
   DomainsBloc({
     required this.domainsRepository,
+    required this.sellingRepository,
     required this.globalErrorsSink,
     required this.globalEventsSink,
     required Stream<AuthState> authStateChanges,
@@ -27,6 +30,9 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     on<LoadDomainsEvent>(_onLoadDomainsEvent);
     on<_UpdateDomainsEvent>(_onUpdateDomainsEvent);
     on<PurchaseDomainEvent>(_onPurchaseNewDomain);
+    on<SellDomainEvent>(_onSellDomainEvent);
+    on<UnlistDomainEvent>(_onUnlistDomainEvent);
+    on<DomainListedForSaleEvent>(_onDomainListedForSaleEvent);
 
     // Listen to the auth state changes
     // They should reset the domains status
@@ -46,6 +52,13 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
           'DomainsBloc: globalEventsSink.domainTransfers.listen: $event');
       add(const LoadDomainsEvent());
     });
+
+    // Listen to the global events of DomainListedForSale
+    // but react only to knows domains
+    globalEventsSink.domainListings.listen((event) {
+      debugPrint('DomainsBloc: globalEventsSink.domainListings.listen: $event');
+      add(DomainListedForSaleEvent(event.domainName, event.price));
+    });
   }
 
   FutureOr<void> _onLoadDomainsEvent(
@@ -55,8 +68,8 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     emit(const LoadingDomainsState());
     try {
       final domains = await domainsRepository.getMyDomains();
-      emit(DomainsStateData(domains));
-    } catch (e, stackTrace) {
+      emit(DomainsStateData(domains, {}));
+    } catch (e) {
       emit(const UnavailableDomainsState());
     }
   }
@@ -70,7 +83,7 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     if (event.domains == null) {
       emit(const UnavailableDomainsState());
     } else {
-      emit(DomainsStateData(event.domains!));
+      emit(DomainsStateData(event.domains!, {}));
     }
   }
 
@@ -113,15 +126,103 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
         domainType: domainType,
       ));
 
-  FutureOr<void> _onPurchaseNewDomain(
-    PurchaseDomainEvent event,
-    Emitter<DomainsState> emit,
-  ) =>
+  FutureOr<void> _onPurchaseNewDomain(PurchaseDomainEvent event,
+      Emitter<DomainsState> emit,) =>
       _wrapSmartContractInvocation(
-          () => domainsRepository.purchaseNewDomain(
+              () =>
+              domainsRepository.purchaseNewDomain(
                 event.domainName,
                 event.pointedAddress,
                 event.domainType,
               ),
           emit);
+
+  void sellDomain(String domainName, BigInt price) =>
+      add(SellDomainEvent(domainName: domainName, price: price));
+
+  FutureOr<void> _wrapSellingDomainInvocation<T>(String domainName,
+      Future<String> Function() invocation,
+      Emitter<DomainsState> emit,) async {
+    // Don't emit a full loading state: just update a single domain
+    final oldState = state;
+    _emitNewLoadingDomain(domainName, emit);
+    try {
+      final txHash = await invocation();
+      globalEventsSink.addWeb3Event(Web3TransactionSent(txHash));
+    } on Web3Exception catch (e) {
+      globalErrorsSink.addWeb3Error(e);
+      debugPrint('DomainsBloc: _onSellDomainEvent: $e');
+      if (oldState is DomainsStateData) {
+        // Rollback state
+        emit(oldState);
+      } else {
+        // Refresh only on error, otherwise an update will be triggered by events
+        final domains = await domainsRepository.getMyDomains();
+        add(_UpdateDomainsEvent(domains: domains));
+      }
+    }
+  }
+
+  FutureOr<void> _onSellDomainEvent(SellDomainEvent event,
+      Emitter<DomainsState> emit,) =>
+      _wrapSellingDomainInvocation(
+        event.domainName,
+            () => sellingRepository.sellDomain(event.domainName, event.price),
+        emit,
+      );
+
+  void unlistDomain(String domainName) =>
+      add(UnlistDomainEvent(domainName: domainName));
+
+  FutureOr<void> _onUnlistDomainEvent(UnlistDomainEvent event,
+      Emitter<DomainsState> emit,) =>
+      _wrapSellingDomainInvocation(
+        event.domainName,
+            () => sellingRepository.unlistDomainFromSelling(event.domainName),
+        emit,
+      );
+
+  void _emitNewLoadingDomain(String loadingDomain, Emitter<DomainsState> emit) {
+    // Add the loading state of the current domain only
+    final Set<String> loadingDomains = {};
+    if (state is DomainsStateData) {
+      loadingDomains.addAll((state as DomainsStateData).loadingDomains);
+    }
+    loadingDomains.add(loadingDomain);
+
+    final List<Domain> availableDomains =
+    state is DomainsStateData ? (state as DomainsStateData).domains : [];
+
+    emit(DomainsStateData(availableDomains, loadingDomains));
+  }
+
+  FutureOr<void> _onDomainListedForSaleEvent(DomainListedForSaleEvent event,
+      Emitter<DomainsState> emit,) {
+    final oldState = state;
+    if (oldState is! DomainsStateData) {
+      // Reload from scratch
+      add(const LoadDomainsEvent());
+      return null;
+    }
+
+    // Remove the loading state of the current domain only
+    oldState.loadingDomains.remove(event.domainName);
+
+    // Replace the current domain with the loaded one
+    final oldDomain = oldState.domains
+        .firstWhere((domain) => domain.domainName == event.domainName);
+    final newDomain = oldDomain.copyWith(
+      price: event.price,
+    );
+
+    // Replace the current domain with the loaded one
+    final newDomains = List.of([newDomain], growable: true);
+    for (final domain in oldState.domains) {
+      if (domain.domainName != event.domainName) {
+        newDomains.add(domain);
+      }
+    }
+
+    emit(DomainsStateData(newDomains, oldState.loadingDomains));
+  }
 }

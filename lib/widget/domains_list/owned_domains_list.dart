@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gethdomains/bloc/domains/domains_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gethdomains/bloc/domains/domains_bloc.dart';
 
 import 'owned_domains_list_item.dart';
 
@@ -40,6 +40,8 @@ class OwnedDomainsList extends StatelessWidget {
       itemCount: state.domains.length,
       itemBuilder: (context, index) => OwnedDomainListItem(
         domain: state.domains[index],
+        isLoading:
+            state.loadingDomains.contains(state.domains[index].domainName),
       ),
     );
   }

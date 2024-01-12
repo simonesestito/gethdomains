@@ -26,3 +26,30 @@ class PurchaseDomainEvent extends DomainsEvent {
     required this.domainType,
   });
 }
+
+class SellDomainEvent extends DomainsEvent {
+  final String domainName;
+  final BigInt price;
+
+  const SellDomainEvent({
+    required this.domainName,
+    required this.price,
+  });
+}
+
+class UnlistDomainEvent extends DomainsEvent {
+  final String domainName;
+
+  const UnlistDomainEvent({
+    required this.domainName,
+  });
+}
+
+class DomainListedForSaleEvent extends DomainsEvent {
+  final String domainName;
+  final BigInt price; // Price is zero if the domain is not listed for sale
+
+  const DomainListedForSaleEvent(this.domainName, this.price);
+}
+
+// DomainSold is not used by the bloc, because it already updates with the Transfer

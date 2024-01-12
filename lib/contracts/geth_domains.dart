@@ -18,8 +18,8 @@ external JSPromise _purchaseNewDomainFees(
     String domain, String pointedAddress, String domainType);
 
 @JS('domains_purchaseNewDomain')
-external JSPromise _purchaseNewDomain(String domain, String pointedAddress,
-    String domainType);
+external JSPromise _purchaseNewDomain(
+    String domain, String pointedAddress, String domainType);
 
 @JS('domains_searchDomain')
 external JSPromise _searchDomain(String domain);
@@ -31,17 +31,19 @@ external JSPromise _getMyDomains();
 external void _addDomainToMetamask(String domain);
 
 @JS('domains_sellDomain_fees')
-external JSPromise _sellDomainFees(String domain);
+external JSPromise _sellDomainFees(String domain, String price);
 
 @JS('domains_sellDomain')
-external JSPromise _sellDomain(String domain);
+external JSPromise _sellDomain(String domain, String price);
 
+@JS('domains_retrieveDomain')
+external JSPromise _retrieveDomain(String domain);
 
 class GethDomainsContract {
   const GethDomainsContract();
 
-  Future<BigInt> purchaseNewDomainFees(Uint8List domain,
-      Uint8List pointedAddress, DomainType domainType) =>
+  Future<BigInt> purchaseNewDomainFees(
+          Uint8List domain, Uint8List pointedAddress, DomainType domainType) =>
       metamaskPromise<String>(
         _purchaseNewDomainFees(
           sendUint8List(domain),
@@ -93,15 +95,18 @@ class GethDomainsContract {
     _addDomainToMetamask(sendUint8List(domainBytes));
   }
 
-  Future<BigInt> sellDomainFees(Uint8List domain) => metamaskPromise<String>(
-        _sellDomainFees(
-          sendUint8List(domain),
-        ),
-      ).then((value) => BigInt.parse(value));
+  Future<BigInt> sellDomainFees(Uint8List domain, BigInt price) =>
+      metamaskPromise<String>(_sellDomainFees(
+        sendUint8List(domain),
+        price.toString(),
+      )).then((value) => BigInt.parse(value));
 
-  Future<String> sellDomain(Uint8List domain) => metamaskPromise<String>(
-        _sellDomain(
-          sendUint8List(domain),
-        ),
-      );
+  Future<String> sellDomain(Uint8List domain, BigInt price) =>
+      metamaskPromise<String>(_sellDomain(
+        sendUint8List(domain),
+        price.toString(),
+      ));
+
+  Future<String> unlistDomainFromSelling(Uint8List domain) =>
+      metamaskPromise<String>(_retrieveDomain(sendUint8List(domain)));
 }

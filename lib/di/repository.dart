@@ -17,6 +17,12 @@ class _RepositoryDependencies extends StatelessWidget {
                   domainEncoder: context.read(),
                 )),
         RepositoryProvider(
+          create: (context) => SellingRepository(
+            domainsContract: context.read(),
+            domainEncoder: context.read(),
+          ),
+        ),
+        RepositoryProvider(
             create: (context) => AuthRepository(
                   sepoliaNetworkDetector: context.read(),
                 )),

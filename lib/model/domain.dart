@@ -14,8 +14,6 @@ class Domain with _$Domain {
     required BigInt price,
   }) = _Domain;
 
-  const Domain._();
-
   factory Domain.fromSmartContract(
     String originalDomain,
     Map<String, dynamic> data,
@@ -34,7 +32,9 @@ class Domain with _$Domain {
       price: BigInt.parse(data['price']),
     );
   }
+}
 
+extension DomainExtension on Domain {
   bool get isForSale => price.compareTo(BigInt.zero) > 0;
 }
 

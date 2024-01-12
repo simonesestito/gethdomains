@@ -10,8 +10,9 @@ class LoadingDomainsState extends DomainsState {
 
 class DomainsStateData extends DomainsState {
   final List<Domain> domains;
+  final Set<String> loadingDomains;
 
-  const DomainsStateData(this.domains);
+  const DomainsStateData(this.domains, this.loadingDomains);
 }
 
 class UnavailableDomainsState extends DomainsState {
