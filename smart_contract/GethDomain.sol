@@ -36,20 +36,20 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
     // Evento emesso quando un dominio viene messo in vendita
     // indexed è utilizzato per permettere i destinatari di filtrare gli eventi in base al valore del par
-    event DomainForSale(bytes indexed domain, address indexed seller, uint256 price);
+    event DomainForSale(bytes domain, address indexed seller, uint256 price);
 
     // Evento emesso quando un dominio è stato venduto per aggiornare la vista dei domini in vendita
     // Non ho messo il prezzo perchè non interessa più non essendo appunto in vendita ** TEORICAMENTE POTREBBE ESSERE INTERESSANTE SAPERE A QUANTO E' STATO VENDUTO UN DOMINIO
-    event DomainSold(address seller, address indexed buyer, bytes indexed domain);
+    event DomainSold(address seller, address indexed buyer, bytes domain);
 
     // Evento emesso quando un dominio viene acquistato e le royalties vengono inviate all'acquirente originale
-    event RoyaltiesPaid(address indexed originalOwner, address indexed buyer, bytes indexed domain, uint256 royaltiesAmount);
+    event RoyaltiesPaid(address indexed originalOwner, address indexed buyer, bytes domain, uint256 royaltiesAmount);
 
     // Evento emesso quando sovrascrivi un dominioTor con uno ipfs
-    event TorOverwritten(bytes indexed domain, address indexed owner);
+    event TorOverwritten(bytes domain, address indexed owner);
 
     // Evento emesso quando sovrascrivi un dominioIpfs con uno tor
-    event IpfsOverwritten(bytes indexed domain, address indexed owner);
+    event IpfsOverwritten(bytes domain, address indexed owner);
 
     // Costruttore del contratto
     constructor() ERC721("GethDomain", "GETHD") Ownable(msg.sender) {
