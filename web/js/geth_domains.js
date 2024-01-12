@@ -1,4 +1,4 @@
-const geth_domains_address = "0x663029224d9f577b186f0d63bfcf69d24dcb5f62";
+const geth_domains_address = "0xe8616c2a4b1f91f02e0113b541d45572B4b45F14";
 const geth_domains_abi = [
                          	{
                          		"inputs": [],
