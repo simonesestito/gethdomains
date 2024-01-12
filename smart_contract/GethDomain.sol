@@ -40,7 +40,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
     // Evento emesso quando un dominio è stato venduto per aggiornare la vista dei domini in vendita
     // Non ho messo il prezzo perchè non interessa più non essendo appunto in vendita ** TEORICAMENTE POTREBBE ESSERE INTERESSANTE SAPERE A QUANTO E' STATO VENDUTO UN DOMINIO
-    event DomainSold(address indexed buyer, bytes indexed domain);
+    event DomainSold(address seller, address indexed buyer, bytes indexed domain);
 
     // Evento emesso quando un dominio viene acquistato e le royalties vengono inviate all'acquirente originale
     event RoyaltiesPaid(address indexed originalOwner, address indexed buyer, bytes indexed domain, uint256 royaltiesAmount);
@@ -127,7 +127,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         domains[domain].price = 0;
 
         // Emetti l'evento per ricordare di aggiornare la lista dei domini in vendita SERVE???
-        emit DomainSold(msg.sender, domain);
+        emit DomainSold(owner, msg.sender, domain);
 
     }
 
@@ -140,6 +140,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
     // Funzione per mettere un dominio in vendita
     function sellDomain(bytes calldata domain, uint32 price) external onlyDomainOwner(domain) returns (uint256 prezzo){
+        require(domains[domain].price>0, "Domain already in sale");
         // uint256 id = uint256(keccak256(abi.encodePacked(domain)));
         // prezzo maggiore di zero
         require(price > 0, "Domain are not free :(");
@@ -154,6 +155,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
     function retrieveDomain(bytes calldata domain) external onlyDomainOwner(domain){
         // uint256 id = uint256(keccak256(abi.encodePacked(domain)));
+        require(domains[domain].price==0, "Domain not in sale");
 
         domains[domain].price = 0;
 
