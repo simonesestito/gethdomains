@@ -53,7 +53,7 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
       add(const LoadDomainsEvent());
     });
 
-    // Listen to the global events of DomainListedForSale
+    // Listen to the global events of DomainForSale
     // but react only to knows domains
     globalEventsSink.domainListings.listen((event) {
       debugPrint('DomainsBloc: globalEventsSink.domainListings.listen: $event');
@@ -207,6 +207,15 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
 
     // Remove the loading state of the current domain only
     oldState.loadingDomains.remove(event.domainName);
+
+    if (oldState.domains
+        .where((domain) => domain.domainName == event.domainName)
+        .isEmpty) {
+      // unknown domain
+      debugPrint(
+          'Ignored DomainListedForSaleEvent for unknown domain ${event.domainName}');
+      return null;
+    }
 
     // Replace the current domain with the loaded one
     final oldDomain = oldState.domains

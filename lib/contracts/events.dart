@@ -33,6 +33,7 @@ sealed class Web3Event extends Web3Notice {
       'coinTransfer' => Web3CoinTransfer.fromJson(message),
       'domainTransfer' => Web3DomainTransfer.fromJson(message),
       'domainListingForSale' => Web3DomainListingForSale.fromJson(message),
+      'domainSold' => Web3DomainSold.fromJson(message),
       _ => throw Exception('Unknown Web3Event tag: $tag'),
     };
   }
@@ -111,9 +112,10 @@ class Web3DomainTransfer extends Web3Event {
 
 class Web3DomainListingForSale extends Web3Event {
   final String domainName;
+  final String seller;
   final BigInt price;
 
-  const Web3DomainListingForSale(this.domainName, this.price)
+  const Web3DomainListingForSale(this.domainName, this.seller, this.price)
       : super('Domain $domainName listed for sale for $price');
 
   factory Web3DomainListingForSale.fromJson(String json) {
@@ -125,7 +127,34 @@ class Web3DomainListingForSale extends Web3Event {
 
     return Web3DomainListingForSale(
       domainEncoder.decode(domainBytes) + DomainInputValidator.domainSuffix,
+      data['seller'],
       BigInt.parse(data['price']),
+    );
+  }
+}
+
+class Web3DomainSold extends Web3Event {
+  final String domainName;
+  final String seller;
+  final String buyer;
+
+  const Web3DomainSold(
+    this.domainName,
+    this.seller,
+    this.buyer,
+  ) : super('Domain $domainName sold');
+
+  factory Web3DomainSold.fromJson(String json) {
+    const domainEncoder = DomainEncoder(
+      domainSuffix: DomainInputValidator.domainSuffix,
+    );
+    final data = jsonDecode(json);
+    final domainBytes = receiveUint8ListFromHex(data['domainBytes']);
+
+    return Web3DomainSold(
+      domainEncoder.decode(domainBytes) + DomainInputValidator.domainSuffix,
+      data['seller'],
+      data['buyer'],
     );
   }
 }

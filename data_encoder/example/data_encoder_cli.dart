@@ -51,7 +51,7 @@ void main(List<String> args) {
 
   switch (action) {
     case 'encode':
-      print('Input length: ${data.length}');
+      print('Input length: \${data.length}');
       final resultBytes = encoder.encode(data);
       print('Result bytes (hex): ${hex.encode(resultBytes)}');
       print('Result length (bytes): ${resultBytes.length}');
