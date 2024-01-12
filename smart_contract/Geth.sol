@@ -28,6 +28,7 @@ contract Geth is ERC20, Ownable {
      * @dev function to buy tokens with Ether and transfer them to the buyer.
      */
     function purchaseTokens() external payable {
+        require(msg.value>0, "No eth to make an exchange");
         uint256 tokenAmount = calculateTokenAmount(msg.value);
         // se volessimo mettere un maxSupply
         // require(balanceOf(address(this)) >= tokenAmount, "Insufficient token balance in the contract");
