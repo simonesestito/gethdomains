@@ -1073,13 +1073,7 @@ const geth_domains_abi = [
 async function _initializeGethDomainsContract() {
     const web3 = getWeb3();
     const user = await getCurrentUser();
-
-    if (user === null) {
-        return;
-    }
-
     const contract = new web3.eth.Contract(geth_domains_abi, geth_domains_address);
-
     return [contract, user];
 }
 

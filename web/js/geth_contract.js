@@ -432,13 +432,7 @@ const abi = [
 async function _initializeGethContract() {
     const web3 = getWeb3();
     const user = await getCurrentUser();
-
-    if (user === null) {
-        return;
-    }
-
     const contract = new web3.eth.Contract(abi, geth_contract_address);
-
     return [contract, user];
 }
 
