@@ -102,11 +102,12 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
 
     if (notice is Web3CoinTransfer) {
       final String label;
-      if (notice.from == authenticatedAccount) {
+      if (notice.from == authenticatedAccount && notice.to != notice.from) {
         label = AppLocalizations.of(context)!.coinTransferSent(
           notice.value.toString(),
         );
-      } else if (notice.to == authenticatedAccount) {
+      } else if (notice.to == authenticatedAccount &&
+          notice.to != notice.from) {
         label = AppLocalizations.of(context)!.coinTransferReceived(
           notice.value.toString(),
         );
