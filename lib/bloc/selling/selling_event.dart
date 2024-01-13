@@ -17,10 +17,10 @@ class SellingBuy extends SellingEvent {
 }
 
 class SellingBought extends SellingEvent {
-  final Domain domain;
+  final String domainName;
 
   const SellingBought({
-    required this.domain,
+    required this.domainName,
   });
 }
 
