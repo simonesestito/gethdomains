@@ -24,6 +24,8 @@ async function useSepoliaNetwork() {
             method: 'wallet_switchEthereumChain',
             params: [{chainId: '0xaa36a7'}]
         });
+        // Refresh the page
+        window.location.reload();
     }
 
     return isSepoliaNetwork();
