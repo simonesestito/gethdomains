@@ -83,12 +83,15 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         domains[domain].resoldTimes++;
     }
 
-    function purchaseExistingDomain(bytes calldata domain) external {
+    function purchaseExistingDomain(bytes calldata domain, uint32 price) external {
         uint256 id = uint256(keccak256(abi.encodePacked(domain)));
         address owner = ownerOf(id);
 
         // Verifica che l'acquirente e il possessore non coincidano
         require(msg.sender != owner, "You cannot buy your own domain");
+
+        // Check that the requested price is the actual one (avoid consistency issues with the client)
+        require(domains[domain].price == price, "Domain price changed");
 
         // Verifica che l'acquirente abbia abbastanza token
         require(payGeth.balanceOf(msg.sender) >= domains[domain].price, "Insufficient payment");
