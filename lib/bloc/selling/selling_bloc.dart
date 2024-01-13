@@ -31,7 +31,7 @@ class SellingBloc extends Bloc<SellingEvent, SellingState> {
     required this.globalEventsSink,
   }) : super(const SellingLoading()) {
     on<SellingLoad>(_onLoad);
-    // on<SellingBuy>(_onBuy);
+    on<SellingBuy>(_onBuy);
     on<SellingBought>(_onBought);
     on<SellingListed>(_onListed);
 
@@ -108,28 +108,26 @@ class SellingBloc extends Bloc<SellingEvent, SellingState> {
     } as T;
   }
 
-// FutureOr<void> _onBuy(
-//   SellingBuy event,
-//   Emitter<SellingState> emit,
-// ) async {
-//   final oldState = state;
-//   if (oldState is! SellingData) {
-//     add(const SellingLoad());
-//     return;
-//   }
-//
-//   // Set the domain as loading
-//   final loadingDomains = Set<String>.from(oldState.loadingDomains);
-//   loadingDomains.add(event.domain.domainName);
-//   emit(SellingData(
-//     domains: oldState.domains,
-//     loadingDomains: loadingDomains,
-//   ));
-//
-//   try {
-//     final txHash = await sellingRepository.buyDomain(event.domain);
-//   } catch (e) {
-//     return const SellingError();
-//   }
-// }
+  void buy(Domain domain) => add(SellingBuy(domain: domain));
+
+  FutureOr<void> _onBuy(
+    SellingBuy event,
+    Emitter<SellingState> emit,
+  ) async {
+    // Set the domain as loading
+    loadingDomains.add(event.domain.domainName);
+    emit(SellingData(domains: domains, loadingDomains: loadingDomains));
+
+    try {
+      final txHash = await sellingRepository.buyDomain(event.domain);
+      globalEventsSink.addWeb3Event(Web3TransactionSent(txHash));
+      // No need for more updates, since an event will do the job
+    } on Web3Exception catch (e) {
+      globalErrorsSink.addWeb3Error(e);
+
+      // Error: restore old state
+      loadingDomains.remove(event.domain.domainName);
+      emit(SellingData(domains: domains, loadingDomains: loadingDomains));
+    }
+  }
 }

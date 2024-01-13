@@ -2,8 +2,10 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/bloc/selling/selling_bloc.dart';
 import 'package:gethdomains/input/validators/domain_input.dart';
+import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
 
 @RoutePage()
@@ -12,6 +14,13 @@ class ForSaleDomainsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authUser = context.select((AuthBloc bloc) {
+      if (bloc.state is AuthLoggedIn) {
+        return (bloc.state as AuthLoggedIn).account.address;
+      }
+      return null;
+    });
+
     return Scaffold(
         appBar: gethAppBar(
           context,
@@ -57,12 +66,8 @@ class ForSaleDomainsPage extends StatelessWidget {
                       domain.domainName + DomainInputValidator.domainSuffix,
                     ),
                     subtitle: Text('${domain.price} GETH'),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.shopping_cart),
-                      onPressed: () {
-                        // TODO: Add buy domain
-                      },
-                    ),
+                    trailing:
+                        _buildBuyDomainButton(context, state, domain, authUser),
                   );
                 },
                 separatorBuilder: (_, __) => const Divider(),
@@ -72,5 +77,24 @@ class ForSaleDomainsPage extends StatelessWidget {
             return const SizedBox.shrink();
           },
         ));
+  }
+
+  Widget? _buildBuyDomainButton(
+    BuildContext context,
+    SellingData state,
+    Domain domain,
+    String? authUser,
+  ) {
+    if (domain.owner != authUser) {
+      return IconButton(
+        icon: const Icon(Icons.shopping_cart),
+        onPressed: state.loadingDomains.contains(domain.domainName)
+            ? null // The domain is already being bought
+            : () => context.read<SellingBloc>().buy(domain),
+      );
+    }
+
+    // The domain is owned by the user, you cannot buy your own domains
+    return null;
   }
 }

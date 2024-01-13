@@ -1,4 +1,4 @@
-const geth_domains_address = "0xe9698753e7d9e75068583B76331cB27349F8cA30";
+const geth_domains_address = "0x0Fdc00e6047AE998f30C1635435B8b6C3e6ef60a";
 const geth_domains_abi = [
                          	{
                          		"inputs": [],
@@ -755,6 +755,11 @@ const geth_domains_abi = [
                          				"internalType": "bytes",
                          				"name": "domain",
                          				"type": "bytes"
+                         			},
+                         			{
+                         				"internalType": "uint32",
+                         				"name": "price",
+                         				"type": "uint32"
                          			}
                          		],
                          		"name": "purchaseExistingDomain",
@@ -1215,7 +1220,8 @@ async function domains_sellDomain(domainBytes, price) {
 async function domains_retrieveDomain(domainBytes) {
     domainBytes = _receiveBytes(domainBytes);
     const [contract, user] = await _initializeGethDomainsContract();
-    const txHash = await wrapContractSend(contract.methods.retrieveDomain(domainBytes).send({from: user}));
+    const gas = await contract.methods.retrieveDomain(domainBytes).estimateGas({from: user});
+    const txHash = await wrapContractSend(contract.methods.retrieveDomain(domainBytes).send({from: user, gas: gas}));
     return txHash;
 }
 
@@ -1240,6 +1246,14 @@ async function domains_getDomainsForSale() {
     return JSON.stringify(result);
 }
 
+
+async function domains_purchaseExistingDomain(domainBytes, price) {
+    domainBytes = _receiveBytes(domainBytes);
+    const [contract, user] = await _initializeGethDomainsContract();
+    const gas = await contract.methods.purchaseExistingDomain(domainBytes, price).estimateGas({from: user});
+    const txHash = await wrapContractSend(contract.methods.purchaseExistingDomain(domainBytes, price).send({from: user, gas: gas}));
+    return txHash;
+}
 
 
 let domains_sent_event_emitter = null;

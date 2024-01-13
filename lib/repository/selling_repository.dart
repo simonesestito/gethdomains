@@ -38,4 +38,9 @@ class SellingRepository {
       );
     }).toList();
   }
+
+  Future<String> buyDomain(Domain domain) => domainsContract.buyDomain(
+        domainEncoder.encode(domain.domainName),
+        domain.price,
+      );
 }

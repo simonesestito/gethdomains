@@ -49,6 +49,11 @@ class SmartContractRuntimeError extends Web3Exception {
     if (reason.contains('insufficient funds for gas')) {
       return 'Insufficient funds to pay for the gas of the transaction';
     }
+
+    if (reason.startsWith('execution reverted:')) {
+      return reason.substring('execution reverted:'.length).trim();
+    }
+
     return reason;
   }
 }

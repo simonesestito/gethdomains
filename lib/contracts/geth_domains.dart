@@ -41,6 +41,9 @@ external JSPromise _retrieveDomain(String domain);
 @JS('domains_getDomainsForSale')
 external JSPromise _getDomainsForSale();
 
+@JS('domains_purchaseExistingDomain')
+external JSPromise _purchaseExistingDomain(String domain, String price);
+
 class GethDomainsContract {
   const GethDomainsContract();
 
@@ -125,4 +128,12 @@ class GethDomainsContract {
     }
     return jsonData.cast<Map<String, dynamic>>();
   }
+
+  Future<String> buyDomain(Uint8List domain, BigInt price) =>
+      metamaskPromise<String>(
+        _purchaseExistingDomain(
+          sendUint8List(domain),
+          price.toString(),
+        ),
+      );
 }
