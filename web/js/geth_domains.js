@@ -1220,6 +1220,27 @@ async function domains_retrieveDomain(domainBytes) {
 }
 
 
+async function domains_getDomainsForSale() {
+    const [contract, user] = await _initializeGethDomainsContract();
+    const domainsList = await contract.methods.getDomainsForSale().call({from: user});
+    const result = [];
+    for (let i = 0; i < domainsList[0].length; i++) {
+        const domainBytes = domainsList[0][i];
+        const domain = domainsList[1][i];
+        result.push({
+            domain: domainBytes,
+            price: domain.price,
+            resoldTimes: domain.resoldTimes,
+            pointedAddress: domain.dominioTorOrIpfs,
+            isTor: domain.isTor,
+            owner: user,
+        });
+    }
+
+    return JSON.stringify(result);
+}
+
+
 
 let domains_sent_event_emitter = null;
 let domains_received_event_emitter = null;

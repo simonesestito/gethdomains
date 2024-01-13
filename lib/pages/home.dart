@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/bloc/domain_search/domain_search_bloc.dart';
 import 'package:gethdomains/routing/router.dart';
+import 'package:gethdomains/widget/action_buttons/for_sale_domains_icon_button.dart';
 import 'package:gethdomains/widget/action_buttons/login_button.dart';
 import 'package:gethdomains/widget/action_buttons/settings_button.dart';
 import 'package:gethdomains/widget/body_container.dart';
@@ -31,7 +32,11 @@ class HomePage extends StatelessWidget {
         appBar: gethAppBar(
           context,
           backgroundColor: Colors.transparent,
-          actions: const [LoginButton(), SettingsButton()],
+          actions: const [
+            LoginButton(),
+            ForSaleDomainsIconButton(),
+            SettingsButton(),
+          ],
         ),
         body: SizedBox.expand(
           child: Column(

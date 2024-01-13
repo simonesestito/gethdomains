@@ -7,6 +7,7 @@ import 'package:gethdomains/bloc/domain_search/domain_search_bloc.dart';
 import 'package:gethdomains/bloc/domains/domains_bloc.dart';
 import 'package:gethdomains/bloc/global_errors/global_errors.dart';
 import 'package:gethdomains/bloc/global_errors/global_events.dart';
+import 'package:gethdomains/bloc/selling/selling_bloc.dart';
 import 'package:gethdomains/bloc/sepolia/sepolia_bloc.dart';
 import 'package:gethdomains/bloc/settings/settings.dart';
 import 'package:gethdomains/bloc/theme/theme.dart';

@@ -20,6 +20,8 @@ class _RepositoryDependencies extends StatelessWidget {
           create: (context) => SellingRepository(
             domainsContract: context.read(),
             domainEncoder: context.read(),
+            ipfsCidEncoder: context.read(),
+            torAddressEncoder: context.read(),
           ),
         ),
         RepositoryProvider(

@@ -4,6 +4,7 @@ import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/pages/buy_tokens.dart';
 import 'package:gethdomains/pages/domain_editing.dart';
 import 'package:gethdomains/pages/domain_registration.dart';
+import 'package:gethdomains/pages/for_sale_domains.dart';
 import 'package:gethdomains/pages/home.dart';
 import 'package:gethdomains/pages/login_status.dart';
 import 'package:gethdomains/pages/sell_domain.dart';
@@ -34,6 +35,7 @@ class AppRouter extends _$AppRouter {
           AutoRoute(path: '/buyTokens', page: BuyTokensRoute.page),
           AutoRoute(path: '/sellTokens', page: SellTokensRoute.page),
           AutoRoute(path: '/sellDomain', page: DomainSellingRoute.page),
+          AutoRoute(path: '/forSale', page: ForSaleDomainsRoute.page),
         ]),
       ];
 

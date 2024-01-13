@@ -49,6 +49,13 @@ class _BlocDependencies extends StatelessWidget {
           ),
           lazy: false,
         ),
+        BlocProvider(
+          create: (context) => SellingBloc(
+            sellingRepository: context.read(),
+            globalErrorsSink: context.read(),
+            globalEventsSink: context.read(),
+          ),
+        ),
       ],
       child: Builder(builder: builder),
     );

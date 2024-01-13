@@ -39,6 +39,9 @@ external JSPromise _sellDomain(String domain, String price);
 @JS('domains_retrieveDomain')
 external JSPromise _retrieveDomain(String domain);
 
+@JS('domains_getDomainsForSale')
+external JSPromise _getDomainsForSale();
+
 class GethDomainsContract {
   const GethDomainsContract();
 
@@ -83,12 +86,7 @@ class GethDomainsContract {
     }
 
     final List<dynamic> jsonData = jsonDecode(jsonString);
-    for (var i = 0; i < jsonData.length; i++) {
-      jsonData[i]['pointedAddress'] =
-          receiveUint8ListFromHex(jsonData[i]['pointedAddress']);
-      jsonData[i]['domain'] = receiveUint8ListFromHex(jsonData[i]['domain']);
-    }
-    return jsonData.cast<Map<String, dynamic>>();
+    return _receiveDomainsList(jsonData);
   }
 
   void addDomainToMetamask(Uint8List domainBytes) {
@@ -109,4 +107,23 @@ class GethDomainsContract {
 
   Future<String> unlistDomainFromSelling(Uint8List domain) =>
       metamaskPromise<String>(_retrieveDomain(sendUint8List(domain)));
+
+  Future<List<Map<String, dynamic>>> getDomainsForSale() async {
+    final jsonString = await metamaskPromise<String?>(_getDomainsForSale());
+    if (jsonString == null) {
+      return [];
+    }
+
+    final List<dynamic> jsonData = jsonDecode(jsonString);
+    return _receiveDomainsList(jsonData);
+  }
+
+  List<Map<String, dynamic>> _receiveDomainsList(List<dynamic> jsonData) {
+    for (var i = 0; i < jsonData.length; i++) {
+      jsonData[i]['pointedAddress'] =
+          receiveUint8ListFromHex(jsonData[i]['pointedAddress']);
+      jsonData[i]['domain'] = receiveUint8ListFromHex(jsonData[i]['domain']);
+    }
+    return jsonData.cast<Map<String, dynamic>>();
+  }
 }

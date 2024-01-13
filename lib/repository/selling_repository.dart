@@ -1,13 +1,20 @@
+import 'dart:typed_data';
+
 import 'package:data_encoder/data_encoder.dart';
 import 'package:gethdomains/contracts/geth_domains.dart';
+import 'package:gethdomains/model/domain.dart';
 
 class SellingRepository {
   final GethDomainsContract domainsContract;
   final DomainEncoder domainEncoder;
+  final IpfsCidEncoder ipfsCidEncoder;
+  final TorAddressEncoder torAddressEncoder;
 
   const SellingRepository({
     required this.domainsContract,
     required this.domainEncoder,
+    required this.ipfsCidEncoder,
+    required this.torAddressEncoder,
   });
 
   Future<BigInt> getSellDomainFees(String domain, BigInt price) =>
@@ -18,4 +25,17 @@ class SellingRepository {
 
   Future<String> unlistDomainFromSelling(String domain) =>
       domainsContract.unlistDomainFromSelling(domainEncoder.encode(domain));
+
+  Future<List<Domain>> getDomainsForSale() async {
+    final jsonResult = await domainsContract.getDomainsForSale();
+    return jsonResult.map((jsonItem) {
+      final domainName = jsonItem['domain'] as Uint8List;
+      return Domain.fromSmartContract(
+        domainEncoder.decode(domainName),
+        jsonItem,
+        ipfsCidEncoder,
+        torAddressEncoder,
+      );
+    }).toList();
+  }
 }

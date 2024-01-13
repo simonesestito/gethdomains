@@ -194,5 +194,8 @@
   "domainSellingTitle": "Sell a domain",
   "domainSellingPriceHint": "Price in GETH",
   "domainSellingSellButton": "Sell",
-  "userDomainItemCancelSale": "Unlist from sale"
+  "userDomainItemCancelSale": "Unlist from sale",
+  "forSaleDomainsTitle": "Domains for sale",
+  "forSaleDomainsError": "An error occurred while fetching the list of domains for sale",
+  "forSaleDomainsEmpty": "No domains are for sale"
 }
