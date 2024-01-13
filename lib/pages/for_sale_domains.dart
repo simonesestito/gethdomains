@@ -2,7 +2,6 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/bloc/selling/selling_bloc.dart';
 import 'package:gethdomains/input/validators/domain_input.dart';
 import 'package:gethdomains/model/domain.dart';
@@ -14,13 +13,6 @@ class ForSaleDomainsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authUser = context.select((AuthBloc bloc) {
-      if (bloc.state is AuthLoggedIn) {
-        return (bloc.state as AuthLoggedIn).account.address;
-      }
-      return null;
-    });
-
     return Scaffold(
         appBar: gethAppBar(
           context,
@@ -72,8 +64,7 @@ class ForSaleDomainsPage extends StatelessWidget {
                         domain.resoldTimes.toInt(),
                       ),
                     ),
-                    trailing:
-                        _buildBuyDomainButton(context, state, domain, authUser),
+                    trailing: _buildBuyDomainButton(context, state, domain),
                   );
                 },
                 separatorBuilder: (_, __) => const Divider(),
@@ -89,7 +80,6 @@ class ForSaleDomainsPage extends StatelessWidget {
     BuildContext context,
     SellingData state,
     Domain domain,
-    String? authUser,
   ) {
     return IconButton(
       icon: const Icon(Icons.shopping_cart),
