@@ -1254,6 +1254,7 @@ let domains_sent_event_emitter = null;
 let domains_received_event_emitter = null;
 let domains_listing_event_emitter = null;
 let domains_selling_event_emitter = null;
+let domains_royalties_event_emitter = null;
 async function _initDomainsEvents() {
     if (domains_sent_event_emitter !== null) {
         domains_sent_event_emitter.removeAllListeners('data');
@@ -1270,6 +1271,10 @@ async function _initDomainsEvents() {
     if (domains_selling_event_emitter !== null) {
         domains_selling_event_emitter.removeAllListeners('data');
         domains_selling_event_emitter.removeAllListeners('error');
+    }
+    if (domains_royalties_event_emitter !== null) {
+        domains_royalties_event_emitter.removeAllListeners('data');
+        domains_royalties_event_emitter.removeAllListeners('error');
     }
 
     const [contract, user] = await _initializeGethDomainsContract();
@@ -1316,6 +1321,17 @@ async function _initDomainsEvents() {
             domainBytes: event.returnValues.domain,
             buyer: event.returnValues.buyer,
             seller: event.returnValues.seller,
+        }));
+    }).on('error', _onError);
+
+    // Subscribe to RoyaltiesPaid events
+    domains_royalties_event_emitter = contract.events.RoyaltiesPaid({
+        filter: {originalOwner: user}
+    }).on('data', async function(event) {
+        console.log(event);
+        web3EventsSink('royaltiesPaid', JSON.stringify({
+            domainBytes: event.returnValues.domain,
+            royaltiesAmount: event.returnValues.royaltiesAmount,
         }));
     }).on('error', _onError);
 }

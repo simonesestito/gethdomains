@@ -34,6 +34,7 @@ sealed class Web3Event extends Web3Notice {
       'domainTransfer' => Web3DomainTransfer.fromJson(message),
       'domainListingForSale' => Web3DomainListingForSale.fromJson(message),
       'domainSold' => Web3DomainSold.fromJson(message),
+      'royaltiesPaid' => Web3RoyaltiesPaid.fromJson(message),
       _ => throw Exception('Unknown Web3Event tag: $tag'),
     };
   }
@@ -188,4 +189,26 @@ class Web3DomainSold extends Web3DomainEvent {
         seller,
         buyer,
       );
+}
+
+class Web3RoyaltiesPaid extends Web3DomainEvent {
+  final BigInt amount;
+
+  const Web3RoyaltiesPaid(
+    String domainName,
+    this.amount,
+  ) : super(domainName, 'Royalties received for $domainName ($amount GETH)');
+
+  factory Web3RoyaltiesPaid.fromJson(String json) {
+    const domainEncoder = DomainEncoder(
+      domainSuffix: DomainInputValidator.domainSuffix,
+    );
+    final data = jsonDecode(json);
+    final domainBytes = receiveUint8ListFromHex(data['domainBytes']);
+
+    return Web3RoyaltiesPaid(
+      domainEncoder.decode(domainBytes) + DomainInputValidator.domainSuffix,
+      BigInt.parse(data['royaltiesAmount']),
+    );
+  }
 }
