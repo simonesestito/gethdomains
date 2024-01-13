@@ -471,6 +471,8 @@ async function geth_purchaseTokens(amount) {
                 options: {
                     address: geth_contract_address, // The address that the token is at.
                     image: window.location.origin + '/big_icon.png', // A string url of the token logo
+                    symbol: 'G',
+                    decimals: 0,
                 },
             },
         }).then(() => {
