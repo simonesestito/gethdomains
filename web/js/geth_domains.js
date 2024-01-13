@@ -1255,7 +1255,6 @@ let domains_received_event_emitter = null;
 let domains_listing_event_emitter = null;
 let domains_selling_event_emitter = null;
 async function _initDomainsEvents() {
-    console.log('Initializing events for domains');
     if (domains_sent_event_emitter !== null) {
         domains_sent_event_emitter.removeAllListeners('data');
         domains_sent_event_emitter.removeAllListeners('error');
@@ -1278,6 +1277,7 @@ async function _initDomainsEvents() {
         console.log('Not logged in, not subscribing to events for domains');
         return;
     }
+    console.log('Initializing events for domains for user', user);
 
     // Subscribe to Transfer events from or to me
     const _onEvent = async function(event) {

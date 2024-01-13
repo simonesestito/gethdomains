@@ -494,8 +494,6 @@ async function geth_withdrawEther(amount) {
 let token_sent_event_emitter = null;
 let token_received_event_emitter = null;
 async function _initTokenEvents() {
-    console.log("Initializing token events");
-
     if (token_sent_event_emitter !== null) {
         token_sent_event_emitter.removeAllListeners('data');
         token_sent_event_emitter.removeAllListeners('error');
@@ -510,6 +508,7 @@ async function _initTokenEvents() {
         console.log("Not logged in, skipping token events");
         return;
     }
+    console.log("Logged in, subscribing to token events for user", user);
 
     // Subscribe to Transfer events from or to ANYONE
     // Anyone is required to make the domain search reactive
