@@ -5,10 +5,11 @@ import 'package:gethdomains/bloc/global_errors/global_errors.dart';
 import 'package:gethdomains/bloc/global_errors/global_events.dart';
 import 'package:gethdomains/contracts/events.dart';
 import 'package:gethdomains/contracts/exceptions.dart';
+import 'package:gethdomains/input/validators/domain_input.dart';
 import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/repository/domain_repository.dart';
 import 'package:gethdomains/repository/selling_repository.dart';
-import 'package:gethdomains/utils/set_utils.dart';
+import 'package:gethdomains/utils/list_utils.dart';
 
 part 'selling_event.dart';
 part 'selling_state.dart';
@@ -20,8 +21,8 @@ class SellingBloc extends Bloc<SellingEvent, SellingState> {
   final GlobalEventsSink globalEventsSink;
 
   // State
-  final Set<Domain> domains = {};
-  final Set<Domain> loadingDomains = {};
+  final List<Domain> domains = List.empty(growable: true);
+  final Set<String> loadingDomains = {};
 
   SellingBloc({
     required this.sellingRepository,
@@ -38,7 +39,7 @@ class SellingBloc extends Bloc<SellingEvent, SellingState> {
     add(const SellingLoad());
 
     // Listen to global events of domain listings
-    globalEventsSink.domainListings.listen((event) {
+    globalEventsSink.domainListings.map(_removeGethSuffix).listen((event) {
       if (event.price.compareTo(BigInt.zero) == 0) {
         // When the price is 0, it means the domain has been unlisted
         add(SellingBought(domainName: event.domainName));
@@ -48,7 +49,7 @@ class SellingBloc extends Bloc<SellingEvent, SellingState> {
     });
 
     // Listen to global events of domain purchases
-    globalEventsSink.domainPurchases.listen((event) {
+    globalEventsSink.domainPurchases.map(_removeGethSuffix).listen((event) {
       add(SellingBought(domainName: event.domainName));
     });
   }
@@ -69,10 +70,7 @@ class SellingBloc extends Bloc<SellingEvent, SellingState> {
     try {
       final domains = await sellingRepository.getDomainsForSale();
       this.domains.addAllOrReplace(domains);
-      emit(SellingData.fromDomainsSet(
-        domains: this.domains,
-        loadingDomains: loadingDomains,
-      ));
+      emit(SellingData(domains: this.domains, loadingDomains: loadingDomains));
     } on Web3Exception catch (e) {
       globalErrorsSink.addWeb3Error(e);
       emit(const SellingError());
@@ -82,22 +80,32 @@ class SellingBloc extends Bloc<SellingEvent, SellingState> {
   FutureOr<void> _onBought(SellingBought event, Emitter<SellingState> emit) {
     // A domain has been bought => remove it from the list
     domains.removeWhere((domain) => domain.domainName == event.domainName);
-    loadingDomains
-        .removeWhere((domain) => domain.domainName == event.domainName);
-    emit(SellingData.fromDomainsSet(
-      domains: domains,
-      loadingDomains: loadingDomains,
-    ));
+    loadingDomains.remove(event.domainName);
+    emit(SellingData(domains: domains, loadingDomains: loadingDomains));
   }
 
   FutureOr<void> _onListed(SellingListed event, Emitter<SellingState> emit) {
     // A domain has been listed => add it to the list
     domains.addOrReplace(event.domain);
-    loadingDomains.remove(event.domain);
-    emit(SellingData.fromDomainsSet(
-      domains: domains,
-      loadingDomains: loadingDomains,
-    ));
+    loadingDomains.removeWhere((domain) => domain == event.domain.domainName);
+    emit(SellingData(domains: domains, loadingDomains: loadingDomains));
+  }
+
+  T _removeGethSuffix<T extends Web3DomainEvent>(T event) {
+    removeDomainName(domainName) => domainName.substring(
+          0,
+          domainName.length - DomainInputValidator.domainSuffix.length,
+        );
+
+    return switch (event) {
+      Web3DomainListingForSale _ => event.copyWith(
+          domainName: removeDomainName(event.domainName),
+        ),
+      Web3DomainSold _ => event.copyWith(
+          domainName: removeDomainName(event.domainName),
+        ),
+      _ => throw UnimplementedError('[SellingBloc] Unknown event type: $event'),
+    } as T;
   }
 
 // FutureOr<void> _onBuy(

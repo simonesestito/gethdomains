@@ -14,20 +14,10 @@ class SellingError extends SellingState {
 
 class SellingData extends SellingState {
   final List<Domain> domains;
-  final Set<Domain> loadingDomains;
+  final Set<String> loadingDomains;
 
   const SellingData({
     required this.domains,
     required this.loadingDomains,
   });
-
-  factory SellingData.fromDomainsSet({
-    required Set<Domain> domains,
-    required Set<Domain> loadingDomains,
-  }) {
-    return SellingData(
-      domains: domains.toList(),
-      loadingDomains: loadingDomains,
-    );
-  }
 }

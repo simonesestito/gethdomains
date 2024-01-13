@@ -32,14 +32,6 @@ class Domain with _$Domain {
       price: BigInt.parse(data['price']),
     );
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Domain && domainName == other.domainName;
-
-  @override
-  int get hashCode => domainName.hashCode;
 }
 
 extension DomainExtension on Domain {

@@ -79,16 +79,21 @@ class Web3CoinTransfer extends Web3Event {
   bool toNoOne() => _addressIsNoOne(to);
 }
 
-class Web3DomainTransfer extends Web3Event {
+abstract class Web3DomainEvent extends Web3Event {
+  final String domainName;
+
+  const Web3DomainEvent(this.domainName, String message) : super(message);
+}
+
+class Web3DomainTransfer extends Web3DomainEvent {
   final String from;
   final String to;
-  final String domainName;
 
   const Web3DomainTransfer({
     required this.from,
     required this.to,
-    required this.domainName,
-  }) : super('Transfer domain $domainName from $from to $to');
+    required String domainName,
+  }) : super(domainName, 'Transfer domain $domainName from $from to $to');
 
   factory Web3DomainTransfer.fromJson(String json) {
     const domainEncoder = DomainEncoder(
@@ -108,15 +113,20 @@ class Web3DomainTransfer extends Web3Event {
   bool fromNoOne() => _addressIsNoOne(from);
 
   bool toNoOne() => _addressIsNoOne(to);
+
+  Web3DomainTransfer copyWith({String? domainName}) => Web3DomainTransfer(
+        from: from,
+        to: to,
+        domainName: domainName ?? this.domainName,
+      );
 }
 
-class Web3DomainListingForSale extends Web3Event {
-  final String domainName;
+class Web3DomainListingForSale extends Web3DomainEvent {
   final String seller;
   final BigInt price;
 
-  const Web3DomainListingForSale(this.domainName, this.seller, this.price)
-      : super('Domain $domainName listed for sale for $price GETH');
+  const Web3DomainListingForSale(String domainName, this.seller, this.price)
+      : super(domainName, 'Domain $domainName listed for sale for $price GETH');
 
   factory Web3DomainListingForSale.fromJson(String json) {
     const domainEncoder = DomainEncoder(
@@ -140,18 +150,24 @@ class Web3DomainListingForSale extends Web3Event {
     }
     return super.getDisplayMessage();
   }
+
+  Web3DomainListingForSale copyWith({String? domainName}) =>
+      Web3DomainListingForSale(
+        domainName ?? this.domainName,
+        seller,
+        price,
+      );
 }
 
-class Web3DomainSold extends Web3Event {
-  final String domainName;
+class Web3DomainSold extends Web3DomainEvent {
   final String seller;
   final String buyer;
 
   const Web3DomainSold(
-    this.domainName,
+    String domainName,
     this.seller,
     this.buyer,
-  ) : super('Domain $domainName sold');
+  ) : super(domainName, 'Domain $domainName sold');
 
   factory Web3DomainSold.fromJson(String json) {
     const domainEncoder = DomainEncoder(
@@ -166,4 +182,10 @@ class Web3DomainSold extends Web3Event {
       data['buyer'],
     );
   }
+
+  Web3DomainSold copyWith({String? domainName}) => Web3DomainSold(
+        domainName ?? this.domainName,
+        seller,
+        buyer,
+      );
 }
