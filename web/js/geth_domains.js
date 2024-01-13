@@ -1,4 +1,4 @@
-const geth_domains_address = "0xe8616c2a4b1f91f02e0113b541d45572B4b45F14";
+const geth_domains_address = "0xF2d3499398C094f74fAa331166cd109C9FD98b5c";
 const geth_domains_abi = [
                          	{
                          		"inputs": [],
@@ -482,25 +482,6 @@ const geth_domains_abi = [
                          		"inputs": [
                          			{
                          				"internalType": "uint256",
-                         				"name": "id",
-                         				"type": "uint256"
-                         			}
-                         		],
-                         		"name": "findDomainById",
-                         		"outputs": [
-                         			{
-                         				"internalType": "uint256",
-                         				"name": "",
-                         				"type": "uint256"
-                         			}
-                         		],
-                         		"stateMutability": "view",
-                         		"type": "function"
-                         	},
-                         	{
-                         		"inputs": [
-                         			{
-                         				"internalType": "uint256",
                          				"name": "tokenId",
                          				"type": "uint256"
                          			}
@@ -511,6 +492,25 @@ const geth_domains_abi = [
                          				"internalType": "address",
                          				"name": "",
                          				"type": "address"
+                         			}
+                         		],
+                         		"stateMutability": "view",
+                         		"type": "function"
+                         	},
+                         	{
+                         		"inputs": [
+                         			{
+                         				"internalType": "uint256",
+                         				"name": "id",
+                         				"type": "uint256"
+                         			}
+                         		],
+                         		"name": "getDomainBytesById",
+                         		"outputs": [
+                         			{
+                         				"internalType": "bytes",
+                         				"name": "",
+                         				"type": "bytes"
                          			}
                          		],
                          		"stateMutability": "view",
@@ -536,13 +536,19 @@ const geth_domains_abi = [
                          		"type": "function"
                          	},
                          	{
-                         		"inputs": [],
-                         		"name": "getMyDomainIndexes",
+                         		"inputs": [
+                         			{
+                         				"internalType": "address",
+                         				"name": "user",
+                         				"type": "address"
+                         			}
+                         		],
+                         		"name": "getUserDomainBytes",
                          		"outputs": [
                          			{
-                         				"internalType": "uint256[]",
+                         				"internalType": "bytes[]",
                          				"name": "",
-                         				"type": "uint256[]"
+                         				"type": "bytes[]"
                          			}
                          		],
                          		"stateMutability": "view",
@@ -1055,13 +1061,11 @@ async function domains_searchDomain(domain) {
     });
 }
 
-
 async function domains_getMyDomains() {
     const [contract, user] = await _initializeGethDomainsContract();
-    const indexes = await contract.methods.getMyDomainIndexes().call({from: user});
+    const domainBytesList = await contract.methods.getUserDomainBytes(user).call({from: user});
     const result = [];
-    for (const index of indexes) {
-        const domainBytes = await contract.methods.keys(index).call({from: user});
+    for (const domainBytes of domainBytesList) {
         const domain = await contract.methods.domains(domainBytes).call({from: user});
         result.push({
             domain: domainBytes,
@@ -1152,8 +1156,7 @@ async function _initDomainsEvents() {
     const _onEvent = async function(event) {
         console.log(event);
          const tokenId = event.returnValues.tokenId;
-         const domainIndex = await contract.methods.findDomainById(tokenId).call({from: user});
-         const domainBytes = await contract.methods.keys(domainIndex).call({from: user});
+         const domainBytes = await contract.methods.getDomainBytesById(tokenId).call({from: user});
          web3EventsSink('domainTransfer', JSON.stringify({
              from: event.returnValues.from,
              to: event.returnValues.to,

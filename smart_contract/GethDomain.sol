@@ -190,27 +190,28 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         return uint256(keccak256(abi.encodePacked(domain)));
     }
 
-    function getMyDomainIndexes() external view returns (uint256[] memory) {
-        uint256[] memory myDomains = new uint256[](balanceOf(msg.sender));
+    function getUserDomainBytes(address user) external view returns (bytes[] memory) {
+        bytes[] memory myDomains = new bytes[](balanceOf(user));
         uint256 j = 0;
         for (uint256 i = 0; i < keys.length; i++) {
             // Collect the indexes of all the domains owned by current user
             bytes memory domain = keys[i];
             if (ownerOf(uint256(keccak256(abi.encodePacked(domain)))) == msg.sender) {
-                myDomains[j] = i;
+                myDomains[j] = domain;
                 j += 1;
             }
         }
         return myDomains;
     }
 
-    function findDomainById(uint256 id) external view returns (uint256) {
+    function getDomainBytesById(uint256 id) external view returns (bytes memory) {
         for (uint256 i = 0; i < keys.length; i++) {
             bytes memory domain = keys[i];
             if (uint256(keccak256(abi.encodePacked(domain))) == id) {
-                return i;
+                return domain;
             }
         }
-        return 0;
+
+        return "";
     }
 }
