@@ -219,4 +219,33 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
         return ("", Domain(0, 0, "", false));
     }
+
+    function getDomainsForSale() external view returns (bytes[] memory, Domain[] memory) {
+        // First, since in Solidity I must specify the size of the array,
+        // I need to know how many domains are for sale.
+        uint256 domainsForSale = 0;
+        for (uint256 i = 0; i < keys.length; i++) {
+            bytes memory domain = keys[i];
+            if (domains[domain].price > 0) {
+                domainsForSale += 1;
+            }
+        }
+
+        // Then, I can create the array of the right size
+        // On the frontend, I need both the bytes (to display the name)
+        // and the struct (containing other information)
+        bytes[] memory domainsForSaleBytes = new bytes[](domainsForSale);
+        Domain[] memory domainsForSaleStructs = new Domain[](domainsForSale);
+        uint256 j = 0;
+        for (uint256 i = 0; i < keys.length && j < domainsForSale; i++) {
+            bytes memory domain = keys[i];
+            if (domains[domain].price > 0) {
+                domainsForSaleBytes[j] = domain;
+                domainsForSaleStructs[j] = domains[domain];
+                j += 1;
+            }
+        }
+
+        return (domainsForSaleBytes, domainsForSaleStructs);
+    }
 }
