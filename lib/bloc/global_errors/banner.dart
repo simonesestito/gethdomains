@@ -51,7 +51,11 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          for (final notice in _notices) _buildCardForNotice(context, notice),
+          for (final notice in _notices)
+            GestureDetector(
+              child: _buildCardForNotice(context, notice),
+              onTap: () => setState(() => _notices.remove(notice)),
+            ),
         ],
       ),
     );
