@@ -190,28 +190,33 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         return uint256(keccak256(abi.encodePacked(domain)));
     }
 
-    function getUserDomainBytes(address user) external view returns (bytes[] memory) {
-        bytes[] memory myDomains = new bytes[](balanceOf(user));
+    function getUserDomains(address user) external view returns (bytes[] memory, Domain[] memory) {
+        uint256 userDomains = balanceOf(user);
+        bytes[] memory ownedDomainBytes = new bytes[](userDomains);
+        Domain[] memory ownedDomainStructs = new Domain[](userDomains);
+
         uint256 j = 0;
-        for (uint256 i = 0; i < keys.length; i++) {
-            // Collect the indexes of all the domains owned by current user
+        for (uint256 i = 0; i < keys.length && j < userDomains; i++) {
+            // Populate the arrays with the domains owned by the user
             bytes memory domain = keys[i];
-            if (ownerOf(uint256(keccak256(abi.encodePacked(domain)))) == msg.sender) {
-                myDomains[j] = domain;
+            if (ownerOf(uint256(keccak256(abi.encodePacked(domain)))) == user) {
+                ownedDomainBytes[j] = domain;
+                ownedDomainStructs[j] = domains[domain];
                 j += 1;
             }
         }
-        return myDomains;
+
+        return (ownedDomainBytes, ownedDomainStructs);
     }
 
-    function getDomainBytesById(uint256 id) external view returns (bytes memory) {
+    function getDomainById(uint256 id) external view returns (bytes memory, Domain memory) {
         for (uint256 i = 0; i < keys.length; i++) {
             bytes memory domain = keys[i];
             if (uint256(keccak256(abi.encodePacked(domain))) == id) {
-                return domain;
+                return (domain, domains[domain]);
             }
         }
 
-        return "";
+        return ("", Domain(0, 0, "", false));
     }
 }
