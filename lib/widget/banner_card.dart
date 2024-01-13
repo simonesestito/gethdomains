@@ -20,9 +20,9 @@ class BannerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      // elevation must be zero. Otherwise, background is not transparent
       elevation: 0,
-      // Otherwise, background is not transparent
-      color: color.withAlpha(backgroundAlpha),
+      color: _buildMixColors(context),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: BorderSide(color: color),
@@ -53,6 +53,26 @@ class BannerCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Color _buildMixColors(BuildContext context) => _mixColors(
+        color,
+        Theme.of(context).scaffoldBackgroundColor,
+        backgroundAlpha,
+      );
+
+  Color _mixColors(Color color, Color background, int alpha) {
+    final alphaPercentage = backgroundAlpha / 255;
+    final red =
+        (color.red * alphaPercentage + background.red * (1 - alphaPercentage))
+            .round();
+    final green = (color.green * alphaPercentage +
+            background.green * (1 - alphaPercentage))
+        .round();
+    final blue =
+        (color.blue * alphaPercentage + background.blue * (1 - alphaPercentage))
+            .round();
+    return Color.fromARGB(255, red, green, blue);
   }
 }
 
