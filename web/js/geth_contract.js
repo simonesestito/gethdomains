@@ -500,6 +500,8 @@ async function geth_withdrawEther(amount) {
 let token_sent_event_emitter = null;
 let token_received_event_emitter = null;
 async function _initTokenEvents() {
+    console.log("Initializing token events");
+
     if (token_sent_event_emitter !== null) {
         token_sent_event_emitter.removeAllListeners('data');
         token_sent_event_emitter.removeAllListeners('error');
@@ -511,6 +513,7 @@ async function _initTokenEvents() {
 
     const [contract, user] = await _initializeGethContract();
     if (user === null) {
+        console.log("Not logged in, skipping token events");
         return;
     }
 
