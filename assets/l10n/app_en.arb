@@ -197,5 +197,19 @@
   "userDomainItemCancelSale": "Unlist from sale",
   "forSaleDomainsTitle": "Domains for sale",
   "forSaleDomainsError": "An error occurred while fetching the list of domains for sale",
-  "forSaleDomainsEmpty": "No domains are for sale"
+  "forSaleDomainsEmpty": "No domains are for sale",
+  "forSaleDomainDescription": "Price: {price} GETH\nSeller: {seller}\nBought {resold} times",
+  "@forSaleDomainDescription": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      },
+      "seller": {
+        "type": "String"
+      },
+      "resold": {
+        "type": "int"
+      }
+    }
+  }
 }

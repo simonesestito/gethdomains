@@ -65,7 +65,13 @@ class ForSaleDomainsPage extends StatelessWidget {
                     title: Text(
                       domain.domainName + DomainInputValidator.domainSuffix,
                     ),
-                    subtitle: Text('${domain.price} GETH'),
+                    subtitle: Text(
+                      AppLocalizations.of(context)!.forSaleDomainDescription(
+                        domain.price.toString(),
+                        domain.owner,
+                        domain.resoldTimes.toInt(),
+                      ),
+                    ),
                     trailing:
                         _buildBuyDomainButton(context, state, domain, authUser),
                   );
@@ -85,16 +91,11 @@ class ForSaleDomainsPage extends StatelessWidget {
     Domain domain,
     String? authUser,
   ) {
-    if (domain.owner != authUser) {
-      return IconButton(
-        icon: const Icon(Icons.shopping_cart),
-        onPressed: state.loadingDomains.contains(domain.domainName)
-            ? null // The domain is already being bought
-            : () => context.read<SellingBloc>().buy(domain),
-      );
-    }
-
-    // The domain is owned by the user, you cannot buy your own domains
-    return null;
+    return IconButton(
+      icon: const Icon(Icons.shopping_cart),
+      onPressed: state.loadingDomains.contains(domain.domainName)
+          ? null // The domain is already being bought
+          : () => context.read<SellingBloc>().buy(domain),
+    );
   }
 }

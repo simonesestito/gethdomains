@@ -48,7 +48,7 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
 
     // Listen to the global events of Transfers
     // They should update the domains status
-    globalEventsSink.domainTransfers.listen((event) {
+    globalEventsSink.domainTransfers.map(_removeGethSuffix).listen((event) {
       debugPrint(
           'DomainsBloc: globalEventsSink.domainTransfers.listen: $event');
       add(const LoadDomainsEvent());
@@ -56,7 +56,7 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
 
     // Listen to the global events of DomainForSale
     // but react only to knows domains
-    globalEventsSink.domainListings.listen((event) {
+    globalEventsSink.domainListings.map(_removeGethSuffix).listen((event) {
       debugPrint('DomainsBloc: globalEventsSink.domainListings.listen: $event');
       add(DomainListedForSaleEvent(event.domainName, event.price));
     });
@@ -116,9 +116,11 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
         domainType,
       );
 
-  void purchaseNewDomain(String domainName,
-      String pointedAddress,
-      DomainType domainType,) =>
+  void purchaseNewDomain(
+    String domainName,
+    String pointedAddress,
+    DomainType domainType,
+  ) =>
       add(PurchaseDomainEvent(
         domainName: domainName,
         pointedAddress: pointedAddress,
@@ -210,13 +212,7 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
       return null;
     }
 
-    final oldDomains = oldState.domains.map((e) {
-      final normalizedDomainName =
-          e.domainName.endsWith(DomainInputValidator.domainSuffix)
-              ? e.domainName
-              : e.domainName + DomainInputValidator.domainSuffix;
-      return e.copyWith(domainName: normalizedDomainName);
-    }).toList();
+    final oldDomains = List<Domain>.from(oldState.domains);
 
     // Remove the loading state of the current domain only
     oldState.loadingDomains.remove(event.domainName);
@@ -233,14 +229,7 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     // Replace the current domain with the loaded one
     final oldDomain = oldDomains
         .firstWhere((domain) => domain.domainName == event.domainName);
-    final newDomain = oldDomain.copyWith(
-      price: event.price,
-      // Undo the normalization
-      domainName: event.domainName.substring(
-        0,
-        event.domainName.length - DomainInputValidator.domainSuffix.length,
-      ),
-    );
+    final newDomain = oldDomain.copyWith(price: event.price);
 
     // Replace the current domain with the loaded one
     final newDomains = List.of([newDomain], growable: true);
@@ -251,5 +240,22 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     }
 
     emit(DomainsStateData(newDomains, oldState.loadingDomains));
+  }
+
+  T _removeGethSuffix<T extends Web3DomainEvent>(T event) {
+    removeDomainName(domainName) => domainName.substring(
+          0,
+          domainName.length - DomainInputValidator.domainSuffix.length,
+        );
+
+    return switch (event) {
+      Web3DomainListingForSale _ => event.copyWith(
+          domainName: removeDomainName(event.domainName),
+        ),
+      Web3DomainTransfer _ => event.copyWith(
+          domainName: removeDomainName(event.domainName),
+        ),
+      _ => throw UnimplementedError('[DomainsBloc] Unknown event type: $event'),
+    } as T;
   }
 }
