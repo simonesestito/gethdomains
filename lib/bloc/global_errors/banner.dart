@@ -139,6 +139,13 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
       return const SizedBox.shrink();
     }
 
+    // Ignore events where the seller or buyer is someone else
+    if (notice is Web3DomainSold &&
+        (notice.seller != authenticatedAccount ||
+            notice.buyer != authenticatedAccount)) {
+      return const SizedBox.shrink();
+    }
+
     return BannerCard(
       color: color,
       icon: icon,
