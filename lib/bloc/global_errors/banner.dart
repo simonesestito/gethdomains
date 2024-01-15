@@ -21,11 +21,12 @@ class GlobalErrorsBanner extends StatefulWidget {
 
 class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
   static const _errorHideDuration = Duration(seconds: 8);
+  final _animatedListKey = GlobalKey<AnimatedListState>();
 
   StreamSubscription<Web3Notice>? _errorsSubscription;
   StreamSubscription<Web3Notice>? _eventsSubscription;
 
-  final _notices = <Web3Notice>{}; // Empty set
+  final _notices = List<Web3Notice>.empty(growable: true);
 
   @override
   void initState() {
@@ -48,15 +49,28 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 56),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (final notice in _notices)
-            GestureDetector(
-              child: _buildCardForNotice(context, notice),
-              onTap: () => setState(() => _notices.remove(notice)),
-            ),
-        ],
+      child: AnimatedList(
+        key: _animatedListKey,
+        initialItemCount: _notices.length,
+        shrinkWrap: true,
+        itemBuilder: (context, index, animation) {
+          final notice = _notices[index];
+          return GestureDetector(
+            child: _buildAnimatedCardForNotice(context, notice, animation),
+            onTap: () => _removeNotice(notice),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildAnimatedCardForNotice(
+      BuildContext context, Web3Notice? notice, Animation<double> animation) {
+    return FadeTransition(
+      opacity: animation,
+      child: SizeTransition(
+        sizeFactor: animation,
+        child: _buildCardForNotice(context, notice),
       ),
     );
   }
@@ -158,6 +172,23 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
     );
   }
 
+  void _removeNotice(Web3Notice notice) {
+    setState(() {
+      final index = _notices.indexOf(notice);
+      if (index >= 0) {
+        _notices.removeAt(index);
+        _animatedListKey.currentState?.removeItem(
+          index,
+          (context, animation) => _buildAnimatedCardForNotice(
+            context,
+            notice,
+            animation,
+          ),
+        );
+      }
+    });
+  }
+
   void _onEvent(Web3Notice event) {
     if (_notices.contains(event)) {
       return;
@@ -165,13 +196,14 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
 
     setState(() {
       _notices.add(event);
+      _animatedListKey.currentState?.insertItem(_notices.length - 1);
     });
 
     // Hide the banner after N seconds
     Future.delayed(
       _errorHideDuration,
       () => setState(() {
-        _notices.remove(event);
+        _removeNotice(event);
       }),
     );
   }
