@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:oracle/oracle.dart';
 
 import './env.dart';
@@ -9,7 +7,8 @@ void main() async {
   final ethClient = EthClient(
     privateKey: ethParams.privateKey,
     smartContractAddress: ethParams.smartContractAddress,
-    abiFile: File(ethParams.abiFile),
+    abiFile: ethParams.abiFile,
+    chainRpcUrl: ethParams.chainRpcUrl,
   );
 
   ethClient.subscribeToDomainVerificationEvents().listen((event) async {
