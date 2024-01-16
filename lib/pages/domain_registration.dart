@@ -53,6 +53,9 @@ class DomainRegistrationPage extends StatelessWidget {
                 form: form,
                 onSubmit: () => _onSubmit(context),
               ),
+              Text(
+                AppLocalizations.of(context)!.domainRegistrationCost,
+              ),
               ReactiveFormConsumer(
                   builder: (context, form, _) => _buildFeesEstimation(
                         context,

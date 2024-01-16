@@ -211,5 +211,6 @@
         "type": "int"
       }
     }
-  }
+  },
+  "domainRegistrationCost": "Registration cost: 10 GETH"
 }
