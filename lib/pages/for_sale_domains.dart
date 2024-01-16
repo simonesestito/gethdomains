@@ -6,6 +6,7 @@ import 'package:gethdomains/bloc/selling/selling_bloc.dart';
 import 'package:gethdomains/input/validators/domain_input.dart';
 import 'package:gethdomains/model/domain.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
+import 'package:gethdomains/widget/geth_balance_view.dart';
 
 @RoutePage()
 class ForSaleDomainsPage extends StatelessWidget {
@@ -50,22 +51,14 @@ class ForSaleDomainsPage extends StatelessWidget {
 
             if (state is SellingData /* && state.domains.isNotEmpty */) {
               return ListView.separated(
-                itemCount: state.domains.length,
+                itemCount: state.domains.length + 1 /* header */,
                 itemBuilder: (context, index) {
-                  final domain = state.domains[index];
-                  return ListTile(
-                    title: Text(
-                      domain.domainName + DomainInputValidator.domainSuffix,
-                    ),
-                    subtitle: Text(
-                      AppLocalizations.of(context)!.forSaleDomainDescription(
-                        domain.price.toString(),
-                        domain.owner,
-                        domain.resoldTimes.toInt(),
-                      ),
-                    ),
-                    trailing: _buildBuyDomainButton(context, state, domain),
-                  );
+                  if (index == 0) {
+                    return _buildHeader();
+                  } else {
+                    return _buildListItem(
+                        context, state, state.domains[index - 1]);
+                  }
                 },
                 separatorBuilder: (_, __) => const Divider(),
               );
@@ -74,6 +67,33 @@ class ForSaleDomainsPage extends StatelessWidget {
             return const SizedBox.shrink();
           },
         ));
+  }
+
+  Widget _buildHeader() => const ListTile(
+        title: GethBalanceView(
+          showBuyIfLowerThan: 4294967295, // 2^32 - 1 = max uint32
+        ),
+        contentPadding: EdgeInsets.only(top: 4, left: 16),
+      );
+
+  Widget _buildListItem(
+    BuildContext context,
+    SellingData state,
+    Domain domain,
+  ) {
+    return ListTile(
+      title: Text(
+        domain.domainName + DomainInputValidator.domainSuffix,
+      ),
+      subtitle: Text(
+        AppLocalizations.of(context)!.forSaleDomainDescription(
+          domain.price.toString(),
+          domain.owner,
+          domain.resoldTimes.toInt(),
+        ),
+      ),
+      trailing: _buildBuyDomainButton(context, state, domain),
+    );
   }
 
   Widget? _buildBuyDomainButton(

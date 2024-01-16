@@ -21,7 +21,7 @@ class GethBalanceView extends StatelessWidget {
   Widget build(BuildContext context) {
     final balanceState = context.watch<BalanceBloc>().state;
     if (balanceState is! BalanceStateData) {
-      return const CircularProgressIndicator();
+      return const Center(child: CircularProgressIndicator());
     }
 
     final gethBalance = balanceState.balance;
@@ -50,9 +50,10 @@ class GethBalanceView extends StatelessWidget {
   }
 
   Widget _buildBuyButton(BuildContext context) {
-    return ElevatedButton(
+    return OutlinedButton.icon(
       onPressed: () => _onBuyGeth(context),
-      child: Text(AppLocalizations.of(context)!.buyTokensButtonLabel),
+      icon: const Icon(Icons.money),
+      label: Text(AppLocalizations.of(context)!.buyTokensButtonLabel),
     );
   }
 
