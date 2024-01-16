@@ -12,7 +12,7 @@ class ForSaleDomainsIconButton extends StatelessWidget {
       onPressed: () {
         context.router.push(const ForSaleDomainsRoute());
       },
-      icon: const Icon(Icons.sell),
+      icon: const Icon(Icons.shopping_cart_outlined),
       tooltip: AppLocalizations.of(context)!.forSaleDomainsTitle,
     );
   }
