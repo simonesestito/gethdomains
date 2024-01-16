@@ -13,7 +13,7 @@
   "domainsSearchRegisterButton": "Register",
   "inputErrorRequired": "This field is required",
   "inputErrorDomainTooShort": "This domain name is too short",
-  "inputErrorDomainInvalid": "This is not a valid {domainSuffix} domain name",
+  "inputErrorDomainInvalid": "This is not a valid domain name (it must end in {domainSuffix} and contain only lowercase letters)",
   "inputErrorNumber": "This is not a valid number",
   "inputErrorMin": "This value must be at least {min}",
   "@inputErrorMin": {
