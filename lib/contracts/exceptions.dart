@@ -12,7 +12,7 @@ class Web3Exception extends Web3Notice implements Exception {
     }
 
     if (info.reason != null) {
-      return SmartContractRuntimeError(info.reason!);
+      return SmartContractRuntimeError(info.normalizedReason()!);
     }
 
     return Web3Exception(info.code);
