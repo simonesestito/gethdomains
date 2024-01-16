@@ -7,7 +7,7 @@ class EventDecoder {
   
   const EventDecoder();
 
-  Event decodeFromSmartContractEvent(ContractEvent smartContractEvent) {}
+  // TODO: Event decodeFromSmartContractEvent(ContractEvent smartContractEvent) {}
 }
 
 class Event {

@@ -12,6 +12,7 @@ dependencies:
   web3dart: ^2.7.2
   data_encoder:
     path: ../data_encoder
+  socks5_proxy: ^1.0.4
 
 dev_dependencies:
   lints: ^2.1.0
