@@ -21,6 +21,12 @@ class _DomainSearchField extends StatelessWidget {
         // Triggered when the user presses Enter on the keyboard
         onSubmit();
       },
+      // Hide "This field is required" on domain search form
+      showErrors: (control) =>
+          control.invalid &&
+          control.touched &&
+          control.isNotNull &&
+          control.value.toString().isNotEmpty,
     );
   }
 }

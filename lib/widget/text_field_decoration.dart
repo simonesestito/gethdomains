@@ -8,6 +8,7 @@ class AppReactiveTextField<T> extends StatelessWidget {
   final String? helperText;
   final ReactiveFormFieldCallback<T>? onSubmit;
   final ReactiveFormFieldCallback<T>? onChanged;
+  final bool Function(FormControl<dynamic>)? showErrors;
 
   const AppReactiveTextField({
     super.key,
@@ -16,6 +17,7 @@ class AppReactiveTextField<T> extends StatelessWidget {
     required this.hintText,
     this.onSubmit,
     this.onChanged,
+    this.showErrors,
   });
 
   @override
@@ -35,6 +37,7 @@ class AppReactiveTextField<T> extends StatelessWidget {
           onSubmit!(form);
         }
       },
+      showErrors: showErrors,
     );
   }
 }

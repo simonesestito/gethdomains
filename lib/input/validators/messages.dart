@@ -5,7 +5,7 @@ import 'package:gethdomains/input/validators/ipfs_cid_validator.dart';
 import 'package:gethdomains/input/validators/tor_address_validator.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-Map<String, String Function(Object)> getValidationMessages(
+Map<String, String Function(dynamic)> getValidationMessages(
         BuildContext context) =>
     {
       ValidationMessage.required: (_) =>
