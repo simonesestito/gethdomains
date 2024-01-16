@@ -10,6 +10,7 @@ import 'package:gethdomains/widget/column_gap.dart';
 import 'package:gethdomains/widget/domain_form/ipfs_tor_inputs.dart';
 import 'package:gethdomains/widget/domain_form/register_domain_button.dart';
 import 'package:gethdomains/widget/geth_app_bar.dart';
+import 'package:gethdomains/widget/geth_balance_view.dart';
 import 'package:gethdomains/widget/loading_future_builder.dart';
 import 'package:gethdomains/widget/text_field_decoration.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -56,6 +57,7 @@ class DomainRegistrationPage extends StatelessWidget {
               Text(
                 AppLocalizations.of(context)!.domainRegistrationCost,
               ),
+              const GethBalanceView(showBuyIfLowerThan: 10),
               ReactiveFormConsumer(
                   builder: (context, form, _) => _buildFeesEstimation(
                         context,
