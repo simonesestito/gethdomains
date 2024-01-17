@@ -14,9 +14,11 @@ void main() async {
 
   //! TEST
   final verifier = IVerifier.forType(DomainType.tor);
-  print(await verifier.verify('onion3yj2gmj7tv3f.onion'));
+  // print(await verifier.verify(
+  //     'duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion'));
+  // print('');
   print(await verifier.verify(
-      'duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion'));
+      'duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzcaaa.onion'));
 
   ethClient.subscribeToDomainVerificationEvents().listen((event) async {
     final verifier = IVerifier.forType(event.type);
@@ -29,7 +31,7 @@ void main() async {
       },
     );
     await ethClient.sendVerificationResult(event, result).onError(
-          (error, stackTrace) {
+      (error, stackTrace) {
         print('=== Error: $error ===');
         print(stackTrace);
         print('');
