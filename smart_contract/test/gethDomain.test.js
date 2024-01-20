@@ -34,7 +34,7 @@ contract('DomainMarketplace', (accounts) => {
     // const domainOwner = await domainMarketplace.ownerOf(0);
     const domainInfo = await domainMarketplace.domains(domain);
     // const expectedTorOrIpfs = new BigNumber(torOrIpfs);
-    // const actualTorOrIpfs = new BigNumber(domainInfo.dominioTorOrIpfs);
+    // const actualTorOrIpfs = new BigNumber(domainInfo.pointedAddress);
 
     // // Usa l'asserzione di chai per confrontare i numeri invece delle stringhe esadecimali
     // assert.isTrue(actualTorOrIpfs.eq(expectedTorOrIpfs), 'Expected TorOrIpfs to be equal');

@@ -1,4 +1,4 @@
-const geth_domains_address = "0x0Fdc00e6047AE998f30C1635435B8b6C3e6ef60a";
+const geth_domains_address = "0x8FC6C7eF9a2ec6df5f90b76C011C7E7Ee33E512f";
 const geth_domains_abi = [
                          	{
                          		"inputs": [],
@@ -466,7 +466,7 @@ const geth_domains_abi = [
                          			},
                          			{
                          				"internalType": "bytes",
-                         				"name": "dominioTorOrIpfs",
+                         				"name": "pointedAddress",
                          				"type": "bytes"
                          			},
                          			{
@@ -526,7 +526,7 @@ const geth_domains_abi = [
                          					},
                          					{
                          						"internalType": "bytes",
-                         						"name": "dominioTorOrIpfs",
+                         						"name": "pointedAddress",
                          						"type": "bytes"
                          					},
                          					{
@@ -535,7 +535,7 @@ const geth_domains_abi = [
                          						"type": "bool"
                          					}
                          				],
-                         				"internalType": "struct DomainMarketplace.Domain",
+                         				"internalType": "struct Domain",
                          				"name": "",
                          				"type": "tuple"
                          			}
@@ -566,7 +566,7 @@ const geth_domains_abi = [
                          					},
                          					{
                          						"internalType": "bytes",
-                         						"name": "dominioTorOrIpfs",
+                         						"name": "pointedAddress",
                          						"type": "bytes"
                          					},
                          					{
@@ -575,7 +575,7 @@ const geth_domains_abi = [
                          						"type": "bool"
                          					}
                          				],
-                         				"internalType": "struct DomainMarketplace.Domain[]",
+                         				"internalType": "struct Domain[]",
                          				"name": "",
                          				"type": "tuple[]"
                          			}
@@ -595,7 +595,7 @@ const geth_domains_abi = [
                          		"outputs": [
                          			{
                          				"internalType": "uint256",
-                         				"name": "id",
+                         				"name": "",
                          				"type": "uint256"
                          			}
                          		],
@@ -631,7 +631,7 @@ const geth_domains_abi = [
                          					},
                          					{
                          						"internalType": "bytes",
-                         						"name": "dominioTorOrIpfs",
+                         						"name": "pointedAddress",
                          						"type": "bytes"
                          					},
                          					{
@@ -640,7 +640,7 @@ const geth_domains_abi = [
                          						"type": "bool"
                          					}
                          				],
-                         				"internalType": "struct DomainMarketplace.Domain[]",
+                         				"internalType": "struct Domain[]",
                          				"name": "",
                          				"type": "tuple[]"
                          			}
@@ -673,25 +673,6 @@ const geth_domains_abi = [
                          		"type": "function"
                          	},
                          	{
-                         		"inputs": [
-                         			{
-                         				"internalType": "uint256",
-                         				"name": "",
-                         				"type": "uint256"
-                         			}
-                         		],
-                         		"name": "keys",
-                         		"outputs": [
-                         			{
-                         				"internalType": "bytes",
-                         				"name": "",
-                         				"type": "bytes"
-                         			}
-                         		],
-                         		"stateMutability": "view",
-                         		"type": "function"
-                         	},
-                         	{
                          		"inputs": [],
                          		"name": "name",
                          		"outputs": [
@@ -699,6 +680,19 @@ const geth_domains_abi = [
                          				"internalType": "string",
                          				"name": "",
                          				"type": "string"
+                         			}
+                         		],
+                         		"stateMutability": "view",
+                         		"type": "function"
+                         	},
+                         	{
+                         		"inputs": [],
+                         		"name": "newDomainPrice",
+                         		"outputs": [
+                         			{
+                         				"internalType": "uint32",
+                         				"name": "",
+                         				"type": "uint32"
                          			}
                          		],
                          		"stateMutability": "view",
@@ -731,19 +725,6 @@ const geth_domains_abi = [
                          				"internalType": "address",
                          				"name": "",
                          				"type": "address"
-                         			}
-                         		],
-                         		"stateMutability": "view",
-                         		"type": "function"
-                         	},
-                         	{
-                         		"inputs": [],
-                         		"name": "prezzoBase",
-                         		"outputs": [
-                         			{
-                         				"internalType": "uint32",
-                         				"name": "",
-                         				"type": "uint32"
                          			}
                          		],
                          		"stateMutability": "view",
@@ -904,13 +885,7 @@ const geth_domains_abi = [
                          			}
                          		],
                          		"name": "sellDomain",
-                         		"outputs": [
-                         			{
-                         				"internalType": "uint256",
-                         				"name": "prezzo",
-                         				"type": "uint256"
-                         			}
-                         		],
+                         		"outputs": [],
                          		"stateMutability": "nonpayable",
                          		"type": "function"
                          	},
@@ -941,7 +916,7 @@ const geth_domains_abi = [
                          			},
                          			{
                          				"internalType": "bytes",
-                         				"name": "dominioIpfs",
+                         				"name": "ipfsAddress",
                          				"type": "bytes"
                          			}
                          		],
@@ -954,11 +929,11 @@ const geth_domains_abi = [
                          		"inputs": [
                          			{
                          				"internalType": "uint32",
-                         				"name": "prezzo",
+                         				"name": "price",
                          				"type": "uint32"
                          			}
                          		],
-                         		"name": "setPrezzoBase",
+                         		"name": "setNewDomainPrice",
                          		"outputs": [],
                          		"stateMutability": "nonpayable",
                          		"type": "function"
@@ -972,7 +947,7 @@ const geth_domains_abi = [
                          			},
                          			{
                          				"internalType": "bytes",
-                         				"name": "dominioTor",
+                         				"name": "torAddress",
                          				"type": "bytes"
                          			}
                          		],
@@ -1139,7 +1114,7 @@ async function domains_searchDomain(domain) {
     domain = _receiveBytes(domain);
     const [contract, user] = await _initializeGethDomainsContract();
     const result = await contract.methods.domains(domain).call({from: user});
-    if (result.dominioTorOrIpfs == null) {
+    if (result.pointedAddress == null) {
         // Result not found.
         return null;
     }
@@ -1148,7 +1123,7 @@ async function domains_searchDomain(domain) {
     return JSON.stringify({
         price: result.price,
         resoldTimes: result.resoldTimes,
-        pointedAddress: result.dominioTorOrIpfs,
+        pointedAddress: result.pointedAddress,
         isTor: result.isTor,
         owner: owner,
     });
@@ -1166,7 +1141,7 @@ async function domains_getMyDomains() {
             domain: domainBytes,
             price: domain.price,
             resoldTimes: domain.resoldTimes,
-            pointedAddress: domain.dominioTorOrIpfs,
+            pointedAddress: domain.pointedAddress,
             isTor: domain.isTor,
             owner: user,
         });
@@ -1231,7 +1206,7 @@ async function domains_getDomainsForSale() {
             domain: domainBytes,
             price: domain.price,
             resoldTimes: domain.resoldTimes,
-            pointedAddress: domain.dominioTorOrIpfs,
+            pointedAddress: domain.pointedAddress,
             isTor: domain.isTor,
             owner: user,
         });
