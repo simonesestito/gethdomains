@@ -1279,27 +1279,22 @@ let domains_received_event_emitter = null;
 let domains_listing_event_emitter = null;
 let domains_selling_event_emitter = null;
 let domains_royalties_event_emitter = null;
+let domains_ipfs_overwritten_event_emitter = null;
+let domains_tor_overwritten_event_emitter = null;
 async function _initDomainsEvents() {
-    if (domains_sent_event_emitter !== null) {
-        domains_sent_event_emitter.removeAllListeners('data');
-        domains_sent_event_emitter.removeAllListeners('error');
-    }
-    if (domains_received_event_emitter !== null) {
-        domains_received_event_emitter.removeAllListeners('data');
-        domains_received_event_emitter.removeAllListeners('error');
-    }
-    if (domains_listing_event_emitter !== null) {
-        domains_listing_event_emitter.removeAllListeners('data');
-        domains_listing_event_emitter.removeAllListeners('error');
-    }
-    if (domains_selling_event_emitter !== null) {
-        domains_selling_event_emitter.removeAllListeners('data');
-        domains_selling_event_emitter.removeAllListeners('error');
-    }
-    if (domains_royalties_event_emitter !== null) {
-        domains_royalties_event_emitter.removeAllListeners('data');
-        domains_royalties_event_emitter.removeAllListeners('error');
-    }
+    // Remove all the previous listeners
+    [
+        domains_sent_event_emitter,
+        domains_received_event_emitter,
+        domains_listing_event_emitter,
+        domains_selling_event_emitter,
+        domains_royalties_event_emitter,
+        domains_ipfs_overwritten_event_emitter,
+        domains_tor_overwritten_event_emitter,
+    ].filter((x) => x !== null).forEach((x) => {
+        x.removeAllListeners('data');
+        x.removeAllListeners('error');
+    });
 
     const [contract, user] = await _initializeGethDomainsContract();
     if (user === null) {
@@ -1358,5 +1353,16 @@ async function _initDomainsEvents() {
             royaltiesAmount: event.returnValues.royaltiesAmount,
         }));
     }).on('error', _onError);
+
+    // Subscribe to IpfsOverwritten and TorOverwritten events
+    const _onOverwrittenEvent = function(event) {
+        console.log(event);
+        web3EventsSink('domainPointerOverwritten', JSON.stringify({
+            domainBytes: event.returnValues.domain,
+            owner: event.returnValues.owner,
+        }));
+    };
+    domains_ipfs_overwritten_event_emitter = contract.events.IpfsOverwritten().on('data', _onOverwrittenEvent).on('error', _onError);
+    domains_tor_overwritten_event_emitter = contract.events.TorOverwritten().on('data', _onOverwrittenEvent).on('error', _onError);
 }
 _initDomainsEvents().catch(console.error);

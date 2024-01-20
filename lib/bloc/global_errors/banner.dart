@@ -165,6 +165,12 @@ class _GlobalErrorsBannerState extends State<GlobalErrorsBanner> {
       return const SizedBox.shrink();
     }
 
+    if (notice is Web3DomainEdited && notice.owner != authenticatedAccount) {
+      // Do not show banners for domain edited events,
+      // if the domain is not owned by the user
+      return const SizedBox.shrink();
+    }
+
     return BannerCard(
       color: color,
       icon: icon,

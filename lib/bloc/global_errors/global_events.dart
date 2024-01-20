@@ -39,6 +39,9 @@ class GlobalEventsSink {
   Stream<Web3DomainSold> get domainPurchases =>
       _getWeb3Events<Web3DomainSold>();
 
+  Stream<Web3DomainEdited> get domainEdits =>
+      _getWeb3Events<Web3DomainEdited>();
+
   void addWeb3Event(Web3Event event) {
     debugPrint('[Web3Event] $event');
     _web3ErrorsStreamController.add(event);

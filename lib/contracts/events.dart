@@ -35,6 +35,7 @@ sealed class Web3Event extends Web3Notice {
       'domainListingForSale' => Web3DomainListingForSale.fromJson(message),
       'domainSold' => Web3DomainSold.fromJson(message),
       'royaltiesPaid' => Web3RoyaltiesPaid.fromJson(message),
+      'domainPointerOverwritten' => Web3DomainEdited.fromJson(message),
       _ => throw Exception('Unknown Web3Event tag: $tag'),
     };
   }
@@ -211,4 +212,32 @@ class Web3RoyaltiesPaid extends Web3DomainEvent {
       BigInt.parse(data['royaltiesAmount']),
     );
   }
+}
+
+class Web3DomainEdited extends Web3DomainEvent {
+  final String owner;
+
+  const Web3DomainEdited({
+    required this.owner,
+    required String domainName,
+  }) : super(domainName, 'Domain $domainName edited');
+
+  factory Web3DomainEdited.fromJson(String json) {
+    const domainEncoder = DomainEncoder(
+      domainSuffix: DomainInputValidator.domainSuffix,
+    );
+    final data = jsonDecode(json);
+    final domainBytes = receiveUint8ListFromHex(data['domainBytes']);
+
+    return Web3DomainEdited(
+      owner: data['owner'],
+      domainName:
+          domainEncoder.decode(domainBytes) + DomainInputValidator.domainSuffix,
+    );
+  }
+
+  Web3DomainEdited copyWith({String? domainName}) => Web3DomainEdited(
+        owner: owner,
+        domainName: domainName ?? this.domainName,
+      );
 }

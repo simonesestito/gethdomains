@@ -20,6 +20,7 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
   final SellingRepository sellingRepository;
   final GlobalErrorsSink globalErrorsSink;
   final GlobalEventsSink globalEventsSink;
+  String? currentUser;
 
   DomainsBloc({
     required this.domainsRepository,
@@ -41,8 +42,10 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     authStateChanges.listen((state) {
       debugPrint('DomainsBloc: authStateChanges.listen: $state');
       if (state is AuthLoggedIn) {
+        currentUser = state.account.address;
         add(const LoadDomainsEvent());
       } else {
+        currentUser = null;
         add(const _UpdateDomainsEvent(domains: null));
       }
     });
@@ -60,6 +63,15 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     globalEventsSink.domainListings.map(_removeGethSuffix).listen((event) {
       debugPrint('DomainsBloc: globalEventsSink.domainListings.listen: $event');
       add(DomainListedForSaleEvent(event.domainName, event.price));
+    });
+
+    // Listen to the global events of domain edits
+    // and react to my domains only
+    globalEventsSink.domainEdits.map(_removeGethSuffix).listen((event) {
+      if (event.owner == currentUser) {
+        debugPrint('DomainsBloc: globalEventsSink.domainEdits.listen: $event');
+        add(const LoadDomainsEvent());
+      }
     });
   }
 
@@ -289,6 +301,9 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
           domainName: removeDomainName(event.domainName),
         ),
       Web3DomainTransfer _ => event.copyWith(
+          domainName: removeDomainName(event.domainName),
+        ),
+      Web3DomainEdited _ => event.copyWith(
           domainName: removeDomainName(event.domainName),
         ),
       _ => throw UnimplementedError('[DomainsBloc] Unknown event type: $event'),
