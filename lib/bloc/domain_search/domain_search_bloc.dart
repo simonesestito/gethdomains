@@ -23,15 +23,26 @@ class DomainSearchBloc extends Bloc<DomainSearchEvent, DomainSearchState> {
     // Listen for events in domains
     globalEventsSink.domainTransfers.listen((event) {
       debugPrint('[DomainSearchBloc] transfer event received: $event');
-      debugPrint(
-          '[DomainSearchBloc] last searched domain: ${_getLastSearchedDomain()}');
-      debugPrint('[DomainSearchBloc] event domain: ${event.domainName}');
-
-      if (_getLastSearchedDomain() == event.domainName) {
-        // Reload the domain
-        search(event.domainName);
-      }
+      _onReloadDomain(event.domainName);
     });
+
+    // Listen for events in domain edits
+    globalEventsSink.domainEdits.listen((event) {
+      debugPrint('[DomainSearchBloc] edit event received: $event');
+      _onReloadDomain(event.domainName);
+    });
+  }
+
+  void _onReloadDomain(String domainName) {
+    debugPrint(
+      '[DomainSearchBloc] last searched domain: ${_getLastSearchedDomain()}',
+    );
+    debugPrint('[DomainSearchBloc] event domain: $domainName');
+
+    if (_getLastSearchedDomain() == domainName) {
+      // Reload the domain
+      search(domainName);
+    }
   }
 
   void search(String domain) => add(DomainSearchEventSearch(domain));
