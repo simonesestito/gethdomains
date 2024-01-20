@@ -52,6 +52,9 @@ external JSPromise _editDomainPointerFees(
 external JSPromise _editDomainPointer(
     String domain, String pointedAddress, String domainType);
 
+@JS('domains_getDomainOriginalOwner')
+external JSPromise _getDomainOriginalOwner(String domain);
+
 class GethDomainsContract {
   const GethDomainsContract();
 
@@ -163,5 +166,10 @@ class GethDomainsContract {
           sendUint8List(pointedAddress),
           domainType.name,
         ),
+      );
+
+  Future<String> getDomainOriginalOwner(Uint8List domain) =>
+      metamaskPromise<String>(
+        _getDomainOriginalOwner(sendUint8List(domain)),
       );
 }

@@ -1274,6 +1274,15 @@ async function domains_editDomainPointer(domainBytes, pointedAddress, domainType
 }
 
 
+async function domains_getDomainOriginalOwner(domainBytes) {
+    domainBytes = _receiveBytes(domainBytes);
+    const [contract, user] = await _initializeGethDomainsContract();
+    const domainId = await contract.methods.getId(domainBytes).call({from: user});
+    const royaltyInfo = await contract.methods.royaltyInfo(domainId, 1).call({from: user});
+    return royaltyInfo[0];
+}
+
+
 let domains_sent_event_emitter = null;
 let domains_received_event_emitter = null;
 let domains_listing_event_emitter = null;

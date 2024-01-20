@@ -25,6 +25,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   void logout() => add(const AuthLogout());
 
+  String? getCurrentUserAddress() {
+    final state = this.state;
+    if (state is AuthLoggedIn) {
+      return state.account.address;
+    }
+    return null;
+  }
+
   FutureOr<void> _onLogin(AuthLogin event, Emitter<AuthState> emit) async {
     if (!await authRepository.canLogin()) {
       emit(const AuthMissingProvider());

@@ -212,5 +212,21 @@
       }
     }
   },
-  "domainRegistrationCost": "Registration cost: 10 GETH"
+  "domainRegistrationCost": "Registration cost: 10 GETH",
+  "domainRealSellingPriceInfo": "The earning from this sale will be {price} GETH (you are the original owner)",
+  "@domainRealSellingPriceInfo": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "domainRealSellingPriceInfoWithRoyalties": "The earning from this sale will be {price} GETH (5% are for royalties)",
+  "@domainRealSellingPriceInfoWithRoyalties": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  }
 }

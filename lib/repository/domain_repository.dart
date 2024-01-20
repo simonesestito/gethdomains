@@ -118,4 +118,8 @@ class DomainRepository {
       domainType,
     );
   }
+
+  Future<String> getDomainOriginalOwner(String domainName) async {
+    return contract.getDomainOriginalOwner(domainEncoder.encode(domainName));
+  }
 }

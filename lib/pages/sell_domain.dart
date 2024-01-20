@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:gethdomains/bloc/auth/auth_bloc.dart';
 import 'package:gethdomains/bloc/domains/domains_bloc.dart';
+import 'package:gethdomains/repository/domain_repository.dart';
 import 'package:gethdomains/repository/selling_repository.dart';
 import 'package:gethdomains/widget/action_buttons/sell_domain_button.dart';
 import 'package:gethdomains/widget/body_container.dart';
@@ -19,6 +21,7 @@ class DomainSellingPage extends StatelessWidget {
   static const String _kPrice = 'price';
 
   late final FormGroup form;
+  late final Future<String> domainOriginalOwner;
 
   DomainSellingPage({super.key, required this.sellingDomain}) {
     form = FormGroup({
@@ -31,7 +34,8 @@ class DomainSellingPage extends StatelessWidget {
           Validators.required,
           Validators.number,
           Validators.min(1),
-          Validators.max(4294967295), // uint32 max
+          Validators.max(4294967295),
+          // uint32 max
         ],
       ),
     });
@@ -57,6 +61,12 @@ class DomainSellingPage extends StatelessWidget {
               AppReactiveTextField(
                 formControlName: _kPrice,
                 hintText: AppLocalizations.of(context)!.domainSellingPriceHint,
+              ),
+              ReactiveFormConsumer(
+                builder: (context, form, _) => _buildEarningsEstimation(
+                  context,
+                  form,
+                ),
               ),
               ReactiveFormConsumer(
                   builder: (context, form, _) => _buildFeesEstimation(
@@ -113,5 +123,47 @@ class DomainSellingPage extends StatelessWidget {
           BigInt.from(form.control(_kPrice).value),
         );
     context.popRoute();
+  }
+
+  Widget _buildEarningsEstimation(BuildContext context, FormGroup form) {
+    if (!form.valid || form.control(_kPrice).value == null) {
+      debugPrint('Form is invalid, with errors: ${form.errors}');
+      return const SizedBox.shrink();
+    }
+
+    final price = BigInt.from(form.control(_kPrice).value);
+    final originalOwnerFuture =
+        context.read<DomainRepository>().getDomainOriginalOwner(sellingDomain);
+
+    return LoadingFutureBuilder<String>(
+      key: ValueKey<String>(sellingDomain),
+      future: originalOwnerFuture,
+      loadingBuilder: (_) => const SizedBox.shrink(),
+      builder: (context, originalOwner) {
+        final authUser = context.watch<AuthBloc>().getCurrentUserAddress();
+        if (authUser == null) {
+          debugPrint('User is not logged in');
+          return const SizedBox.shrink();
+        }
+
+        if (authUser == originalOwner) {
+          // The seller is the original owner, so he will get all the money
+          return Text(
+            AppLocalizations.of(context)!
+                .domainRealSellingPriceInfo(price.toString()),
+          );
+        } else {
+          // The seller is not the original owner, so he won't get royalties
+          // Calculate the final earnings: they will be the price minus the royalties (5%)
+          final royalties = price ~/ BigInt.from(20);
+          final earnings = price - royalties;
+
+          return Text(
+            AppLocalizations.of(context)!
+                .domainRealSellingPriceInfoWithRoyalties(earnings.toString()),
+          );
+        }
+      },
+    );
   }
 }
