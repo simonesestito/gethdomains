@@ -86,4 +86,36 @@ class DomainRepository {
   void addDomainToMetamask(Domain domain) {
     contract.addDomainToMetamask(domainEncoder.encode(domain.domainName));
   }
+
+  Future<BigInt> estimateDomainEditFees(
+    String domainName,
+    String pointedAddress,
+    DomainType domainType,
+  ) {
+    final encodedPointer = switch (domainType) {
+      DomainType.ipfs => ipfsCidEncoder.encode(pointedAddress),
+      DomainType.tor => torAddressEncoder.encode(pointedAddress),
+    };
+    return contract.editDomainPointerFees(
+      domainEncoder.encode(domainName),
+      encodedPointer,
+      domainType,
+    );
+  }
+
+  Future<String> editDomainPointer(
+    String domainName,
+    String pointedAddress,
+    DomainType domainType,
+  ) async {
+    final encodedPointer = switch (domainType) {
+      DomainType.ipfs => ipfsCidEncoder.encode(pointedAddress),
+      DomainType.tor => torAddressEncoder.encode(pointedAddress),
+    };
+    return contract.editDomainPointer(
+      domainEncoder.encode(domainName),
+      encodedPointer,
+      domainType,
+    );
+  }
 }

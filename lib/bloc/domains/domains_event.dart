@@ -53,3 +53,15 @@ class DomainListedForSaleEvent extends DomainsEvent {
 }
 
 // DomainSold is not used by the bloc, because it already updates with the Transfer
+
+class EditDomainEvent extends DomainsEvent {
+  final String domainName;
+  final String pointedAddress;
+  final DomainType domainType;
+
+  const EditDomainEvent({
+    required this.domainName,
+    required this.pointedAddress,
+    required this.domainType,
+  });
+}

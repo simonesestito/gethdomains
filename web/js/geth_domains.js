@@ -1250,6 +1250,30 @@ async function domains_purchaseExistingDomain(domainBytes, price) {
 }
 
 
+async function domains_editDomainPointer_fees(domainBytes, pointedAddress, domainType) {
+    domainBytes = _receiveBytes(domainBytes);
+    pointedAddress = _receiveBytes(pointedAddress);
+    const isTor = domainType === 'tor';
+    const [contract, user] = await _initializeGethDomainsContract();
+
+    const contractMethod = isTor ? contract.methods.setTor : contract.methods.setIpfs;
+    const gas = await contractMethod(domainBytes, pointedAddress).estimateGas({from: user});
+    return gas.toString();
+}
+
+async function domains_editDomainPointer(domainBytes, pointedAddress, domainType) {
+    domainBytes = _receiveBytes(domainBytes);
+    pointedAddress = _receiveBytes(pointedAddress);
+    const isTor = domainType === 'tor';
+    const [contract, user] = await _initializeGethDomainsContract();
+
+    const contractMethod = isTor ? contract.methods.setTor : contract.methods.setIpfs;
+    const gas = await contractMethod(domainBytes, pointedAddress).estimateGas({from: user});
+    const txHash = await wrapContractSend(contractMethod(domainBytes, pointedAddress).send({from: user, gas: gas}));
+    return txHash;
+}
+
+
 let domains_sent_event_emitter = null;
 let domains_received_event_emitter = null;
 let domains_listing_event_emitter = null;

@@ -34,6 +34,7 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
     on<SellDomainEvent>(_onSellDomainEvent);
     on<UnlistDomainEvent>(_onUnlistDomainEvent);
     on<DomainListedForSaleEvent>(_onDomainListedForSaleEvent);
+    on<EditDomainEvent>(_onEditDomainEvent);
 
     // Listen to the auth state changes
     // They should reset the domains status
@@ -184,6 +185,41 @@ class DomainsBloc extends Bloc<DomainsEvent, DomainsState> {
       _wrapSellingDomainInvocation(
         event.domainName,
         () => sellingRepository.unlistDomainFromSelling(event.domainName),
+        emit,
+      );
+
+  Future<BigInt> estimateDomainEditFees(
+    String domainName,
+    String pointedAddress,
+    DomainType domainType,
+  ) =>
+      domainsRepository.estimateDomainEditFees(
+        domainName,
+        pointedAddress,
+        domainType,
+      );
+
+  void editDomainPointer(
+    String domainName,
+    String pointedAddress,
+    DomainType domainType,
+  ) =>
+      add(EditDomainEvent(
+        domainName: domainName,
+        pointedAddress: pointedAddress,
+        domainType: domainType,
+      ));
+
+  FutureOr<void> _onEditDomainEvent(
+    EditDomainEvent event,
+    Emitter<DomainsState> emit,
+  ) =>
+      _wrapSmartContractInvocation(
+        () => domainsRepository.editDomainPointer(
+          event.domainName,
+          event.pointedAddress,
+          event.domainType,
+        ),
         emit,
       );
 

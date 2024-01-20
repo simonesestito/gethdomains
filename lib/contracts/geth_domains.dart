@@ -44,6 +44,14 @@ external JSPromise _getDomainsForSale();
 @JS('domains_purchaseExistingDomain')
 external JSPromise _purchaseExistingDomain(String domain, String price);
 
+@JS('domains_editDomainPointer_fees')
+external JSPromise _editDomainPointerFees(
+    String domain, String pointedAddress, String domainType);
+
+@JS('domains_editDomainPointer')
+external JSPromise _editDomainPointer(
+    String domain, String pointedAddress, String domainType);
+
 class GethDomainsContract {
   const GethDomainsContract();
 
@@ -134,6 +142,26 @@ class GethDomainsContract {
         _purchaseExistingDomain(
           sendUint8List(domain),
           price.toString(),
+        ),
+      );
+
+  Future<BigInt> editDomainPointerFees(
+          Uint8List domain, Uint8List pointedAddress, DomainType domainType) =>
+      metamaskPromise<String>(
+        _editDomainPointerFees(
+          sendUint8List(domain),
+          sendUint8List(pointedAddress),
+          domainType.name,
+        ),
+      ).then((value) => BigInt.parse(value));
+
+  Future<String> editDomainPointer(
+          Uint8List domain, Uint8List pointedAddress, DomainType domainType) =>
+      metamaskPromise<String>(
+        _editDomainPointer(
+          sendUint8List(domain),
+          sendUint8List(pointedAddress),
+          domainType.name,
         ),
       );
 }
