@@ -15,7 +15,7 @@ struct Domain {
     /// @notice The pointed address, saved as an encoded byte array, which represents either a Tor address or an IPFS CID.
     /// @dev The address is stored following the encoding implemented by the decoder library.
     ///      For Tor addresses, this is the public key, while for IPFS CID this is the multihash.
-    bytes dominioTorOrIpfs;
+    bytes pointedAddress;
 
     /// @notice A boolean flag indicating whether the domain points to a Tor address or an IPFS CID.
     /// @dev This flag is used to avoid decoding the address to check its type.
