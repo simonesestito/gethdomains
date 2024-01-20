@@ -33,6 +33,7 @@ contract Geth is ERC20, Ownable {
     }
 
     /// @notice Purchase Geth tokens with ETH, according to the established rate in GETH_TO_WEI.
+    ///         A Transfer event is emitted with the amount of tokens purchased.
     /// @dev The contract will mint new tokens and transfer them to the buyer.
     ///      The contract will receive in its balance the ETH amount paid.
     function purchaseTokens() external payable {
@@ -42,6 +43,7 @@ contract Geth is ERC20, Ownable {
     }
 
     /// @notice Withdraw ETH with Geth tokens, according to the established rate in GETH_TO_WEI.
+    ///         A Transfer event is emitted with the amount of tokens burned.
     /// @dev The contract will burn the tokens from the balance of the withdrawer.
     ///      The contract will transfer to the withdrawer the ETH amount.
     /// @param tokenAmount The amount of tokens to be burned and converted to ETH.
