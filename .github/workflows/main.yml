@@ -17,28 +17,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.16.1'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.1'
 
-    - name: Install dependencies
-      run: flutter pub get
+      - name: Install dependencies
+        run: flutter pub get
 
-    - name: Run build_runner
-      run: flutter pub run build_runner build
+      - name: Run build_runner
+        run: flutter pub run build_runner build
 
-    - name: Build Flutter Web
-      run: flutter build web --release --base-href /
+      - name: Build Flutter Web
+        run: flutter build web --release --base-href /
 
-    - name: Upload Web Build Files
-      uses: actions/upload-artifact@v2
-      with:
-        name: web-release
-        path: ./build/web
+      - name: Set up node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate Solidity docs
+        run: (cd smart_contract && ./create-html-docs.sh && mv docs/index.html ../build/web/smart_contract_docs.html)
+
+      - name: Upload Web Build Files
+        uses: actions/upload-artifact@v2
+        with:
+          name: web-release
+          path: ./build/web
 
   deploy:
     name: Deploy Web Build on gh-pages
