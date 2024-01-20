@@ -1,4 +1,0 @@
-enum DomainType {
-  tor,
-  ipfs,
-}

@@ -1,6 +1,0 @@
-{
-    "smartContractAddress": "",
-    "ethPrivateKey": "",
-    "chainRpcUrl": "https://sepolia.infura.io/v3/",
-    "abiFile": "./abi.json"
-}

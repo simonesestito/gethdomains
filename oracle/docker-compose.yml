@@ -1,9 +1,0 @@
-version: '3'
-
-services:
-  tor-socks-proxy:
-    image: "peterdavehello/tor-socks-proxy@sha256:5bf08ae97de1e2d959782bfedbf3759e4f748e6a6970ab5fb093d25b53bce76b"
-    container_name: tor-socks-proxy
-    restart: always
-    ports:
-      - "127.0.0.1:9150:9150/tcp"
