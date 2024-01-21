@@ -11,6 +11,9 @@ Deployed on Sepolia test network:
 
 This project is developed as part of the Blockchain and Distributed Ledger Technologies course in the Computer Science master's degree program at Sapienza University of Rome. It serves as a practical application of theoretical concepts covered in the course.
 
+[![Download report (PDF)](.github/assets/Download_report_pdf.svg)](report.pdf?raw=true)
+[![Use the DApp on our website](.github/assets/Use_dapp_website.svg)](https://simonesestito.github.io/gethdomains/)
+
 ## Technical Summary
 
 ### Web3 and Ethereum Integration
