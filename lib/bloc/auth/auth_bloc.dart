@@ -76,6 +76,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       try {
         final currentUser = await authRepository.getCurrentUser();
+        debugPrint(
+            'Current user: $currentUser (type: ${currentUser.runtimeType})');
         if (currentUser != null) {
           emit(AuthLoggedIn(currentUser));
         } else {

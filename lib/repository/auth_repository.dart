@@ -57,7 +57,10 @@ class AuthRepository {
 
   Future<UserAccount?> getCurrentUser() async {
     try {
-      final accountAddress = await promiseToFuture<String>(_getCurrentUser());
+      final accountAddress = await promiseToFuture<String?>(_getCurrentUser());
+      if (accountAddress == null) {
+        return null;
+      }
       return UserAccount(address: accountAddress);
     } catch (err) {
       debugPrint('Error fetching current user: $err');
