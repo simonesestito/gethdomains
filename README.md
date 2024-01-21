@@ -5,7 +5,9 @@
 </div>
 <hr>
 
-Deployed on Sepolia test network at address **{????????}**.
+Deployed on Sepolia test network:
+- Geth token smart contract: [0xa514C64fd0e5Fe44B2C4448AfB8C6f3268232169](https://sepolia.etherscan.io/address/0xa514C64fd0e5Fe44B2C4448AfB8C6f3268232169)
+- GethDomains Marketplace smart contract: [0x8FC6C7eF9a2ec6df5f90b76C011C7E7Ee33E512f](https://sepolia.etherscan.io/address/0x8FC6C7eF9a2ec6df5f90b76C011C7E7Ee33E512f)
 
 This project is developed as part of the Blockchain and Distributed Ledger Technologies course in the Computer Science master's degree program at Sapienza University of Rome. It serves as a practical application of theoretical concepts covered in the course.
 
