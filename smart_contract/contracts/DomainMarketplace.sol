@@ -69,19 +69,12 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
     /// @param royaltiesAmount The amount of royalties received by the original owner, in Geth.
     event RoyaltiesPaid(address indexed originalOwner, address indexed buyer, bytes domain, uint256 royaltiesAmount);
 
-    /// @notice Event emitted when a domain is edited, and now it points to a Tor address.
+    /// @notice Event emitted when a domain is edited, and now it points to a different Tor or IPFS address.
     /// @dev This is used to notify the frontend that a domain has been edited,
     ///      and so it's able to update the search results and the list.
     /// @param domain The domain name, encoded as bytes.
-    /// @param owner The address of the owner.
-    event TorOverwritten(bytes domain, address indexed owner);
-
-    /// @notice Event emitted when a domain is edited, and now it points to an IPFS CID.
-    /// @dev This is used to notify the frontend that a domain has been edited,
-    ///      and so it's able to update the search results and the list.
-    /// @param domain The domain name, encoded as bytes.
-    /// @param owner The address of the owner.
-    event IpfsOverwritten(bytes domain, address indexed owner);
+    /// @param owner The address of the owner, so that a listener can filter events based on some of these criteria.
+    event DomainPointerEdited(bytes domain, address indexed owner);
 
     /// @notice Constructor of the contract, which sets the Geth token contract address.
     /// @dev The Geth token contract address is immutable, and can be set only once.
@@ -237,7 +230,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
 
     /// @notice Edit a domain, given its name and the Tor address it will point to.
     /// @dev The domain name must be owned by the caller, otherwise the transaction will revert.
-    ///      Emits a {TorOverwritten} event.
+    ///      Emits a {DomainPointerEdited} event.
     /// @param domain The domain name, encoded as bytes, according to the encoding library in the frontend.
     /// @param torAddress The address the domain points to, encoded as bytes, according to the encoding library in the frontend.
     function setTor(bytes calldata domain, bytes calldata torAddress) external onlyDomainOwner(domain) {
@@ -246,12 +239,12 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         // Set the domain information, informing the frontend via event
         domains[domain].pointedAddress = torAddress;
         domains[domain].isTor = true;
-        emit TorOverwritten(domain, msg.sender);
+        emit DomainPointerEdited(domain, msg.sender);
     }
 
     /// @notice Edit a domain, given its name and the IPFS address it will point to.
     /// @dev The domain name must be owned by the caller, otherwise the transaction will revert.
-    ///      Emits a {IpfsOverwritten} event.
+    ///      Emits a {DomainPointerEdited} event.
     /// @param domain The domain name, encoded as bytes, according to the encoding library in the frontend.
     /// @param ipfsAddress The address the domain points to, encoded as bytes, according to the encoding library in the frontend.
     function setIpfs(bytes calldata domain, bytes calldata ipfsAddress) external onlyDomainOwner(domain) {
@@ -260,7 +253,7 @@ contract DomainMarketplace is ERC721Royalty, Ownable {
         // Set the domain information, informing the frontend via event
         domains[domain].pointedAddress = ipfsAddress;
         domains[domain].isTor = false;
-        emit IpfsOverwritten(domain, msg.sender);
+        emit DomainPointerEdited(domain, msg.sender);
     }
 
     /// @notice Set the price of a new domain, in Geth.
