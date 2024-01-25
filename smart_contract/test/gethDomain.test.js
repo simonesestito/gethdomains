@@ -1,6 +1,5 @@
-// const { BigNumber } = require('web3-utils');
 const DomainMarketplace = artifacts.require('DomainMarketplace');
-const GethToken = artifacts.require('Geth'); // Assicurati di sostituire con il nome del tuo contratto ERC20
+const GethToken = artifacts.require('Geth'); 
 
 contract('DomainMarketplace', (accounts) => {
   let domainMarketplace;
@@ -11,37 +10,42 @@ contract('DomainMarketplace', (accounts) => {
   const buyer = accounts[2];
   const ethAmount = web3.utils.toWei('0.01', 'ether');
 
-
+  // operations done before each test
   beforeEach(async () => {
     gethToken = await GethToken.new({ from: owner });
     domainMarketplace = await DomainMarketplace.new(gethToken.address, { from: owner });
     await gethToken.setOperator(domainMarketplace.address, { from: owner });
-    // seller acquista token
+    // seller purchase token
     await gethToken.purchaseTokens({ from: seller, value: ethAmount });
 
-    // buyer acquista token
+    // buyer purchase token
     await gethToken.purchaseTokens({ from: buyer, value: ethAmount });
   });
 
   it('should allow purchase of a new domain', async () => {
+    // domain information
     const domain = 0xeeeeeeeeeeee;
     const torOrIpfs = 0xeeeeeeeeeeee;
     const isTor = true;
-    // await gethToken.approve(domainMarketplace.address, 10, { from: seller });
     
+    // domain purchase
     await domainMarketplace.purchaseNewDomain(domain, torOrIpfs, isTor, { from: seller });
 
-    // const domainOwner = await domainMarketplace.ownerOf(0);
+    // get actual domain info
     const domainInfo = await domainMarketplace.domains(domain);
-    // const expectedTorOrIpfs = new BigNumber(torOrIpfs);
-    // const actualTorOrIpfs = new BigNumber(domainInfo.pointedAddress);
+    const idActualDomain = await domainMarketplace.getId(domain);
+    const actualDomainOwner = await domainMarketplace.ownerOf(idActualDomain);
+    const actualTorOrIpfs = domainInfo.pointedAddress;
+    const actualIsTor = domainInfo.isTor;
+    const actualPrice = domainInfo.price.toNumber();
+    const actualResoldTimes = domainInfo.resoldTimes.toNumber();
 
-    // // Usa l'asserzione di chai per confrontare i numeri invece delle stringhe esadecimali
-    // assert.isTrue(actualTorOrIpfs.eq(expectedTorOrIpfs), 'Expected TorOrIpfs to be equal');
-    // assert.strictEqual(domainOwner, seller);
-    assert.strictEqual(domainInfo.price.toNumber(), 0);
-    assert.strictEqual(domainInfo.resoldTimes.toNumber(), 1);
-    assert.strictEqual(domainInfo.isTor, isTor);
+    // check domain info
+    assert.equal(actualPrice, 0, "Price does not match");
+    assert.equal(actualResoldTimes, 1, "Resold times does not match");
+    assert.equal(actualIsTor, isTor, "IsTor does not match");
+    assert.equal(actualTorOrIpfs, torOrIpfs, "Tor or Ipfs address does not match");
+    assert.equal(actualDomainOwner, seller, 'Owner address does not match');
   });
 
   it('should allow selling an existing domain', async () => {
@@ -50,14 +54,24 @@ contract('DomainMarketplace', (accounts) => {
     const isTor = true;
     const salePrice = 10;
 
-    // await gethToken.approve(domainMarketplace.address, salePrice, { from: seller });
+    // domain purchase
     await domainMarketplace.purchaseNewDomain(domain, torOrIpfs, isTor, { from: seller });
-
+    // domain sale
     await domainMarketplace.sellDomain(domain, salePrice, { from: seller });
 
+    // get actual domain info
     const domainInfo = await domainMarketplace.domains(domain);
-    assert.strictEqual(domainInfo.price.toNumber(), salePrice);
+    const idActualDomain = await domainMarketplace.getId(domain);
+    const actualDomainOwner = await domainMarketplace.ownerOf(idActualDomain);
+    const actualPrice = domainInfo.price.toNumber();
+
+    // check domain state
+    assert.equal(actualPrice, salePrice);
+    assert.equal(actualDomainOwner, seller, 'Owner address does not match');
+
   });
+
+
 
   it('should allow buying an existing domain', async () => {
     const domain = 0xeeeeeeeeeeee;
@@ -65,19 +79,23 @@ contract('DomainMarketplace', (accounts) => {
     const isTor = true;
     const salePrice = 10;
 
-    // await gethToken.approve(domainMarketplace.address, salePrice, { from: seller });
     await domainMarketplace.purchaseNewDomain(domain, torOrIpfs, isTor, { from: seller });
     await domainMarketplace.sellDomain(domain, salePrice, { from: seller });
 
-    // await gethToken.approve(domainMarketplace.address, salePrice, { from: buyer });
-    await domainMarketplace.purchaseExistingDomain(domain, { from: buyer });
+    // buy existing domain
+    await domainMarketplace.purchaseExistingDomain(domain, salePrice, { from: buyer });
 
-    // const domainOwner = await domainMarketplace.ownerOf(0);
+    // get actual domain info
     const domainInfo = await domainMarketplace.domains(domain);
+    const idActualDomain = await domainMarketplace.getId(domain);
+    const actualDomainOwner = await domainMarketplace.ownerOf(idActualDomain);
+    const actualPrice = domainInfo.price.toNumber();
+    const actualResoldTimes = domainInfo.resoldTimes.toNumber();
 
-    // assert.strictEqual(domainOwner, buyer);
-    assert.strictEqual(domainInfo.price.toNumber(), 0);
-    assert.strictEqual(domainInfo.resoldTimes.toNumber(), 2);
+    // check domain state
+    assert.strictEqual(actualPrice, 0);
+    assert.strictEqual(actualResoldTimes, 2, "Resold times does not match");
+    assert.equal(actualDomainOwner, buyer, 'Owner address does not match');
   });
 
   it('should allow retrieving a domain from sale', async () => {
@@ -85,16 +103,33 @@ contract('DomainMarketplace', (accounts) => {
     const torOrIpfs = 0xeeeeeeeeeeee;
     const isTor = true;
     const salePrice = 10;
-
-    await gethToken.approve(domainMarketplace.address, salePrice, { from: seller });
     await domainMarketplace.purchaseNewDomain(domain, torOrIpfs, isTor, { from: seller });
     await domainMarketplace.sellDomain(domain, salePrice, { from: seller });
 
+    // check if someone else tries to retrieve the domain
+    try {
+      await domainMarketplace.retrieveDomain(domain, { from: buyer });
+      assert.fail('Expected an exception but got success');
+    } catch (error) {
+        assert.include(
+            error.message,
+            'revert', 
+            'Expected a revert exception, but got ' + error
+        );
+    }
+
+    // retreive domain
     await domainMarketplace.retrieveDomain(domain, { from: seller });
 
+    // get actual domain info
     const domainInfo = await domainMarketplace.domains(domain);
-    assert.strictEqual(domainInfo.price.toNumber(), 0);
+    const actualPrice = domainInfo.price.toNumber();
+    const idActualDomain = await domainMarketplace.getId(domain);
+    const actualDomainOwner = await domainMarketplace.ownerOf(idActualDomain);
+
+    // check domain and owner
+    assert.equal(actualPrice, 0);
+    assert.equal(actualDomainOwner, seller, 'Owner address does not match');
   });
 
-  // Aggiungi altri test a seconda delle funzionalità del tuo contratto
 });

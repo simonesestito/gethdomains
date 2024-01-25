@@ -1,37 +1,65 @@
-// Importa il contratto da testare
 const Geth = artifacts.require('Geth');
 
-// Dichiarazione del contratto e dell'account
 contract('Geth', (accounts) => {
-  let gethInstance;
+  let gethToken;
   const deployerAccount = accounts[0];
   const buyerAccount = accounts[1];
+  const ethAmount = web3.utils.toWei('0.01', 'ether');
 
-  // Esegui prima di ogni test
-  // sta creando una nuova istanza del contratto Geth prima di ogni test. 
-  // Questo è utile perché ti fornisce un ambiente pulito e isolato per eseguire ciascun test.
-  // Ogni test viene eseguito con una nuova istanza del contratto, evitando così possibili interferenze tra uno e l'altro.
   beforeEach(async () => {
-    gethInstance = await Geth.new({ from: deployerAccount });
+    gethToken = await Geth.new({ from: deployerAccount });
   });
 
-  // Testa la funzione purchaseTokens
   it('should allow buying tokens with Ether', async () => {
-    const ethAmount = web3.utils.toWei('1', 'ether');
-    await gethInstance.purchaseTokens({ from: buyerAccount, value: ethAmount });
-    const balance = await gethInstance.balanceOf(buyerAccount);
-    assert.equal(balance.toNumber(), 1000, 'Tokens not received');
+
+    // purchase tokens
+    await gethToken.purchaseTokens({ from: buyerAccount, value: ethAmount });
+
+    // balance in Geth after purchase
+    const balance = await gethToken.balanceOf(buyerAccount);
+
+    // check balance
+    assert.equal(balance.toNumber(), 10, 'Tokens not received');
   });
 
   // Testa la funzione purchaseWei
   it('should allow selling tokens for Ether', async () => {
-    const ethAmount = web3.utils.toWei('1', 'ether');
-    const tokenAmount = 1000; // Adjust based on your conversion rate
-    await gethInstance.purchaseTokens({ from: buyerAccount, value: ethAmount });
-    await gethInstance.purchaseWei(tokenAmount, { from: buyerAccount });
-    const balance = await web3.eth.getBalance(buyerAccount);
-    assert.equal(balance.toString(), ethAmount, 'Ether not received');
+    const tokenAmount = 10; 
+
+    // purchase tokens
+    await gethToken.purchaseTokens({ from: buyerAccount, value: ethAmount });
+
+    // balance in ether before purchase wei
+    const balance1 = await web3.eth.getBalance(buyerAccount);q
+
+    // sell tokens
+    await gethToken.purchaseWei(tokenAmount, { from: buyerAccount });
+
+    // balance in Geth and ether after sell
+    const balanceGeth = await gethToken.balanceOf(buyerAccount);
+    const balance2 = await web3.eth.getBalance(buyerAccount);
+
+    // check balances
+    assert.equal(balanceGeth.toNumber(), 0, 'Tokens not sold correctly');
+    assert.ok(balance2 > balance1, 'balance2 should be greater than balance1');
   });
 
-  // Aggiungi altri test a seconda delle funzionalità del tuo contratto
+
+  it('should allow the owner to withdraw Ether', async () => {
+    // purchase tokens
+    await gethToken.purchaseTokens({ from: buyerAccount, value: ethAmount });
+
+    // balance in ether before withdraw
+    const balance1 = await web3.eth.getBalance(deployerAccount);
+
+    // withdraw ether
+    await gethToken.destroy({ from: deployerAccount });
+
+    // balance in ether after withdraw
+    const balance2 = await web3.eth.getBalance(deployerAccount);
+
+    // check balance
+    assert.ok(balance2 > balance1, 'balance2 should be greater than balance1');
+  });
+
 });
