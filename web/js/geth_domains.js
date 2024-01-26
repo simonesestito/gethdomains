@@ -1183,13 +1183,15 @@ async function domains_getDomainsForSale() {
     for (let i = 0; i < domainsList[0].length; i++) {
         const domainBytes = domainsList[0][i];
         const domain = domainsList[1][i];
+        const domainId = await contract.methods.getId(domainBytes).call({from: user});
+        const owner = await contract.methods.ownerOf(domainId).call({from: user});
         result.push({
             domain: domainBytes,
             price: domain.price,
             resoldTimes: domain.resoldTimes,
             pointedAddress: domain.pointedAddress,
             isTor: domain.isTor,
-            owner: user,
+            owner: owner,
         });
     }
 
