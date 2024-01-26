@@ -443,7 +443,8 @@ async function geth_getMyBalance() {
 
 async function geth_purchaseTokens_fees(amount) {
     const [contract, user] = await _initializeGethContract();
-    const gas = await contract.methods.purchaseTokens().estimateGas({from: user, value: web3.utils.toWei(amount, "ether")});
+	const weiAmount = web3.utils.toWei(amount, "ether").slice(0, -3); // Equivalent as /1000
+    const gas = await contract.methods.purchaseTokens().estimateGas({from: user, value: weiAmount});
     return gas.toString();
 }
 
