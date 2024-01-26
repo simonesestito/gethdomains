@@ -1,0 +1,602 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" viewBox="-10.97 -215.01 889.79 1215.24">
+<desc>Created with Fabric.js 3.5.0</desc>
+<defs>
+</defs>
+<rect x="0" y="0" width="100%" height="100%" fill="#ffffff"/>
+<g transform="matrix(0.6183 0 0 0.6183 276.9895 500.0192)" id="492024">
+<g style="" vector-effect="non-scaling-stroke">
+		<g transform="matrix(1 0 0 1 -211.205 -409.8)" id="svg_67">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(242,242,242); fill-rule: nonzero; opacity: 1;" points="-253.715,398.4 -253.715,-398.4 253.715,-398.4 253.715,398.4 -253.715,398.4 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -211.2 -795.9859)" style="" id="svg_68">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-39.5049" y="4.398">&lt;&lt;Abstract&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -211.2 -779.1859)" style="" id="svg_69">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-24.1138" y="4.398">ERC721</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -211.2 -762.3859)" style="" id="svg_70">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-45.3086" y="4.398">cs2/ERC721.sol</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -211.205 -749.8)" id="svg_71">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-253.715,0 253.715,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -435.1475 -737.5859)" style="" id="svg_72">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-21.7725" y="4.398">Private:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -418.6217 -720.7859)" style="" id="svg_73">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-38.2983" y="4.398">_name: string</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -413.1666 -703.9859)" style="" id="svg_74">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-43.7534" y="4.398">_symbol: string</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -350.0709 -687.1859)" style="" id="svg_75">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-106.8491" y="4.398">_owners: mapping(uint256=&gt;address)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -346.1915 -670.3859)" style="" id="svg_76">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-110.7285" y="4.398">_balances: mapping(address=&gt;uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -325.5743 -653.5859)" style="" id="svg_77">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-131.3457" y="4.398">_tokenApprovals: mapping(uint256=&gt;address)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -268.7027 -636.7859)" style="" id="svg_78">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-188.2173" y="4.398">_operatorApprovals: mapping(address=&gt;mapping(address=&gt;bool))</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -211.205 -624.2)" id="svg_79">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-253.715,0 253.715,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -435.1475 -611.9859)" style="" id="svg_80">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-21.7725" y="4.398">Private:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -218.2022 -595.1859)" style="" id="svg_81">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-238.7178" y="4.398">_checkOnERC721Received(from: address, to: address, tokenId: uint256, data: bytes)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -433.2096 -578.3859)" style="" id="svg_82">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-23.7104" y="4.398">Internal:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -404.6251 -561.5859)" style="" id="svg_83">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-52.2949" y="4.398">_baseURI(): string</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -352.7232 -544.7859)" style="" id="svg_84">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-104.1968" y="4.398">_ownerOf(tokenId: uint256): address</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -341.0577 -527.9859)" style="" id="svg_85">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-115.8623" y="4.398">_getApproved(tokenId: uint256): address</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -254.3541 -511.1859)" style="" id="svg_86">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-202.5659" y="4.398">_isAuthorized(owner: address, spender: address, tokenId: uint256): bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -258.8419 -494.3859)" style="" id="svg_87">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-198.0781" y="4.398">_checkAuthorized(owner: address, spender: address, tokenId: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -313.0919 -477.5859)" style="" id="svg_88">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-143.8281" y="4.398">_increaseBalance(account: address, value: uint128)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -285.0714 -460.7859)" style="" id="svg_89">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-171.8486" y="4.398">_update(to: address, tokenId: uint256, auth: address): address</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -355.8233 -443.9859)" style="" id="svg_90">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-101.0967" y="4.398">_mint(to: address, tokenId: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -343.775 -427.1859)" style="" id="svg_91">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-113.145" y="4.398">_safeMint(to: address, tokenId: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -310.1456 -410.3859)" style="" id="svg_92">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-146.7744" y="4.398">_safeMint(to: address, tokenId: uint256, data: bytes)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -389.4596 -393.5859)" style="" id="svg_93">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-67.4604" y="4.398">_burn(tokenId: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -305.4869 -376.7859)" style="" id="svg_94">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-151.4331" y="4.398">_transfer(from: address, to: address, tokenId: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -292.1329 -359.9859)" style="" id="svg_95">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-164.7871" y="4.398">_safeTransfer(from: address, to: address, tokenId: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -258.5035 -343.1859)" style="" id="svg_96">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-198.4165" y="4.398">_safeTransfer(from: address, to: address, tokenId: uint256, data: bytes)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -305.8731 -326.3859)" style="" id="svg_97">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-151.0469" y="4.398">_approve(to: address, tokenId: uint256, auth: address)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -257.4644 -309.5859)" style="" id="svg_98">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-199.4556" y="4.398">_approve(to: address, tokenId: uint256, auth: address, emitEvent: bool)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -256.5006 -292.7859)" style="" id="svg_99">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-200.4194" y="4.398">_setApprovalForAll(owner: address, operator: address, approved: bool)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -337.5645 -275.9859)" style="" id="svg_100">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-119.3555" y="4.398">_requireOwned(tokenId: uint256): address</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -437.0855 -259.1859)" style="" id="svg_101">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-19.8345" y="4.398">Public:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -335.2164 -242.3859)" style="" id="svg_102">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-121.7036" y="4.398">constructor(name_: string, symbol_: string)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -335.2471 -225.5859)" style="" id="svg_103">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-121.6729" y="4.398">supportsInterface(interfaceId: bytes4): bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -356.2335 -208.7859)" style="" id="svg_104">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-100.6865" y="4.398">balanceOf(owner: address): uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -356.2232 -191.9859)" style="" id="svg_105">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-100.6968" y="4.398">ownerOf(tokenId: uint256): address</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -417.4596 -175.1859)" style="" id="svg_106">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-39.4604" y="4.398">name(): string</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -412.0045 -158.3859)" style="" id="svg_107">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-44.9155" y="4.398">symbol(): string</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -358.544 -141.5859)" style="" id="svg_108">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-98.376" y="4.398">tokenURI(tokenId: uint256): string</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -349.6129 -124.7859)" style="" id="svg_109">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-107.3071" y="4.398">approve(to: address, tokenId: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -344.5577 -107.9859)" style="" id="svg_110">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-112.3623" y="4.398">getApproved(tokenId: uint256): address</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -305.6817 -91.1859)" style="" id="svg_111">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-151.2383" y="4.398">setApprovalForAll(operator: address, approved: bool)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -291.0972 -74.3859)" style="" id="svg_112">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-165.8228" y="4.398">isApprovedForAll(owner: address, operator: address): bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -293.8179 -57.5859)" style="" id="svg_113">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-163.1021" y="4.398">transferFrom(from: address, to: address, tokenId: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -280.4639 -40.7859)" style="" id="svg_114">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-176.4561" y="4.398">safeTransferFrom(from: address, to: address, tokenId: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -246.8346 -23.9859)" style="" id="svg_115">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-210.0854" y="4.398">safeTransferFrom(from: address, to: address, tokenId: uint256, data: bytes)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -293.765 142.8)" id="svg_176">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(242,242,242); fill-rule: nonzero; opacity: 1;" points="-136.675,50 -136.675,-50 136.675,-50 136.675,50 -136.675,50 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -293.76 105.0141)" style="" id="svg_177">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-39.5049" y="4.398">&lt;&lt;Abstract&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -293.76 121.8141)" style="" id="svg_178">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-46.2793" y="4.398">ERC721Royalty</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -293.76 138.6141)" style="" id="svg_179">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-67.0195" y="4.398">cs2/ERC721Royalty.sol</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -293.765 151.2)" id="svg_180">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-136.675,0 136.675,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -402.6055 163.4141)" style="" id="svg_181">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-19.8345" y="4.398">Public:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -300.7671 180.2141)" style="" id="svg_182">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-121.6729" y="4.398">supportsInterface(interfaceId: bytes4): bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -283.27 55.545)" id="svg_185">
+<path style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-873.65, 753.155)" d="m 869.16 -716.25 c 2.45 -20.13 5.53 -45.4 8.98 -73.81" stroke-linecap="round"/>
+</g>
+		<g transform="matrix(1 0 0 1 -278.745 4.13)" id="svg_186">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-10.425,12.99 3.625,-15.52 10.425,15.52 -10.425,12.99 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -60.765 552.6)" id="svg_187">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(242,242,242); fill-rule: nonzero; opacity: 1;" points="-319.485,255.6 -319.485,-255.6 319.485,-255.6 319.485,255.6 -319.485,255.6 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -60.76 309.2141)" style="" id="svg_188">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-57.5313" y="4.398">DomainMarketplace</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -60.76 326.0141)" style="" id="svg_189">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-57.3535" y="4.398">cs2/GethDomain.sol</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -60.765 338.6)" id="svg_190">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-319.485,0 319.485,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -352.4155 350.8141)" style="" id="svg_191">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-19.8345" y="4.398">Public:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -321.8965 367.6141)" style="" id="svg_192">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-50.3535" y="4.398">payGeth: IERC20</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -318.4067 384.4141)" style="" id="svg_193">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-53.8433" y="4.398">prezzoBase: uint32</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -270.4526 401.2141)" style="" id="svg_194">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-101.7974" y="4.398">domains: mapping(bytes=&gt;Domain)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -336.2861 418.0141)" style="" id="svg_195">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-35.9639" y="4.398">keys: bytes[]</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -60.765 430.6)" id="svg_196">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-319.485,0 319.485,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -348.5396 442.8141)" style="" id="svg_197">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-23.7104" y="4.398">Internal:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -297.0239 459.6141)" style="" id="svg_198">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-75.2261" y="4.398">_feeDenominator(): uint96</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -346.5947 476.4141)" style="" id="svg_199">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-25.6553" y="4.398">External:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -185.5298 493.2141)" style="" id="svg_200">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-186.7202" y="4.398">purchaseNewDomain(domain: bytes, torOrIpfs: bytes, isTor: bool)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -218.2842 510.0141)" style="" id="svg_201">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-153.9658" y="4.398">purchaseExistingDomain(domain: bytes, price: uint32)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -133.0947 526.8141)" style="" id="svg_202">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-239.1553" y="4.398">sellDomain(domain: bytes, price: uint32): (prezzo: uint256) &lt;&lt;onlyDomainOwner&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -212.6104 543.6141)" style="" id="svg_203">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-159.6396" y="4.398">retrieveDomain(domain: bytes) &lt;&lt;onlyDomainOwner&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -184.2173 560.4141)" style="" id="svg_204">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-188.0327" y="4.398">setTor(domain: bytes, dominioTor: bytes) &lt;&lt;onlyDomainOwner&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -181.6812 577.2141)" style="" id="svg_205">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-190.5688" y="4.398">setIpfs(domain: bytes, dominioIpfs: bytes) &lt;&lt;onlyDomainOwner&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -237.8896 594.0141)" style="" id="svg_206">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-134.3604" y="4.398">setPrezzoBase(prezzo: uint32) &lt;&lt;onlyOwner&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -274.8516 610.8141)" style="" id="svg_207">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-97.3984" y="4.398">getId(domain: bytes): (id: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -225.6841 627.6141)" style="" id="svg_208">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-146.5659" y="4.398">getUserDomains(user: address): (bytes[], Domain[])</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -242.7705 644.4141)" style="" id="svg_209">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-129.4795" y="4.398">getDomainById(id: uint256): (bytes, Domain)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -253.4756 661.2141)" style="" id="svg_210">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-118.7744" y="4.398">getDomainsForSale(): (bytes[], Domain[])</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -352.4155 678.0141)" style="" id="svg_211">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-19.8345" y="4.398">Public:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -165.1724 694.8141)" style="" id="svg_212">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-207.0776" y="4.398">&lt;&lt;event&gt;&gt; DomainForSale(domain: bytes, seller: address, price: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -172.5586 711.6141)" style="" id="svg_213">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-199.6914" y="4.398">&lt;&lt;event&gt;&gt; DomainSold(seller: address, buyer: address, domain: bytes)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -67.7671 728.4141)" style="" id="svg_214">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-304.4829" y="4.398">&lt;&lt;event&gt;&gt; RoyaltiesPaid(originalOwner: address, buyer: address, domain: bytes, royaltiesAmount: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -206.3008 745.2141)" style="" id="svg_215">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-165.9492" y="4.398">&lt;&lt;event&gt;&gt; TorOverwritten(domain: bytes, owner: address)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -205.0327 762.0141)" style="" id="svg_216">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-167.2173" y="4.398">&lt;&lt;event&gt;&gt; IpfsOverwritten(domain: bytes, owner: address)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -232.4312 778.8141)" style="" id="svg_217">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-139.8188" y="4.398">&lt;&lt;modifier&gt;&gt; onlyDomainOwner(domain: bytes)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -336.0981 795.6141)" style="" id="svg_218">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-36.1519" y="4.398">constructor()</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -228.54 257.96)" id="svg_219">
+<path style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-928.38, 550.74)" d="m 950.58 -511.89 c -16.02 -28.04 -31.26 -54.71 -44.4 -77.7" stroke-linecap="round"/>
+</g>
+		<g transform="matrix(1 0 0 1 -253.62 208.68)" id="svg_220">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-6.24,15.63 -12,-15.63 12,5.21 -6.24,15.63 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -60.765 142.8)" id="svg_221">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(242,242,242); fill-rule: nonzero; opacity: 1;" points="-78.185,66.8 -78.185,-66.8 78.185,-66.8 78.185,66.8 -78.185,66.8 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -60.76 88.2141)" style="" id="svg_222">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-32.5117" y="4.398">&lt;&lt;Struct&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -60.76 105.0141)" style="" id="svg_223">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-22.5518" y="4.398">Domain</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -60.76 121.8141)" style="" id="svg_224">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-57.3535" y="4.398">cs2/GethDomain.sol</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -60.765 134.4)" id="svg_225">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-78.185,0 78.185,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -95.3758 146.6141)" style="" id="svg_226">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-35.5742" y="4.398">price: uint32</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -75.0081 163.4141)" style="" id="svg_227">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-55.9419" y="4.398">resoldTimes: uint32</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -61.2542 180.2141)" style="" id="svg_228">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-69.6958" y="4.398">dominioTorOrIpfs: bytes</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -100.5232 197.0141)" style="" id="svg_229">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-30.4268" y="4.398">isTor: bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -66.745 258.45)" id="svg_230">
+<path style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-1090.175, 550.25)" d="m 1089.6 -511.89 c 0.21 -27.64 0.59 -53.96 1.15 -76.72" stroke-linecap="round"/>
+</g>
+		<g transform="matrix(1 0 0 1 -66.16 214.935)" id="svg_231">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" points="-3.5,4.855 0.26,-5.045 3.5,5.045 -3.5,4.855 "/>
+</g>
+		<g transform="matrix(1 0 0 1 250.235 142.8)" id="svg_232">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(242,242,242); fill-rule: nonzero; opacity: 1;" points="-214.685,117.2 -214.685,-117.2 214.685,-117.2 214.685,117.2 -214.685,117.2 "/>
+</g>
+		<g transform="matrix(1 0 0 1 250.24 37.8141)" style="" id="svg_233">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-40.6567" y="4.398">&lt;&lt;Interface&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 250.24 54.6141)" style="" id="svg_234">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-22.9448" y="4.398">IERC20</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 250.24 71.4141)" style="" id="svg_235">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-44.1396" y="4.398">cs2/IERC20.sol</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 250.235 84)" id="svg_236">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-214.685,0 214.685,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 69.2053 96.2141)" style="" id="svg_237">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-25.6553" y="4.398">External:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 105.5759 113.0141)" style="" id="svg_238">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-62.0259" y="4.398">totalSupply(): uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 148.509 129.8141)" style="" id="svg_239">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-104.959" y="4.398">balanceOf(account: address): uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 159.6037 146.6141)" style="" id="svg_240">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-116.0537" y="4.398">transfer(to: address, value: uint256): bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 193.8073 163.4141)" style="" id="svg_241">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-150.2573" y="4.398">allowance(owner: address, spender: address): uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 177.0969 180.2141)" style="" id="svg_242">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-133.5469" y="4.398">approve(spender: address, value: uint256): bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 216.5676 197.0141)" style="" id="svg_243">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-173.0176" y="4.398">transferFrom(from: address, to: address, value: uint256): bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 63.3845 213.8141)" style="" id="svg_244">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-19.8345" y="4.398">Public:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 220.0437 230.6141)" style="" id="svg_245">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-176.4937" y="4.398">&lt;&lt;event&gt;&gt; Transfer(from: address, to: address, value: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 243.2312 247.4141)" style="" id="svg_246">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-199.6812" y="4.398">&lt;&lt;event&gt;&gt; Approval(owner: address, spender: address, value: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 144.435 282.535)" id="svg_247">
+<path style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-1301.355, 526.165)" d="m 1290.47 -511.89 c 7.4 -9.71 14.69 -19.26 21.77 -28.55" stroke-linecap="round"/>
+</g>
+		<g transform="matrix(1 0 0 1 157.065 265.205)" id="svg_248">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" points="-4.425,0.795 4.425,-5.035 1.145,5.035 -4.425,0.795 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -54.97 247.235)" id="svg_269">
+<path style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-1101.95, 561.465)" d="m 1101.29 -598.81 c 0.61 21.72 1.06 47.37 1.32 74.69" stroke-linecap="round"/>
+</g>
+		<g transform="matrix(1 0 0 1 -54.26 290.81)" id="svg_270">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" points="-0.05,-6 -4,0.03 0.06,6 4,-0.03 -0.05,-6 "/>
+</g>
+</g>
+</g>
+<g transform="matrix(0.5418 0 0 0.5418 607.9158 135.4944)" id="616417">
+<g style="" vector-effect="non-scaling-stroke">
+		<g transform="matrix(1 0 0 1 0 0)" id="svg_1">
+<polygon style="stroke: rgb(255,255,255); stroke-opacity: 0; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" points="-499.075,646 -499.075,-646 499.075,-646 499.075,646 -499.075,646 "/>
+</g>
+		<g transform="matrix(1 0 0 1 237.39 47.7)" id="svg_11">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(242,242,242); fill-rule: nonzero; opacity: 1;" points="-229.995,247.2 -229.995,-247.2 229.995,-247.2 229.995,247.2 -229.995,247.2 "/>
+</g>
+		<g transform="matrix(1 0 0 1 237.395 -187.2859)" style="" id="svg_12">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-39.5049" y="4.398">&lt;&lt;Abstract&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 237.395 -170.4859)" style="" id="svg_13">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-20.6138" y="4.398">ERC20</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 237.395 -153.6859)" style="" id="svg_14">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-41.8086" y="4.398">cs2/ERC20.sol</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 237.39 -141.1)" id="svg_15">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-229.995,0 229.995,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 37.1675 -128.8859)" style="" id="svg_16">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-21.7725" y="4.398">Private:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 126.1235 -112.0859)" style="" id="svg_17">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-110.7285" y="4.398">_balances: mapping(address=&gt;uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 191.1709 -95.2859)" style="" id="svg_18">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-175.7759" y="4.398">_allowances: mapping(address=&gt;mapping(address=&gt;uint256))</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 76.2588 -78.4859)" style="" id="svg_19">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-60.8638" y="4.398">_totalSupply: uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 53.6933 -61.6859)" style="" id="svg_20">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-38.2983" y="4.398">_name: string</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 59.1484 -44.8859)" style="" id="svg_21">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-43.7534" y="4.398">_symbol: string</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 237.39 -32.3)" id="svg_22">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-229.995,0 229.995,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 39.1054 -20.0859)" style="" id="svg_23">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-23.7104" y="4.398">Internal:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 160.604 -3.2859)" style="" id="svg_24">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-145.209" y="4.398">_transfer(from: address, to: address, value: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 157.8867 13.5141)" style="" id="svg_25">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-142.4917" y="4.398">_update(from: address, to: address, value: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 126.5884 30.3141)" style="" id="svg_26">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-111.1934" y="4.398">_mint(account: address, value: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 126.5849 47.1141)" style="" id="svg_27">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-111.1899" y="4.398">_burn(account: address, value: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 181.9834 63.9141)" style="" id="svg_28">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-166.5884" y="4.398">_approve(owner: address, spender: address, value: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 230.3921 80.7141)" style="" id="svg_29">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-214.9971" y="4.398">_approve(owner: address, spender: address, value: uint256, emitEvent: bool)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 206.0903 97.5141)" style="" id="svg_30">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-190.6953" y="4.398">_spendAllowance(owner: address, spender: address, value: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 35.2295 114.3141)" style="" id="svg_31">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-19.8345" y="4.398">Public:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 137.0986 131.1141)" style="" id="svg_32">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-121.7036" y="4.398">constructor(name_: string, symbol_: string)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 54.8554 147.9141)" style="" id="svg_33">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-39.4604" y="4.398">name(): string</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 60.3105 164.7141)" style="" id="svg_34">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-44.9155" y="4.398">symbol(): string</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 63.021 181.5141)" style="" id="svg_35">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-47.626" y="4.398">decimals(): uint8</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 77.4209 198.3141)" style="" id="svg_36">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-62.0259" y="4.398">totalSupply(): uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 120.354 215.1141)" style="" id="svg_37">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-104.959" y="4.398">balanceOf(account: address): uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 131.4487 231.9141)" style="" id="svg_38">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-116.0537" y="4.398">transfer(to: address, value: uint256): bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 165.6523 248.7141)" style="" id="svg_39">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-150.2573" y="4.398">allowance(owner: address, spender: address): uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 148.9419 265.5141)" style="" id="svg_40">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-133.5469" y="4.398">approve(spender: address, value: uint256): bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 188.4126 282.3141)" style="" id="svg_41">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-173.0176" y="4.398">transferFrom(from: address, to: address, value: uint256): bool</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -7.605 486.7)" id="svg_78">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(242,242,242); fill-rule: nonzero; opacity: 1;" points="-168.58,154.8 -168.58,-154.8 168.58,-154.8 168.58,154.8 -168.58,154.8 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -7.605 344.1141)" style="" id="svg_79">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-13.6069" y="4.398">Geth</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -7.605 360.9141)" style="" id="svg_80">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-34.8018" y="4.398">cs2/Geth.sol</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -7.605 373.5)" id="svg_81">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-168.58,0 168.58,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -146.4125 385.7141)" style="" id="svg_82">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-21.7725" y="4.398">Private:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -98.52 402.5141)" style="" id="svg_83">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-69.665" y="4.398">GETH_TO_WEI: uint64</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -120.1762 419.3141)" style="" id="svg_84">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-48.0088" y="4.398">operator: address</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -7.605 431.9)" id="svg_85">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-168.58,0 168.58,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -146.4125 444.1141)" style="" id="svg_86">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-21.7725" y="4.398">Private:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -15.0942 460.9141)" style="" id="svg_87">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-153.0908" y="4.398">calculateTokenAmount(weiAmount: uint256): uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -15.9453 477.7141)" style="" id="svg_88">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-152.2397" y="4.398">calculateWeiAmount(tokenAmount: uint256): uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -142.5297 494.5141)" style="" id="svg_89">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-25.6553" y="4.398">External:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -79.2221 511.3141)" style="" id="svg_90">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-88.9629" y="4.398">&lt;&lt;payable&gt;&gt; purchaseTokens()</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -63.9677 528.1141)" style="" id="svg_91">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-104.2173" y="4.398">purchaseWei(tokenAmount: uint256)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -20.6108 544.9141)" style="" id="svg_92">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-147.5742" y="4.398">setOperator(newOperator: address) &lt;&lt;onlyOwner&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -93.8818 561.7141)" style="" id="svg_93">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-74.3032" y="4.398">destroy() &lt;&lt;onlyOwner&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -148.3505 578.5141)" style="" id="svg_94">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-19.8345" y="4.398">Public:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -132.0331 595.3141)" style="" id="svg_95">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-36.1519" y="4.398">constructor()</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -120.559 612.1141)" style="" id="svg_96">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-47.626" y="4.398">decimals(): uint8</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -17.9277 628.9141)" style="" id="svg_97">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-150.2573" y="4.398">allowance(owner: address, spender: address): uint256</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 81.605 326.57)" id="svg_98">
+<path style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-576.68, 315.43)" d="m 573.84 -310.37 c 1.88 -3.35 3.77 -6.73 5.68 -10.12" stroke-linecap="round"/>
+</g>
+		<g transform="matrix(1 0 0 1 87.28 310.845)" id="svg_99">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-11.915,5.385 11.915,-15.655 6.405,15.655 -11.915,5.385 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -252.61 47.7)" id="svg_100">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(242,242,242); fill-rule: nonzero; opacity: 1;" points="-242.465,138 -242.465,-138 242.465,-138 242.465,138 -242.465,138 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -252.605 -78.0859)" style="" id="svg_101">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-39.5049" y="4.398">&lt;&lt;Abstract&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -252.605 -61.2859)" style="" id="svg_102">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-25.269" y="4.398">Ownable</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -252.605 -44.4859)" style="" id="svg_103">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-46.4639" y="4.398">cs2/Ownable.sol</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -252.61 -31.9)" id="svg_104">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-242.465,0 242.465,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -465.3025 -19.6859)" style="" id="svg_105">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-21.7725" y="4.398">Private:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -441.3938 -2.8859)" style="" id="svg_106">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-45.6812" y="4.398">_owner: address</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -252.61 9.7)" id="svg_107">
+<polyline style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-242.465,0 242.465,0 "/>
+</g>
+		<g transform="matrix(1 0 0 1 -463.3646 21.9141)" style="" id="svg_108">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-23.7104" y="4.398">Internal:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -443.5437 38.7141)" style="" id="svg_109">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-43.5313" y="4.398">_checkOwner()</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -371.4212 55.5141)" style="" id="svg_110">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-115.6538" y="4.398">_transferOwnership(newOwner: address)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -467.2405 72.3141)" style="" id="svg_111">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-19.8345" y="4.398">Public:</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -259.8553 89.1141)" style="" id="svg_112">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-227.2197" y="4.398">&lt;&lt;event&gt;&gt; OwnershipTransferred(previousOwner: address, newOwner: address)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -409.2752 105.9141)" style="" id="svg_113">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-77.7998" y="4.398">&lt;&lt;modifier&gt;&gt; onlyOwner()</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -390.8558 122.7141)" style="" id="svg_114">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-96.2192" y="4.398">constructor(initialOwner: address)</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -440.2317 139.5141)" style="" id="svg_115">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-46.8433" y="4.398">owner(): address</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -377.0096 156.3141)" style="" id="svg_116">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-110.0654" y="4.398">renounceOwnership() &lt;&lt;onlyOwner&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -325.887 173.1141)" style="" id="svg_117">
+		<text xml:space="preserve" font-family="Times,serif" font-size="14" font-style="normal" font-weight="normal" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-161.188" y="4.398">transferOwnership(newOwner: address) &lt;&lt;onlyOwner&gt;&gt;</tspan></text>
+</g>
+		<g transform="matrix(1 0 0 1 -127.505 271.84)" id="svg_118">
+<path style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-367.57, 370.16)" d="m 401.09 -310.37 c -21.71 -38.73 -45.09 -80.42 -67.04 -119.58" stroke-linecap="round"/>
+</g>
+		<g transform="matrix(1 0 0 1 -163.86 201.39)" id="svg_119">
+<polygon style="stroke: rgb(0,0,0); stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: none; fill-rule: nonzero; opacity: 1;" points="-6.405,15.65 -11.915,-15.65 11.915,5.38 -6.405,15.65 "/>
+</g>
+</g>
+</g>
+</svg>

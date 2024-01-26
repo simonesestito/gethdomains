@@ -1,0 +1,70 @@
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
+
+\section{Background}\label{sec:background}
+\subsection{Blockchain's history}
+The first decentralized blockchain was conceptualized in 2008, year of the publication of the Bitcoin white paper by an unknown person or group using the pseudonym Satoshi Nakamoto\cite{nakamoto2009bitcoin}. The Bitcoin network officially came into existence on January 3, 2009, with the mining of the first block, known as the "Genesis Block." This marked the beginning of the Bitcoin blockchain. \\
+Ethereum, conceived by Vitalik Buterin \cite{Vitalik:2014}, aimed to expand blockchain's capabilities beyond currency. 
+The Ethereum blockchain went live on July 30, 2015, with its first version, Homestead. Ethereum introduced "smart contracts," enabling developers to create decentralized applications (DApps) on its platform.
+
+\subsection{How the blockchain works}
+The blockchain is a shared and an immutable ledger that contains transactions. The principal components are:
+\begin{itemize}
+    \item Nodes - participants in the blockchain that through the accounts (Externally owned accounts) can make transactions and with a consensus mechanism can propose a block (miners).
+    \item Transactions are the build-in blocks of a ledger and represent the transfer of an asset between accounts.
+    \item Blocks are the structures that contain transactions and other useful fields like the header or the hash to the previous block.
+\end{itemize}
+
+% Once a transaction is considered valid, it cannot change as a consequence of staying in the ledger, because a change to them would cause a change in the block and so implicity would invalidate the next blocks which are chained through the hash. So an attacker that would change a transaction should have so much power to recostruct the other blocks which is considered infeasible.
+% \subsection{Types of blockchain}
+% A blockchain can be classified based on his transactability/visibility and the level of access control to consensus. According to the first one a blockchain can be divided in:
+% \begin{itemize}
+%     \item private: In a private blockchain only selected nodes can transact and view.
+%     \item public: In a public blockchain anyone can transact and view.
+% \end{itemize}
+% According to the second one the blockchain can be classified in:
+% \begin{itemize}
+%     \item permissionless: All node can partecipate to consensus.
+%     \item permissioned: selected nodes can partecipate to consensus.
+% \end{itemize}
+\subsection{Consensus algorithms}
+The aim of consensus algorithms is to reach an agreement through the participants of the blockchain. 
+Given that blockchain is inherently decentralized, it requires a secure mechanism to achieve consensus on determining the latest block (implicitly to the previous ones because the hash of the previous block inside to a field of the header) and the correctness of the transactions inside the block.
+Different types of mechanisms to reach consensus have been proposed:
+\begin{itemize}
+    \item \textbf{Proof of Work}: POW is a puzzle miners have to solve to gain the authority to publish a block by finding a nonce that results in a block hash below a difficulty threshold. POW can be solved by different miners at the same time so there can be forks, but the most computational work chain is the one considered valid. 
+    For this reason, a block is considered finalized after another 5 blocks. A miner who solves POW gains a price, which is currently bitcoin plus the transaction fee in the block.
+    \item \textbf{Proof\ of\ Stake}: In POS the validators are not miners, but they stake a capital of 32 Ethereum(ETH). 
+    In Ethereum Proof of Stake, the tempo is fixed.
+    Each epoch is composed by 32 slots and each slot lasts 12 seconds: 6 seconds for block proposal and 6 seconds for block attestations. In each slot, a commit of 128 validators is randomly chosen and one, from them, is randomly selected to be a block proposer and has 6 seconds to forge a new block.
+    Validators vote on checkpoint pairs, justifying the most recent checkpoint with 2/3 of total staked ETH votes, finalizing the oldest justified checkpoint, and employing a sync committee every 256 epochs for block validation.
+    Like in POW, validators can have different views of the head of the chain. To solve this problem POS uses \texttt{LMD-GHOST}  algorithm, which chooses as the "right" one, the one that has the \textbf{greatest accumulated weight of attestations}.
+    POS introduces slashing mechanisms to deter dishonest behaviors, including double proposals, FFG double votes, and attesters signing a checkpoint attestation that “surrounds” another one.
+\end{itemize}
+
+\subsection{Smart Contracts}
+    Smart contracts are pieces of code that run on the blockchain. As transactions, once posted on the blockchain, their code runs uncensorably and cannot be changed. For this reason, they are considered trustworthy and secure, so participants in a smart contract do not need to trust each other or a third party.
+    Smart contracts run on the Ethereum Virtual Machine and they are not for free. Every single bit or execution has a cost in terms of gas.\\
+    ERC are standards for smart contracts, so they are guidelines for programming on blockchain. 
+    \subsubsection{ERC-20}
+    ERC-20\cite{ft} is the standard used to represent fungible tokens, meaning that \texttt{each token is identical} and can be exchanged on a one-to-one basis with any other token of the same type.
+    These tokens are typically used to represent units of a certain resource, like coins used for accessing features or loyalty points.
+    \subsubsection{ERC-721}
+    ERC721 is the standard used to represent non-fungible tokens\cite{nft}. Unlike ERC-20 tokens, they are not interchangeable on a one-to-one basis. Each ERC-721 token is distinct and possesses unique characteristics, making them ideal for representing ownership of unique items. 
+    They cannot be divided into smaller units like fungible tokens so they are traded as whole units.
+    \subsubsection{ERC-1155}
+    ERC1155\cite{ERC-1155} is the combination of ERC-20 and ERC-721, so it allows the management of both fungible and non-fungible tokens within a single contract. These tokens are very useful in DApps that use batch operations, which are more efficient than operations on a single token.
+
+\subsection{IPFS and TOR}
+IPFS is a distributed file system designed to create a more efficient and resilient way of storing and sharing content on the internet.\cite{IPFS_Benet_paper_2014} The IPFS system associates a link to the files stored.\\
+TOR is a privacy-focused network that aims to enhance anonymity and security for users on the internet.
+To access websites with ".onion" domains, users need to use the Tor browser, which is designed to connect to the Tor network. This browser allows users to navigate and access content within the Tor ecosystem. \cite{Tor_v2}
+
+\subsection{Encodings}
+Encoding is the process of converting data from one form to another, typically for the purpose of efficient storage, transmission, or representation. Some time happen that an encoding such as base64 is not efficient for the aim of the DApp, so finding one is crucial to reduce the amount of data and their cost.
+
+\subsection{Huffman Tree} \label{sec:introduction_huffman}
+Huffman coding is a compression algorithm that assigns variable-length codes to input characters, with shorter codes assigned to more frequently occurring characters. The algorithm begins by analyzing the frequency of each character in the input data (e.g., a text file). The algorithm builds a binary tree known as the Huffman tree. Each leaf node of the tree represents a character along with its frequency. Starting from the root of the tree, traversing left and right corresponds to adding '0' or '1' to the code. The codes assigned to the characters are determined by the path from the root to the respective leaf nodes. The original data is then encoded using the generated Huffman codes. The resulting compressed data typically occupies fewer bits than the original data, especially if there are frequently occurring characters. To decode the data the code itself is used, crossing through the nodes up to the character's leaf associated.\cite{Huffman_coding}
+
+\end{document}
